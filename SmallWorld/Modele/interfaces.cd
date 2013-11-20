@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Fabrique">
+    <Position X="9.51" Y="1.76" Height="0.375" Width="0.96" />
+  </Comment>
+  <Comment CommentText="Poids-Mouche">
+    <Position X="1.281" Y="6.875" Height="0.291" Width="1.315" />
+  </Comment>
+  <Comment CommentText="Stratégie">
+    <Position X="0.5" Y="10.833" Height="0.291" Width="1.585" />
+  </Comment>
+  <Interface Name="SmallWorld.IMap">
+    <Position X="1.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMap.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.ICase">
+    <Position X="3.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IPlayer">
+    <Position X="6.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IUnit">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAAAAAAEAAAA=</HashCode>
+      <FileName>IUnit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IViking">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IViking.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IDwarf">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDwarf.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IGallic">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IGallic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.INation">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>INation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.INationViking">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>INationViking.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.INationDwarf">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>INationDwarf.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.INationGallic">
+    <Position X="10.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>INationGallic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IDesert">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDesert.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IPlain">
+    <Position X="2.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPlain.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.ISea">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISea.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IForest">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IForest.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IMountain">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMountain.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IGame">
+    <Position X="4.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAEAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>IGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IDemoGame">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDemoGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.ISmallGame">
+    <Position X="2.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISmallGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.INormalGame">
+    <Position X="4" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>INormalGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SmallWorld.IGameCreation">
+    <Position X="2" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IGameCreation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
