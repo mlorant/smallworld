@@ -29,6 +29,20 @@
       <SubType>Content</SubType>
       <DependentUpon>Creation de la carte.sequencediagram</DependentUpon>
     </Content>
+    <Content Include="Deroulement tour.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Deroulement tour.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Deroulement tour.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Deroulement_Global.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Deroulement_Global.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Deroulement_Global.sequencediagram</DependentUpon>
+    </Content>
     <Content Include="General-UseCase.usecasediagram">
       <SubType>Content</SubType>
     </Content>
@@ -42,6 +56,13 @@
     <Content Include="Deroulement_Tour.sequencediagram.layout">
       <SubType>Content</SubType>
       <DependentUpon>Deroulement_Tour.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Lancer_Partie_suite.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Lancer_Partie_suite.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Lancer_Partie_suite.sequencediagram</DependentUpon>
     </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="Lancer_Partie.sequencediagram">

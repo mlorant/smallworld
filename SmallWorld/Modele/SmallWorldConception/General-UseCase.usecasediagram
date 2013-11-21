@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="bb8241fb-7930-46d7-8c75-b79704a785ee" name="UMLUseCaseDiagram1" linkedPackageId="821b8ad3-2fd5-4f4b-a797-4724fda46989" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
-  <profileInstances>
-    <packageHasProfileInstances Id="6ce5443e-4864-4e11-b779-b2057567ae93">
-      <profileInstance Id="3f38da66-dfc9-4256-bc6b-7a729842c329" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="021a81af-c46c-44bd-b716-44140c7516f4">
-      <profileInstance Id="b1bf5955-3aef-43f3-8d25-48e4690452d2" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="bb8241fb-7930-46d7-8c75-b79704a785ee" name="UMLUseCaseDiagram1" linkedPackageId="821b8ad3-2fd5-4f4b-a797-4724fda46989" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
   <packagedElements>
     <useCaseModelRootHasTypes>
       <actor Id="bf34bd58-caad-4d65-aaf5-658370b4b837" name="Joueur" isAbstract="false" isLeaf="false">
@@ -126,14 +112,6 @@
       </useCase>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <useCase Id="aed30336-d668-49d2-891a-0e920683ed84" name="Placer ses unités" isAbstract="false" isLeaf="false">
-        <elementDefinition Id="272efb80-b68f-4169-b966-d203d05cad05" />
-        <subjects>
-          <subsystemMoniker Id="2917386e-d947-4ef8-a211-f91d57c985cc" LastKnownName="SmallWorld" />
-        </subjects>
-      </useCase>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <useCase Id="1db1551d-91a6-445c-9ec9-66d0fc088c28" name="Choisir une nation" isAbstract="false" isLeaf="false">
         <elementDefinition Id="54fb2def-5a6e-4dcb-95f9-deb89d4d17ec" />
         <subjects>
@@ -226,22 +204,6 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="5c3e83c4-46c4-4b46-bc15-0f25f93e058a" />
-          </association>
-          <association Id="35655da4-2e1d-47e3-b693-4e9f75ae7e5d" isDerived="false" sourceEndRoleName="Lancer une partie" targetEndRoleName="Placer ses unités" isLeaf="false" isAbstract="false">
-            <useCaseMoniker Id="aed30336-d668-49d2-891a-0e920683ed84" LastKnownName="Placer ses unités" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="1103ae21-4ecb-46b8-b033-c5899eadba6e" name="Lancer une partie" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="0b9874d7-385f-4926-aebb-714e7f5f7d3d" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="6511e5c9-ac52-472a-ad13-b8041fb9a44f" name="Placer ses unités" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="157d5253-8f96-4e22-acf3-a98f30f22cc4" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="b9297fcf-b618-422c-a9f4-3b151dad1498" />
           </association>
         </targetEnds>
         <subjects>
@@ -360,5 +322,19 @@
   </packagedElements>
   <package Id="821b8ad3-2fd5-4f4b-a797-4724fda46989" name="SmallWorldConception">
     <elementDefinition Id="e350521c-48c1-40a0-a900-0c8758d71dc3" />
+    <profileInstances>
+      <packageHasProfileInstances Id="6ce5443e-4864-4e11-b779-b2057567ae93">
+        <profileInstance Id="3f38da66-dfc9-4256-bc6b-7a729842c329" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="021a81af-c46c-44bd-b716-44140c7516f4">
+        <profileInstance Id="b1bf5955-3aef-43f3-8d25-48e4690452d2" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </useCaseModelRoot>
