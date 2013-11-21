@@ -1,6 +1,5 @@
-**/Debug/*
-**/bin/*
-SmallWorld/obj/*
-bin/*
+obj/
+bin/
+Debug/
 ~*
 *.log
