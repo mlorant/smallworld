@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallWorld", "Modele\SmallW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsSmallWorld", "UnitTestsSmallWorld\UnitTestsSmallWorld.csproj", "{6C076C6C-C955-41AC-A871-250C58148994}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicInterface", "GraphicInterface\GraphicInterface.csproj", "{13074ACD-B3AE-47D5-A855-DDCD880FA56F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{6C076C6C-C955-41AC-A871-250C58148994}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6C076C6C-C955-41AC-A871-250C58148994}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6C076C6C-C955-41AC-A871-250C58148994}.Release|Win32.ActiveCfg = Release|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13074ACD-B3AE-47D5-A855-DDCD880FA56F}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
