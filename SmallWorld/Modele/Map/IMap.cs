@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public interface IMap
     {
-        ICase getCase();
+        ICase getCase(int i);
 
         int getSize();
     }
