@@ -7,7 +7,11 @@ namespace SmallWorld
 {
     public abstract class Unit : IUnit
     {
+        /// <summary>
+        /// Current health status of the unit
+        /// </summary>
         private int health;
+
         private int attackPoints;
         private int defensePoints;
         private int movePoint;
@@ -19,7 +23,7 @@ namespace SmallWorld
 
         public bool isAlive()
         {
-            throw new NotImplementedException();
+            return (health > 0);
         }
 
         public int getMoveCost()

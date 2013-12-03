@@ -5,12 +5,24 @@ using System.Text;
 
 namespace SmallWorld
 {
+
+    /// <summary>
+    /// Core class of SmallWorld : directs the
+    /// game, and let play each player when it's
+    /// their turn.
+    /// </summary>
     public interface IGame
     {
-        void initPlayers();
+        void initPlayer(int i, string nickname, NationType nation);
 
         void createMap();
 
         void placePlayers();
+
+        void determinePlayOrder();
+
+        bool isGameFinished();
+
+        void setWinner();
     }
 }

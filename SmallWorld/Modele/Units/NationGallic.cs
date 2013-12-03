@@ -7,14 +7,9 @@ namespace SmallWorld
 {
     public class NationGallic : Nation, INationGallic
     {
-        public Gallic fabricUnit()
+        public IGallic fabricUnit()
         {
-            throw new System.NotImplementedException();
-        }
-
-        IUnit INation.fabricUnit()
-        {
-            throw new NotImplementedException();
+            return new Gallic();
         }
     }
 }

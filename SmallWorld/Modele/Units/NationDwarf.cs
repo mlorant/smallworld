@@ -7,14 +7,9 @@ namespace SmallWorld
 {
     public class NationDwarf : Nation, INationDwarf
     {
-        public Dwarf fabricUnit()
+        public IDwarf fabricUnit()
         {
-            throw new System.NotImplementedException();
-        }
-
-        IUnit INation.fabricUnit()
-        {
-            throw new NotImplementedException();
+            return new Dwarf();
         }
     }
 }

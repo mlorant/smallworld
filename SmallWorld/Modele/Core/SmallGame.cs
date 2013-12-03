@@ -7,8 +7,8 @@ namespace SmallWorld
 {
     public class SmallGame : GameCreation, ISmallGame
     {
-        private const int NB_ROUNDS = 20;
-        private const int MAP_SIZE = 10;
-        private const int NB_UNITS = 6;
+        public new const int NB_ROUNDS = 20;
+        public new const int MAP_SIZE = 10;
+        public new const int NB_UNITS = 6;
     }
 }

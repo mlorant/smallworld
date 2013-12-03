@@ -7,14 +7,9 @@ namespace SmallWorld
 {
     public class NationViking : Nation, INationViking
     {
-        public Viking fabricUnit()
+        public IViking fabricUnit()
         {
-            throw new System.NotImplementedException();
-        }
-
-        IUnit INation.fabricUnit()
-        {
-            throw new NotImplementedException();
+            return new Viking();
         }
     }
 }

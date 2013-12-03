@@ -9,14 +9,34 @@ namespace SmallWorld
 
     public class Map : IMap
     {
+
+        /// <summary>
+        /// Map grid. Composed of instances of ICase, which inform
+        /// about the type of terrain (plain, sea, forest, ...)
+        /// </summary>
         private ICase[] grid;
 
+        /// <summary>
+        /// Instances list of square types (Flyweight pattern)
+        /// </summary>
         private ICase[] casesReferences;
 
+        /// <summary>
+        /// Size of the map
+        /// </summary>
+        public int Size
+        {
+            get { return grid.Length; }
+        }
+
+        /// <summary>
+        /// Init a new map with a new flyweigh pattern
+        /// </summary>
         public Map()
         {
             casesReferences = new ICase[5];
         }
+
 
         public void generateMap(int mapSize)
         {
@@ -42,6 +62,11 @@ namespace SmallWorld
             return casesReferences[caseIndex];
         }
 
+        /// <summary>
+        /// Create a new instance of case
+        /// </summary>
+        /// <param name="caseIndex"></param>
+        /// <returns></returns>
         private ICase generateCase(int caseIndex) 
         {
             ICase obj = null;
@@ -68,11 +93,6 @@ namespace SmallWorld
             }
             
             return obj;
-        }
-
-        public int getSize()
-        {
-            return grid.Length;
         }
 
         public ICase getCase(int i)

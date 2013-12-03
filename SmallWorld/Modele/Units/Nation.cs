@@ -5,11 +5,10 @@ using System.Text;
 
 namespace SmallWorld
 {
+    public enum NationType { VIKING, DWARF, GALLIC };
+
     public abstract class Nation : INation
     {
-        public IUnit fabricUnit()
-        {
-            throw new System.NotImplementedException();
-        }
+        public abstract IUnit fabricUnit();
     }
 }
