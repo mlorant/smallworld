@@ -12,22 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmallWorld;
 
 namespace GraphicInterface
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour GameBoard.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameBoard : Window
     {
-        public MainWindow()
+        Game game;
+
+        public GameBoard(Game g)
         {
             InitializeComponent();
+            game = g;
+            CurrentRound.Text = "1";
+            MaxRound.Text = game.Builder.NB_ROUNDS.ToString();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
 
+        private void endRound(object sender, RoutedEventArgs e)
+        {
+            game.CurrentRound += 1;
+            CurrentRound.Text = game.CurrentRound.ToString();
         }
     }
 }

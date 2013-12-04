@@ -43,6 +43,31 @@ namespace SmallWorld
         /// </summary>
         private GameCreation builder;
 
+
+        public IPlayer[] Players
+        {
+            get { return this.players; }
+        }
+
+        public int CurrentRound
+        {
+            get { return this.currentRound; }
+            set 
+            { 
+                if(value != this.currentRound+1) {
+                    throw new Exception("Anormal");
+                }
+
+                this.currentRound = value;
+            }
+        }
+
+        public GameCreation Builder
+        {
+            get { return this.builder; }
+        }
+
+        
         /// <summary>
         /// Initialize game data
         /// </summary>
@@ -50,6 +75,7 @@ namespace SmallWorld
         {
             map = new Map();
             players = new Player[2];
+            currentRound = 1;
         }
 
         /// <summary>
@@ -116,22 +142,26 @@ namespace SmallWorld
         /// <returns>A boolean (true if the game is finished)</returns>
         public bool isGameFinished()
         {
+            // If game isn't initialized yet
+            if (builder == null)
+                return false;
+
             // Check round limit 
             if (currentRound >= builder.NB_ROUNDS)
                 return true;
 
             // Check units number
-            return (players[0].getUnits().Length == 0 ||
-                     players[1].getUnits().Length == 0);
+            return (players[0].Units.Length == 0 ||
+                     players[1].Units.Length == 0);
         }
 
         public void setWinner()
         {
-            if (players[0].getUnits().Length == 0)
+            if (players[0].Units.Length == 0)
             {
                 winner = 0;
             }
-            else if (players[0].getUnits().Length == 0)
+            else if (players[0].Units.Length == 0)
             {
                 winner = 1;
             }

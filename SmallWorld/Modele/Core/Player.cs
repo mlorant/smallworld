@@ -23,6 +23,25 @@ namespace SmallWorld
         /// </summary>
         private INation nation;
 
+
+        public string Nickname
+        {
+            get { return this.nickname; }
+        }
+
+        public IUnit[] Units
+        {
+            get { return this.units; }
+        }
+        
+        public INation Nation
+        {
+            get { return this.nation; }
+        }
+
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -51,9 +70,5 @@ namespace SmallWorld
                 units[i] = nation.fabricUnit();
         }
 
-        public IUnit[] getUnits()
-        {
-            return units;
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public class NationViking : Nation, INationViking
     {
-        public IViking fabricUnit()
+        public override IUnit fabricUnit()
         {
             return new Viking();
         }

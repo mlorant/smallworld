@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public class NationGallic : Nation, INationGallic
     {
-        public IGallic fabricUnit()
+        public override IUnit fabricUnit()
         {
             return new Gallic();
         }

@@ -53,7 +53,7 @@ namespace UnitTestsSmallWorld
         public void TestMapSize()
         {
             map.generateMap(20);
-            Assert.IsTrue(map.getSize() == 20);
+            Assert.IsTrue(map.Size == 20);
         }
     }
 }

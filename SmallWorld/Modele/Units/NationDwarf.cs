@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public class NationDwarf : Nation, INationDwarf
     {
-        public IDwarf fabricUnit()
+        public override IUnit fabricUnit()
         {
             return new Dwarf();
         }
