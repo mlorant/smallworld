@@ -22,6 +22,7 @@ namespace GraphicInterface
     {
 
         Game game;
+        private string gameType;
 
         private GameSize gameTypeSelected;
         private NationType nation1, nation2;
@@ -34,19 +35,7 @@ namespace GraphicInterface
 
         private void selectGameMode(object sender, RoutedEventArgs e)
         {
-            string gameType = (sender as RadioButton).Content.ToString();
-            switch (gameType)
-            {
-                case "Demo":
-                    gameTypeSelected = GameSize.DEMO;
-                    break;
-                case "Normal":
-                    gameTypeSelected = GameSize.NORMAL;
-                    break;
-                case "Small":
-                    gameTypeSelected = GameSize.SMALL;
-                    break;
-            }
+            this.gameType = (sender as RadioButton).Content.ToString(); 
         }
 
         private NationType initNation(string content)
@@ -83,11 +72,26 @@ namespace GraphicInterface
        
         private void startGame(object sender, RoutedEventArgs e)
         {
-            // get player info + partie type
+            GameCreation builder = null;
 
-            // set game mode
-            game.setGameType(gameTypeSelected);
+            // Create Game object
+            switch (gameType)
+            {
+                case "Demo":
+                    builder = new SmallGameBuilder();
+                    break;
+                case "Normal":
+                    builder = new NormalGameBuilder();
+                    break;
+                case "Small":
+                    builder = new SmallGameBuilder();
+                    break;
+                default:
+                    throw new Exception("Unexpected game mode");
+            }
 
+            Game game = builder.createGame();
+            
             GameBoard main = new GameBoard(game);
             App.Current.MainWindow = main;
             this.Close();

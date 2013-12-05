@@ -16,9 +16,37 @@ namespace SmallWorld
         private int defensePoints;
         private int movePoint;
 
+
+        public int Health
+        {
+            get { return this.health; }
+        }
+
         public void attack(ICase target)
         {
-            throw new NotImplementedException();
+      /*      // Get best defense unit on the tile
+            IUnit defender = target.getBestDefensiveUnit();
+
+            if (defender != null)
+            {
+
+                if (defender.Defense == 0)
+                {
+                    // Win 
+                }
+
+                // Get number of attacks, between 3 and the maxHeal+2
+                int maxHeal = Math.Max(this.health, defender.Health);
+                Random rand = new Random();
+                int attacksCount = rand.Next(3, maxHeal + 2);
+
+                for (int i = 0; i < attacksCount; i++)
+                {
+                    double powerBalance = (double) this.attackPoints / defender.Defense;
+                }
+
+            }
+            */
         }
 
         public bool isAlive()

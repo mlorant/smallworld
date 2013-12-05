@@ -37,11 +37,9 @@ namespace SmallWorld
         /// </summary>
         private Map map;
 
-        /// <summary>
-        /// Builder which gives parameters about the game 
-        /// (map size, number of rounds, ...)
-        /// </summary>
-        private GameCreation builder;
+        private int nbRounds;
+
+        private int nbUnits;
 
 
         public Player[] Players
@@ -62,41 +60,25 @@ namespace SmallWorld
             }
         }
 
-        public GameCreation Builder
+        public int NbRounds
         {
-            get { return this.builder; }
+            get { return this.nbRounds; }
         }
 
         
         /// <summary>
         /// Initialize game data
         /// </summary>
-        public Game()
+        public Game(int nbRounds, int nbUnits)
         {
             map = new Map();
             players = new Player[2];
             currentRound = 1;
+
+            this.nbRounds = nbRounds;
+            this.nbUnits = nbUnits;
         }
 
-        /// <summary>
-        /// Set the game Type, according to player choice
-        /// </summary>
-        /// <param name="type">Type of game: Demo, Small or Normal</param>
-        public void setGameType(GameSize type) 
-        {
-            switch(type)
-            {
-                case GameSize.DEMO:
-                    builder = new DemoGame();
-                    break;
-                case GameSize.SMALL:
-                    builder = new SmallGame();
-                    break;
-                case GameSize.NORMAL:
-                    builder = new NormalGame();
-                    break;
-            }
-        }
 
         /// <summary>
         /// Init a player according to its configuration
@@ -106,7 +88,7 @@ namespace SmallWorld
         /// <param name="nation">Nation choosed</param>
         public void initPlayer(int i, string nickname, NationType nation)
         {
-            players[i] = new Player(nickname, nation, builder.NB_UNITS);
+            players[i] = new Player(nickname, nation, this.nbUnits);
             // TODO: check unicity of nickname and nation?
         }
 
@@ -114,10 +96,10 @@ namespace SmallWorld
         /// Generate a new random map with the size defined
         /// by the game type
         /// </summary>
-        public void createMap()
+        public void createMap(int mapSize)
         {
             map = new Map();
-            map.generateMap(builder.MAP_SIZE);
+            map.generateMap(mapSize);
         }
 
         public void placePlayers()
@@ -142,12 +124,8 @@ namespace SmallWorld
         /// <returns>A boolean (true if the game is finished)</returns>
         public bool isGameFinished()
         {
-            // If game isn't initialized yet
-            if (builder == null)
-                return false;
-
             // Check round limit 
-            if (currentRound >= builder.NB_ROUNDS)
+            if (currentRound >= this.nbRounds)
                 return true;
 
             // Check units number

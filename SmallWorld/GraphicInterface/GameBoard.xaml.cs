@@ -32,7 +32,7 @@ namespace GraphicInterface
             // TODO
 
             CurrentRound.Text = "1";
-            MaxRound.Text = game.Builder.NB_ROUNDS.ToString();
+            MaxRound.Text = game.NbRounds.ToString();
         }
 
 

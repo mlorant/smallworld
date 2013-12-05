@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public interface ISmallGame : IGameCreation
+    public interface IDemoGameBuilder : IGameCreation
     {
     }
 }
