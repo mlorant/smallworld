@@ -24,28 +24,13 @@ namespace GraphicInterface
         Game game;
 
         private GameSize gameTypeSelected;
+        private NationType nation1, nation2;
 
         public StartPage()
         {
             InitializeComponent();
             game = new Game();
-            game.setGameType(GameSize.NORMAL); //TOFIX
         }
-        
-        private void startGame(object sender, RoutedEventArgs e)
-        {
-            // get player info + partie type
-
-            // set game mode
-            game.setGameType(gameTypeSelected);
-
-            GameBoard main = new GameBoard(game);
-            App.Current.MainWindow = main;
-            this.Close();
-            main.Show();
-        }
-
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e) { }
 
         private void selectGameMode(object sender, RoutedEventArgs e)
         {
@@ -62,6 +47,51 @@ namespace GraphicInterface
                     gameTypeSelected = GameSize.SMALL;
                     break;
             }
+        }
+
+        private NationType initNation(string content)
+        {
+            NationType nation = 0;
+            switch (content)
+            {
+                case "Dwarf":
+                    nation = NationType.DWARF;
+                    break;
+                case "Gallic":
+                    nation = NationType.GALLIC;
+                    break;
+                case "Viking":
+                    nation = NationType.VIKING;
+                    break;
+            }
+            return nation;
+        }
+
+        private void initNationPlayer1(object sender, RoutedEventArgs e) 
+        {
+            RadioButton sender1 = (sender as RadioButton);
+            string nationType = (sender1.Content.ToString();
+            nation1 = initNation(nationType);
+        }
+
+        private void initNationPlayer2(object sender, RoutedEventArgs e)
+        {
+            string nationType = (sender as RadioButton).Content.ToString();
+            nation2 = initNation(nationType);
+        }
+
+       
+        private void startGame(object sender, RoutedEventArgs e)
+        {
+            // get player info + partie type
+
+            // set game mode
+            game.setGameType(gameTypeSelected);
+
+            GameBoard main = new GameBoard(game);
+            App.Current.MainWindow = main;
+            this.Close();
+            main.Show();
         }
     }
 }
