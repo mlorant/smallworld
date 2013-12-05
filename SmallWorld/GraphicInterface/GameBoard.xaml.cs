@@ -27,6 +27,10 @@ namespace GraphicInterface
         {
             InitializeComponent();
             game = g;
+
+            // Init players points
+            // TODO
+
             CurrentRound.Text = "1";
             MaxRound.Text = game.Builder.NB_ROUNDS.ToString();
         }

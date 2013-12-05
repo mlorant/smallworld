@@ -23,6 +23,8 @@ namespace GraphicInterface
 
         Game game;
 
+        private GameSize gameTypeSelected;
+
         public StartPage()
         {
             InitializeComponent();
@@ -34,15 +36,32 @@ namespace GraphicInterface
         {
             // get player info + partie type
 
+            // set game mode
+            game.setGameType(gameTypeSelected);
+
             GameBoard main = new GameBoard(game);
             App.Current.MainWindow = main;
             this.Close();
             main.Show();
         }
 
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
-        {
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e) { }
 
+        private void selectGameMode(object sender, RoutedEventArgs e)
+        {
+            string gameType = (sender as RadioButton).Content.ToString();
+            switch (gameType)
+            {
+                case "Demo":
+                    gameTypeSelected = GameSize.DEMO;
+                    break;
+                case "Normal":
+                    gameTypeSelected = GameSize.NORMAL;
+                    break;
+                case "Small":
+                    gameTypeSelected = GameSize.SMALL;
+                    break;
+            }
         }
     }
 }

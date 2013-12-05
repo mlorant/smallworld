@@ -20,9 +20,9 @@
             <RadioButton Content="Viking" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
         </StackPanel>
         <Grid HorizontalAlignment="Left" Height="122" Margin="29,43,0,0" VerticalAlignment="Top" Width="716">
-            <RadioButton Content="Demo" HorizontalAlignment="Left" Margin="72,60,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="Small" HorizontalAlignment="Left" Margin="272,60,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="Normal" HorizontalAlignment="Left" Margin="472,60,0,0" VerticalAlignment="Top"/>
+            <RadioButton Content="Demo" HorizontalAlignment="Left" Margin="72,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
+            <RadioButton Content="Small" HorizontalAlignment="Left" Margin="272,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
+            <RadioButton Content="Normal" HorizontalAlignment="Left" Margin="472,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
         </Grid>
     </Grid>
 </Window>

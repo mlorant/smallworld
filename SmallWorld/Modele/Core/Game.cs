@@ -44,7 +44,7 @@ namespace SmallWorld
         private GameCreation builder;
 
 
-        public IPlayer[] Players
+        public Player[] Players
         {
             get { return this.players; }
         }
