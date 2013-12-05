@@ -10,6 +10,24 @@ namespace SmallWorld
 
     public abstract class GameCreation : IGameCreation
     {
-        public int NB_ROUNDS, MAP_SIZE, NB_UNITS;
+        public Game createGame()
+        {
+            Game g = new Game(this.NB_ROUNDS, this.NB_UNITS);
+            g.createMap(MAP_SIZE);
+            return g;
+        }
+
+        public abstract int NB_ROUNDS 
+        {
+            get; 
+        }
+        public abstract int MAP_SIZE
+        {
+            get;
+        }
+        public abstract int NB_UNITS
+        {
+            get;
+        }
     }
 }

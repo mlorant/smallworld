@@ -15,7 +15,7 @@ namespace SmallWorld
     {
         void initPlayer(int i, string nickname, NationType nation);
 
-        void createMap();
+        void createMap(int mapSize);
 
         void placePlayers();
 
