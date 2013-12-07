@@ -11,6 +11,7 @@ namespace SmallWorld
         /// Current health status of the unit
         /// </summary>
         private int health;
+        private int maxHealth;
 
         private int attackPoints;
         private int defensePoints;
@@ -20,11 +21,22 @@ namespace SmallWorld
         public int Health
         {
             get { return this.health; }
+            set { }
+        }
+
+        public int Attack
+        {
+            get { return (int)(this.attackPoints * ((double)this.health / this.maxHealth)); }
+        }
+
+        public int Defense
+        {
+            get { return this.defensePoints; }
         }
 
         public void attack(ICase target)
         {
-      /*      // Get best defense unit on the tile
+            // Get best defense unit on the tile
             IUnit defender = target.getBestDefensiveUnit();
 
             if (defender != null)
@@ -42,11 +54,11 @@ namespace SmallWorld
 
                 for (int i = 0; i < attacksCount; i++)
                 {
-                    double powerBalance = (double) this.attackPoints / defender.Defense;
+                    double powerBalance = (double) this.Attack / defender.Defense;
                 }
 
             }
-            */
+            
         }
 
         public bool isAlive()
@@ -55,11 +67,6 @@ namespace SmallWorld
         }
 
         public int getMoveCost()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int getBonusPoint()
         {
             throw new System.NotImplementedException();
         }

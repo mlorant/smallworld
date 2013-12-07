@@ -18,6 +18,7 @@ namespace UnitTestsSmallWorld
             Assert.AreEqual(cases.Count, 100);
             foreach (int c in cases)
             {
+                Console.Write(c);
                 Assert.IsTrue(c >= 0 && c < 5);
             }
         }

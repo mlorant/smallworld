@@ -1,4 +1,5 @@
 #include "map.h"
+#include <iostream>
 
 enum CaseType
 {
@@ -27,8 +28,25 @@ int* MapGenerator::generate_map(int size) {
 	int i;
 	// TODO: Implement map generation algorithm. Idea : Perlin Noise
 	for(i = 0; i < size * size; i++) {
-		map[i] = rand() % 5;
+		int proba = rand() % 100; // Between 0 and 99
+
+		if(proba < 15) {				// 15% of chance of a Desert
+			map[i] = Desert;
+		}
+		else if(proba < 30) {			// 15% of chance of a Forest
+			map[i] = Forest;
+		}
+		else if(proba < 40) {			// 10% of chance of a Mountain
+			map[i] = Mountain;
+		}
+		else if(proba < 50) {			// 10% of chance of a Sea
+			map[i] = Sea;
+		}
+		else {							// 50% of chance of a Plain
+			map[i] = Plain;
+		}
 	}
 	
 	return map;
 }
+

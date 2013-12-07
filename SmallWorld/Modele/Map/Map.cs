@@ -6,7 +6,11 @@ using mapWrapper;
 
 namespace SmallWorld
 {
-
+    /// <summary>
+    /// Map creation and management. Store a grid of tile instance
+    /// with a flyweight design pattern to optimize ressources.
+    /// Units are located on the map via the tile index in the array.
+    /// </summary>
     public class Map : IMap
     {
 
@@ -88,8 +92,7 @@ namespace SmallWorld
                     obj = new Sea();
                     break;
                 default:
-                    // TODO: Add exception here
-                    break;
+                    throw new UnknownTileException();
             }
             
             return obj;
@@ -98,7 +101,16 @@ namespace SmallWorld
         public ICase getCase(int i)
         {
             // TODO : Add exception if i is too large
+            if (i > grid.Length)
+            {
+                throw new IndexOutOfRangeException("Out of bounds: there's only " + grid.Length + " tiles in the grid");
+            }
+
             return grid[i];
         }
+    }
+
+    class UnknownTileException : Exception
+    {
     }
 }
