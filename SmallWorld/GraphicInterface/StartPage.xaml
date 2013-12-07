@@ -1,28 +1,50 @@
 ﻿<Window x:Class="GraphicInterface.StartPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:GraphicInterface"
         Icon="icon.ico"
         Title="SmallWorld" Height="600" Width="800" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:InverseBooleanConverter x:Key="inverseBooleanConverter"/>
+        <local:BooleanAndConverter x:Key="booleanAndConverter"/>
+    </Window.Resources>
     <Grid>
-        <Button Content="Jouer" Click="startGame" HorizontalAlignment="Left" Margin="241,472,0,0" VerticalAlignment="Top" Width="323" Height="73"/>
-        <StackPanel HorizontalAlignment="Left" Height="250" Margin="29,233,0,0" VerticalAlignment="Top" Width="294">
+        <Button Name="Start" Content="Jouer" Click="startGame" HorizontalAlignment="Left" 
+                Margin="241,472,0,0" VerticalAlignment="Top" Width="323" Height="73">
+            <Button.IsEnabled>
+                <MultiBinding Converter="{StaticResource booleanAndConverter}">
+                    <Binding ElementName="InfoP1" Path="IsChecked"/>
+                    <Binding ElementName="InfoP2" Path="IsChecked" />
+                </MultiBinding>
+            </Button.IsEnabled>
+        </Button>
+
+        <StackPanel HorizontalAlignment="Left" Height="165" Margin="109,233,0,0" VerticalAlignment="Top" Width="242">
             <TextBlock TextWrapping="Wrap" Text="Nickname:"/>
-            <TextBox Height="23" TextWrapping="Wrap" Text="" />
-            <RadioButton Content="Dwarf" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
-            <RadioButton Content="Gallic" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
-            <RadioButton Content="Viking" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="" Name="Player1Nickname" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
+            <RadioButton GroupName="nationP1" Content="Dwarf" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}" 
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1"/>
+            <RadioButton GroupName="nationP1" Content="Gallic" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1"/>
+            <RadioButton GroupName="nationP1" Content="Viking" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1"/>
+            <CheckBox Name="InfoP1" Content="Info completed" Margin="50"/>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="250" Margin="489,233,0,0" VerticalAlignment="Top" Width="256">
+        <StackPanel HorizontalAlignment="Left" Height="165" Margin="489,233,0,0" VerticalAlignment="Top" Width="244">
             <TextBlock TextWrapping="Wrap" Text="Nickname:"/>
-            <TextBox Height="23" TextWrapping="Wrap" Text="" />
-            <RadioButton Content="Dwarf" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
-            <RadioButton Content="Gallic" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
-            <RadioButton Content="Viking" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="RadioButton_Checked_1"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="" Name="Player2Nickname" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
+            <RadioButton GroupName="nationP2" Content="Dwarf" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer2"/>
+            <RadioButton GroupName="nationP2" Content="Gallic" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer2"/>
+            <RadioButton GroupName="nationP2" Content="Viking" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer2"/>
+            <CheckBox Name="InfoP2" Content="Info completed" Margin="50" />
         </StackPanel>
         <Grid HorizontalAlignment="Left" Height="122" Margin="29,43,0,0" VerticalAlignment="Top" Width="716">
-            <RadioButton Content="Demo" HorizontalAlignment="Left" Margin="72,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
-            <RadioButton Content="Small" HorizontalAlignment="Left" Margin="272,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
-            <RadioButton Content="Normal" HorizontalAlignment="Left" Margin="472,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
+            <RadioButton GroupName="gameType" Content="Demo" HorizontalAlignment="Left" Margin="72,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
+            <RadioButton GroupName="gameType" Content="Small" HorizontalAlignment="Left" Margin="272,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
+            <RadioButton GroupName="gameType" Content="Normal" HorizontalAlignment="Left" Margin="472,60,0,0" VerticalAlignment="Top" Checked="selectGameMode"/>
         </Grid>
     </Grid>
 </Window>
