@@ -15,7 +15,7 @@ namespace SmallWorld
         /// <summary>
         /// Maximal number of round possible in a game.
         /// </summary>
-        public override int NB_ROUNDS
+        int NB_ROUNDS
         {
             get;
         }
@@ -23,7 +23,7 @@ namespace SmallWorld
         /// <summary>
         /// Side size of the map (in number of tiles)
         /// </summary>
-        public override int MAP_SIZE
+        int MAP_SIZE
         {
             get;
         }
@@ -31,7 +31,7 @@ namespace SmallWorld
         /// <summary>
         /// Number of the units for each player at the beginning of the game.
         /// </summary>
-        public override int NB_UNITS
+        int NB_UNITS
         {
             get;
         }
