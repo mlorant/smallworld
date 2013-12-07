@@ -9,4 +9,14 @@ namespace SmallWorld
     {
         IUnit getBestDefensiveUnit();
     }
+
+    public interface IDesert : ICase   {}
+
+    public interface IForest : ICase   {}
+
+    public interface IMountain : ICase {}
+
+    public interface IPlain : ICase    {}
+
+    public interface ISea : ICase      {}
 }

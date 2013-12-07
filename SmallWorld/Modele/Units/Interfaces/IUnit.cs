@@ -19,4 +19,8 @@ namespace SmallWorld
 
         void move(ICase target);
     }
+
+    public interface IDwarf : IUnit    {}
+    public interface IGallic : IUnit   {}
+    public interface IViking : IUnit   {}
 }

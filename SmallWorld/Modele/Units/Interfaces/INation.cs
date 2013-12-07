@@ -9,4 +9,8 @@ namespace SmallWorld
     {
         IUnit fabricUnit();
     }
+
+    public interface INationDwarf : INation    {}
+    public interface INationGallic : INation   {}
+    public interface INationViking : INation   {}
 }
