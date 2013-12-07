@@ -30,7 +30,6 @@ namespace GraphicInterface
         public StartPage()
         {
             InitializeComponent();
-            game = new Game();
         }
 
         private void selectGameMode(object sender, RoutedEventArgs e)
@@ -59,7 +58,7 @@ namespace GraphicInterface
         private void initNationPlayer1(object sender, RoutedEventArgs e) 
         {
             RadioButton sender1 = (sender as RadioButton);
-            string nationType = (sender1.Content.ToString();
+            string nationType = sender1.Content.ToString();
             nation1 = initNation(nationType);
         }
 
