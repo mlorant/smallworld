@@ -12,6 +12,8 @@ namespace SmallWorld
     /// </summary>
     public class Game : IGame
     {
+        private static Game instance;
+
         /// <summary>
         /// Players list
         /// </summary>
@@ -65,11 +67,30 @@ namespace SmallWorld
             get { return this.nbRounds; }
         }
 
-        
+        public Map Map
+        {
+            get { return this.map; }
+        }
+
+
+        private Game() { }
+
+        public static Game Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Game();
+                }
+                return instance;
+            }
+        }
+
         /// <summary>
         /// Initialize game data
         /// </summary>
-        public Game(int nbRounds, int nbUnits)
+        public void initGame(int nbRounds, int nbUnits)
         {
             map = new Map();
             players = new Player[2];

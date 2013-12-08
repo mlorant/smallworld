@@ -24,7 +24,8 @@ namespace SmallWorld
         /// <returns>A new instance of game created</returns>
         public Game createGame()
         {
-            Game g = new Game(this.NB_ROUNDS, this.NB_UNITS);
+            Game g = Game.Instance;
+            g.initGame(this.NB_ROUNDS, this.NB_UNITS);
             g.createMap(MAP_SIZE);
             return g;
         }

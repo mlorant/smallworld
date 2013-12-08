@@ -7,7 +7,17 @@
 
 class MapGenerator {
 public:
+	MapGenerator();
 	int* generate_map(int size);
+
+private:
+	int* _map;
+	int _size;
+	int _seaThickness;
+
+	void buildBase();
+
+	bool isThereSeaNearby(int i);
 };
 
 #endif

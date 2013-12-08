@@ -13,11 +13,13 @@ namespace SmallWorld
         int Defense { get; }
         
 
-        void attack(ICase target);
+        void attack(Point target);
 
         bool isAlive();
 
-        void move(ICase target);
+        void move(Point target);
+
+        bool canMoveOn(Point target);
     }
 
     public interface IDwarf : IUnit    {}

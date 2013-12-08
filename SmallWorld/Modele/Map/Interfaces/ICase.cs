@@ -5,10 +5,7 @@ using System.Text;
 
 namespace SmallWorld
 {
-    public interface ICase
-    {
-        IUnit getBestDefensiveUnit();
-    }
+    public interface ICase { }
 
     public interface IDesert : ICase   {}
 
