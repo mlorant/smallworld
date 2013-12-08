@@ -153,7 +153,7 @@ namespace GraphicInterface
             switch (gameType)
             {
                 case "Demo":
-                    builder = new SmallGameBuilder();
+                    builder = new DemoGameBuilder();
                     break;
                 case "Normal":
                     builder = new NormalGameBuilder();
