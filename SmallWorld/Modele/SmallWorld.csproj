@@ -19,9 +19,11 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>2</WarningLevel>
     <DocumentationFile>bin\Debug\SmallWorld.XML</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,25 +54,14 @@
     <Compile Include="Core\GameCreation.cs" />
     <Compile Include="Map\Interfaces\ICase.cs" />
     <Compile Include="Core\Interfaces\IDemoGameBuilder.cs" />
-    <Compile Include="Map\Interfaces\IDesert.cs" />
-    <Compile Include="Units\Interfaces\IDwarf.cs" />
-    <Compile Include="Map\Interfaces\IForest.cs" />
-    <Compile Include="Units\Interfaces\IGallic.cs" />
     <Compile Include="Core\Interfaces\IGame.cs" />
     <Compile Include="Core\Interfaces\IGameCreation.cs" />
     <Compile Include="Map\Interfaces\IMap.cs" />
-    <Compile Include="Map\Interfaces\IMountain.cs" />
     <Compile Include="Units\Interfaces\INation.cs" />
-    <Compile Include="Units\Interfaces\INationDwarf.cs" />
-    <Compile Include="Units\Interfaces\INationGallic.cs" />
-    <Compile Include="Units\Interfaces\INationViking.cs" />
     <Compile Include="Core\Interfaces\INormalGameBuilder.cs" />
-    <Compile Include="Map\Interfaces\IPlain.cs" />
-    <Compile Include="Map\Interfaces\ISea.cs" />
     <Compile Include="Core\Interfaces\ISmallGameBuilder.cs" />
     <Compile Include="Units\Interfaces\IUnit.cs" />
     <Compile Include="Core\Interfaces\IPlayer.cs" />
-    <Compile Include="Units\Interfaces\IViking.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Mountain.cs" />
     <Compile Include="Units\Nation.cs" />

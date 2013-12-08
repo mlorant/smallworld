@@ -10,13 +10,14 @@ namespace SmallWorld
         /// <summary>
         /// Current health status of the unit
         /// </summary>
-        private int health;
-        private int maxHealth;
+        private int health = maxHealth;
+        private const int maxHealth = 5;
 
-        private int attackPoints;
-        private int defensePoints;
-        private int movePoint;
+        private int attackPoints = 2;
+        private int defensePoints = 1;
+        private int movePoint = 1;
 
+        private Point currentPosition;
 
         public int Health
         {
@@ -26,7 +27,7 @@ namespace SmallWorld
 
         public int Attack
         {
-            get { return (int)(this.attackPoints * ((double)this.health / this.maxHealth)); }
+            get { return (int)(this.attackPoints * ((double)this.health / Unit.maxHealth)); }
         }
 
         public int Defense
@@ -34,10 +35,10 @@ namespace SmallWorld
             get { return this.defensePoints; }
         }
 
-        public void attack(ICase target)
+        public void attack(Point target)
         {
             // Get best defense unit on the tile
-            IUnit defender = target.getBestDefensiveUnit();
+            IUnit defender = Game.Instance.Map.getBestDefensiveUnit(target);
 
             if (defender != null)
             {
@@ -71,15 +72,26 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
-        public int move()
-        {
-            throw new System.NotImplementedException();
-        }
-
-
-        public void move(ICase target)
+        public void move(Point target)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Check if the unit can move to the position given
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public bool canMoveOn(Point tgt)
+        {
+            bool verticalMove = (tgt.X == currentPosition.X && 
+                                    Math.Abs(currentPosition.Y - tgt.Y) == 1);
+            bool horizontalMove = (tgt.Y == currentPosition.Y && 
+                                    Math.Abs(currentPosition.X - tgt.X) == 1);
+
+            ICase targetType = Game.Instance.Map.getCase(tgt);
+
+            return (verticalMove || horizontalMove) && !(targetType is Sea);
         }
     }
 }

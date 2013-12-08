@@ -17,6 +17,10 @@ namespace SmallWorld
         /// <summary>
         /// Map grid. Composed of instances of ICase, which inform
         /// about the type of terrain (plain, sea, forest, ...)
+        /// 
+        /// Each tile is represented with (x, y) coordinates, which
+        /// can be computed with the width of the grid (the grid is 
+        /// necessarely a square)
         /// </summary>
         private ICase[] grid;
 
@@ -24,6 +28,16 @@ namespace SmallWorld
         /// Instances list of square types (Flyweight pattern)
         /// </summary>
         private ICase[] casesReferences;
+
+        /// <summary>
+        /// List of units present on each tiles
+        /// </summary>
+        private List<IUnit>[] units;
+
+        /// <summary>
+        /// Width of the map
+        /// </summary>
+        private int width;
 
         /// <summary>
         /// Size of the map
@@ -42,17 +56,19 @@ namespace SmallWorld
         }
 
 
-        public void generateMap(int mapSize)
+        public void generateMap(int width)
         {
             WrapperMapGenerator wrapper = new WrapperMapGenerator();
-            List<int> cases = wrapper.generate_map(mapSize);
+            List<int> cases = wrapper.generate_map(width);
 
-            grid = new ICase[mapSize];
+            grid = new ICase[width*width];
 
-            for (int i = 0; i < mapSize; i++)
+            for (int i = 0; i < width; i++)
             {
                 grid[i] = this.getCaseTypeInstance(cases[i]);
             }
+
+            this.width = width;
         }
 
 
@@ -98,15 +114,42 @@ namespace SmallWorld
             return obj;
         }
 
-        public ICase getCase(int i)
+        public ICase getCase(Point pos)
         {
-            // TODO : Add exception if i is too large
-            if (i > grid.Length)
+            int index = pos.X * width + pos.Y;
+            if (index > grid.Length)
             {
                 throw new IndexOutOfRangeException("Out of bounds: there's only " + grid.Length + " tiles in the grid");
             }
 
-            return grid[i];
+            return grid[index];
+        }
+
+        /// <summary>
+        /// Returns the best defensive unit on the tile, which will
+        /// be used to fight in the battle.
+        /// </summary>
+        /// <param name="index">Position (x, y) of the tile</param>
+        /// <returns>The best defensive unit of the tile</returns>
+        public IUnit getBestDefensiveUnit(Point tgt)
+        {
+            int index = tgt.X * width + tgt.Y;
+            if (index > grid.Length)
+            {
+                throw new IndexOutOfRangeException("Out of bounds: there's only " + grid.Length + " tiles in the grid");
+            }
+
+            IUnit bestUnit = null;
+
+            foreach (IUnit unit in this.units[index])
+            {
+                if (bestUnit == null || bestUnit.Defense < unit.Defense)
+                {
+                    bestUnit = unit;
+                }
+            }
+
+            return bestUnit;
         }
     }
 
