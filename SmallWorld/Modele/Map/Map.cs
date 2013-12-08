@@ -48,6 +48,15 @@ namespace SmallWorld
         }
 
         /// <summary>
+        /// Width of the map
+        /// </summary>
+        public int Width
+        {
+            get { return width; }
+        }
+
+
+        /// <summary>
         /// Init a new map with a new flyweigh pattern
         /// </summary>
         public Map()
@@ -56,19 +65,21 @@ namespace SmallWorld
         }
 
 
-        public void generateMap(int width)
+        public void generateMap(int mapWidth)
         {
+            this.width = mapWidth;
+
             WrapperMapGenerator wrapper = new WrapperMapGenerator();
             List<int> cases = wrapper.generate_map(width);
 
             grid = new ICase[width*width];
 
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < width*width; i++)
             {
                 grid[i] = this.getCaseTypeInstance(cases[i]);
             }
 
-            this.width = width;
+            
         }
 
 

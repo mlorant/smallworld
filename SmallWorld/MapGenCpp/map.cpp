@@ -22,16 +22,15 @@ enum CaseType
  */
 MapGenerator::MapGenerator() {
 	// Init random seed and map array
-	srand (time(NULL));
+	srand (time(0));
 }
 
 int* MapGenerator::generate_map(int size) {
 	
 	// Init general parameters for the map generation
 	this->_size = size;
-	this->_seaThickness = (int) _size*0.20; // Create random seas around the map, 20% max
+	this->_seaThickness = (int) _size*0.15; // Create random seas around the map, 20% max
 
-	
 	this->_map = (int*) malloc(size * size * sizeof(int*));
 	this->buildBase();
 	int i;
@@ -76,18 +75,20 @@ int* MapGenerator::generate_map(int size) {
  */
 void MapGenerator::buildBase() {
 
-	// TODO: limit coef Sea when there's too much Sea tiles
+	// Limit the number of Sea possible side by side
 	int coefSeaDecrease = 0;
 
 	// First lines
 	for(int i = 0; i < _size*_seaThickness; i++) {
-		int coef = this->isThereSeaNearby(i) ? 75 : 50;
+		int line = i / _size; // x coordinates to lowered the number of sea in the center
+		int coef = this->getSeaChance(i, line, &coefSeaDecrease);
 		this->_map[i] = (rand() % 100 < coef) ? Sea : Plain;
 	}
 
 	// Last line (last tile to the center)
-	for(int i = _size*_size; i < (_size*_size) - (_size*_seaThickness); i--) {
-		int coef = this->isThereSeaNearby(i) ? 75 : 50;
+	for(int i = _size*_size; i > (_size*_size) - (_size*_seaThickness); i--) {
+		int line = _size - (i / _size);
+		int coef = this->getSeaChance(i, line, &coefSeaDecrease);
 		this->_map[i] = (rand() % 100 < coef) ? Sea : Plain;
 	}
 	
@@ -96,10 +97,26 @@ void MapGenerator::buildBase() {
 		if((i % _size) > _seaThickness &&  (i % _size) < (_size-_seaThickness)) 
 			continue;
 
-		int coef = this->isThereSeaNearby(i) ? 75 : 50;
+		int column = (i > (_size-_seaThickness)) ? _size - (i % _size) : i % _size;
+		int coef = this->getSeaChance(i, column, &coefSeaDecrease);
 		this->_map[i] = (rand() % 100 < coef) ? Sea : Plain;
 	}
 
+}
+
+int MapGenerator::getSeaChance(int i, int lineNumber, int* coefSeaDecrease) {
+	int coef;
+	if(this->isThereSeaNearby(i)) {
+		coef = 75 - 20*(*coefSeaDecrease);
+		*coefSeaDecrease++;
+	}
+	else {
+		coef = 50;
+		*coefSeaDecrease = 0;
+	}
+	
+	coef *= (0.5 - 0.25*(lineNumber - 2)); // Decreasing as in that approach the center
+	return coef;
 }
 
 bool MapGenerator::isThereSeaNearby(int i) {

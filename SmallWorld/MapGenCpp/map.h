@@ -17,6 +17,7 @@ private:
 
 	void buildBase();
 
+	int getSeaChance(int i, int lineNumber, int* coefSeaDecrease);
 	bool isThereSeaNearby(int i);
 };
 

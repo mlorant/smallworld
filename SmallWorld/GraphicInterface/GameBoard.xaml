@@ -5,9 +5,11 @@
         Title="SmallWorld" Height="600" Width="800" ResizeMode="NoResize">
 
     <Grid Margin="0,0,0,0">
-        <Grid HorizontalAlignment="Left" Width="792" Margin="0,0,0,127">
 
-        </Grid>
+        <Canvas x:Name="canvasMap" Width="792">
+            
+        </Canvas>
+
         <DockPanel HorizontalAlignment="Left" Height="120" LastChildFill="False" Margin="2,450,0,0" VerticalAlignment="Top" Width="792">
 
             <StackPanel Height="120" VerticalAlignment="Top" Width="300">

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SmallWorld;
+using System.Media;
 
 namespace GraphicInterface
 {
@@ -26,6 +27,8 @@ namespace GraphicInterface
         private string player1, player2;
         private NationType nation1, nation2;
         private string nationType1, nationType2;
+
+        private SoundPlayer music;
 
         public StartPage()
         {
