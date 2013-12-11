@@ -125,12 +125,13 @@ namespace SmallWorld
         }
 
         /// <summary>
-        /// Place units players
+        /// Place units players as far as possible on the game board
         /// </summary>
         public void placePlayers()
         {
-            map.initUnits(players[0].Units, new Point(0, 0));
-            map.initUnits(players[1].Units, new Point(map.Width-1, map.Width-1));
+            Point[] starts = map.getStartPoints();
+            map.initUnits(players[0].Units, starts[0]);
+            map.initUnits(players[1].Units, starts[1]);
         }
 
 

@@ -127,6 +127,58 @@ namespace SmallWorld
             return obj;
         }
 
+        /// <summary>
+        /// Get two points at the north-west and south-east of the map
+        /// which aren't and the water. This points will be used to 
+        /// determine the initial position of player units
+        /// </summary>
+        /// <returns>An array of 2 points at opposites of the map</returns>
+        public Point[] getStartPoints()
+        {
+            Point[] points = new Point[2];
+            bool found = false;
+
+            // Get first player
+            Point p = new Point(0, 0);
+            while (!found)
+            {
+                if (!(this.getCase(p) is Sea))
+                {
+                    points[0] = p;
+                    found = true;
+                }
+                else
+                {
+                    if (p.X > p.Y)
+                        p.Y++;
+                    else
+                        p.X++;
+                }
+            }
+
+           
+            // Get second player
+            p = new Point(this.Width-1, this.Width-1);
+            found = false;
+            while (!found)
+            {
+                if (!(this.getCase(p) is Sea))
+                {
+                    points[1] = p;
+                    found = true;
+                }
+                else
+                {
+                    if (p.X > p.Y)
+                        p.Y--;
+                    else
+                        p.X--;
+                }
+            }
+
+            return points;
+        }
+
         private int getIndexFromPoint(Point pos)
         {
             int index = pos.X * width + pos.Y;
@@ -211,6 +263,8 @@ namespace SmallWorld
 
             return bestUnit;
         }
+
+        
     }
 
     class UnknownTileException : Exception
