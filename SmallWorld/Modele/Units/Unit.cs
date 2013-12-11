@@ -85,20 +85,34 @@ namespace SmallWorld
         }
 
         /// <summary>
-        /// Check if the unit can move to the position given
+        /// Check if the position given is accessible from
+        /// the current position of the unit. Only horizontal
+        /// and vertical move of 1 are allowed (no diagonal)
         /// </summary>
-        /// <param name="target"></param>
+        /// <param name="tgt">Target position</param>
+        /// <returns>True is the position is accessible with 1 movement point</returns>
+        protected bool isNear(Point tgt)
+        {
+            bool verticalMove = (tgt.X == currentPosition.X &&
+                                    Math.Abs(currentPosition.Y - tgt.Y) == 1);
+            bool horizontalMove = (tgt.Y == currentPosition.Y &&
+                                    Math.Abs(currentPosition.X - tgt.X) == 1);
+
+            return (verticalMove || horizontalMove);
+        }
+
+        /// <summary>
+        /// Check if the unit can move to the position given.
+        /// By default, only if the unit is near the tile and if
+        /// it isn't to a Sea tile.
+        /// </summary>
+        /// <param name="tgt"></param>
         /// <returns></returns>
         public bool canMoveOn(Point tgt)
         {
-            bool verticalMove = (tgt.X == currentPosition.X && 
-                                    Math.Abs(currentPosition.Y - tgt.Y) == 1);
-            bool horizontalMove = (tgt.Y == currentPosition.Y && 
-                                    Math.Abs(currentPosition.X - tgt.X) == 1);
-
             ICase targetType = Game.Instance.Map.getCase(tgt);
 
-            return (verticalMove || horizontalMove) && !(targetType is Sea);
+            return this.isNear(tgt) && !(targetType is Sea);
         }
     }
 }
