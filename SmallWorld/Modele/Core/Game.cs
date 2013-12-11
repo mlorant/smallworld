@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -123,9 +124,13 @@ namespace SmallWorld
             map.generateMap(mapSize);
         }
 
+        /// <summary>
+        /// Place units players
+        /// </summary>
         public void placePlayers()
         {
-            throw new NotImplementedException();
+            map.initUnits(players[0].Units, new Point(0, 0));
+            map.initUnits(players[1].Units, new Point(map.Width-1, map.Width-1));
         }
 
 
@@ -150,17 +155,17 @@ namespace SmallWorld
                 return true;
 
             // Check units number
-            return (players[0].Units.Length == 0 ||
-                     players[1].Units.Length == 0);
+            return (players[0].Units.Count == 0 ||
+                     players[1].Units.Count == 0);
         }
 
         public void setWinner()
         {
-            if (players[0].Units.Length == 0)
+            if (players[0].Units.Count == 0)
             {
                 winner = 0;
             }
-            else if (players[0].Units.Length == 0)
+            else if (players[0].Units.Count == 0)
             {
                 winner = 1;
             }

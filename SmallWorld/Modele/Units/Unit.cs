@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -33,6 +34,12 @@ namespace SmallWorld
         public int Defense
         {
             get { return this.defensePoints; }
+        }
+
+        public Point CurrentPosition
+        {
+            get { return this.currentPosition; }
+            set { this.currentPosition = value; }
         }
 
         public void attack(Point target)

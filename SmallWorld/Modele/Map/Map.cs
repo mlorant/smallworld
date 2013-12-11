@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Text;
 using mapWrapper;
 
@@ -69,17 +70,18 @@ namespace SmallWorld
         {
             this.width = mapWidth;
 
+            int nbTiles = width * width;
+
             WrapperMapGenerator wrapper = new WrapperMapGenerator();
             List<int> cases = wrapper.generate_map(width);
 
-            grid = new ICase[width*width];
+            units = new List<IUnit>[nbTiles];
+            grid = new ICase[nbTiles];
 
-            for (int i = 0; i < width*width; i++)
+            for (int i = 0; i < nbTiles; i++)
             {
                 grid[i] = this.getCaseTypeInstance(cases[i]);
-            }
-
-            
+            }     
         }
 
 
@@ -125,7 +127,7 @@ namespace SmallWorld
             return obj;
         }
 
-        public ICase getCase(Point pos)
+        private int getIndexFromPoint(Point pos)
         {
             int index = pos.X * width + pos.Y;
             if (index > grid.Length)
@@ -133,8 +135,60 @@ namespace SmallWorld
                 throw new IndexOutOfRangeException("Out of bounds: there's only " + grid.Length + " tiles in the grid");
             }
 
+            return index;
+        }
+
+        public ICase getCase(Point pos)
+        {
+            int index = this.getIndexFromPoint(pos);
             return grid[index];
         }
+
+        /// <summary>
+        /// Get list of units of a given tile
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public List<IUnit> getUnits(Point pos)
+        {
+            int index = this.getIndexFromPoint(pos);
+            if (units[index] == null)
+                return new List<IUnit>();
+            else
+                return units[index];
+        }
+
+
+
+
+
+        ///////////////////////////////////
+        /// <summary>
+        /// Place units at the beginning
+        /// </summary>
+        /// <param name="playerUnits"></param>
+        /// <param name="pos"></param>
+        public void initUnits(List<IUnit> playerUnits, Point pos)
+        {
+            int index = getIndexFromPoint(pos);
+            units[index] = playerUnits;
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="newPosition"></param>
+        public void move(IUnit unit, Point newPosition)
+        {
+            // Search the current unit position
+            int index = getIndexFromPoint(unit.CurrentPosition);
+
+
+        }
+
 
         /// <summary>
         /// Returns the best defensive unit on the tile, which will
@@ -144,14 +198,9 @@ namespace SmallWorld
         /// <returns>The best defensive unit of the tile</returns>
         public IUnit getBestDefensiveUnit(Point tgt)
         {
-            int index = tgt.X * width + tgt.Y;
-            if (index > grid.Length)
-            {
-                throw new IndexOutOfRangeException("Out of bounds: there's only " + grid.Length + " tiles in the grid");
-            }
+            int index = this.getIndexFromPoint(tgt);
 
             IUnit bestUnit = null;
-
             foreach (IUnit unit in this.units[index])
             {
                 if (bestUnit == null || bestUnit.Defense < unit.Defense)

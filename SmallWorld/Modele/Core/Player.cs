@@ -16,7 +16,7 @@ namespace SmallWorld
         /// <summary>
         /// Units list of the player
         /// </summary>
-        private IUnit[] units;
+        private List<IUnit> units;
 
         /// <summary>
         /// Player's nation. Use to fabric units
@@ -29,7 +29,7 @@ namespace SmallWorld
             get { return this.nickname; }
         }
 
-        public IUnit[] Units
+        public List<IUnit> Units
         {
             get { return this.units; }
         }
@@ -65,9 +65,9 @@ namespace SmallWorld
                     break;
             }
 
-            units = new Unit[nbUnits];
+            units = new List<IUnit>();
             for (int i = 0; i < nbUnits; i++)
-                units[i] = nation.fabricUnit();
+                units.Add(nation.fabricUnit());
         }
 
     }

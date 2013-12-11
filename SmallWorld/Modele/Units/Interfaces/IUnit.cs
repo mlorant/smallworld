@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace SmallWorld
         int Health { get; set; }
         int Attack { get; }
         int Defense { get; }
+        Point CurrentPosition { get; set; }
         
 
         void attack(Point target);

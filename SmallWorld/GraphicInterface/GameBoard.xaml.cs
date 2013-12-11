@@ -22,6 +22,13 @@ namespace GraphicInterface
     public partial class GameBoard : Window
     {
         Game game;
+        private int _player1Points = 7;
+
+        public int player1Points
+        {
+            get { return _player1Points; }
+            set { _player1Points = value;  } 
+        }
 
         public GameBoard(Game g)
         {
@@ -29,8 +36,8 @@ namespace GraphicInterface
             game = g;
 
             // Init players points
-            // TODO
-            
+            Player1Nickname.Text = game.Players[0].Nickname;
+            Player2Nickname.Text = game.Players[1].Nickname;            
 
             // Draw the map
             drawMap();
@@ -50,14 +57,14 @@ namespace GraphicInterface
                 int x = (i % game.Map.Width);
                 int y = (i / game.Map.Width);
 
-                ICase tileType = game.Map.getCase(new SmallWorld.Point(x, y));
+                ICase tileType = game.Map.getCase(new System.Drawing.Point(x, y));
 
                 Rectangle tile = new Rectangle();
-                tile.Width = 40;
-                tile.Height = 30;
+                tile.Width = 50;
+                tile.Height = 50;
 
-                Canvas.SetTop(tile, y * 30);
-                Canvas.SetLeft(tile, x * 30);
+                Canvas.SetTop(tile, y * 50);
+                Canvas.SetLeft(tile, x * 50);
                 Canvas.SetZIndex(tile, 5);
 
                 SolidColorBrush mySolidColorBrush = new SolidColorBrush();
@@ -80,10 +87,32 @@ namespace GraphicInterface
             }
         }
 
+        private System.Drawing.Point getPointFromCoordinates(System.Windows.Point p)
+        {
+            // TODO : use constant 
+            int x = (int) p.X / 50;
+            int y = (int) p.Y / 50;
+
+            return new System.Drawing.Point(x, y);
+        }
+
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.CurrentRound += 1;
             CurrentRound.Text = game.CurrentRound.ToString();
+        }
+
+        private void clickOnMap(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Point pt = e.GetPosition(canvasMap);
+            System.Drawing.Point tile = getPointFromCoordinates(pt);
+
+            
+            
+            foreach(IUnit unit in game.Map.getUnits(tile)) 
+            {
+                MessageBox.Show(unit.GetType().ToString());
+            }
         }
     }
 }

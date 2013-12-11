@@ -22,11 +22,17 @@ namespace SmallWorld
         /// and game parameters
         /// </summary>
         /// <returns>A new instance of game created</returns>
-        public Game createGame()
+        public Game createGame(string player1, NationType nation1, string player2, NationType nation2)
         {
             Game g = Game.Instance;
             g.initGame(this.NB_ROUNDS, this.NB_UNITS);
             g.createMap(MAP_SIZE);
+
+            g.initPlayer(0, player1, nation1);
+            g.initPlayer(1, player2, nation2);
+
+            g.placePlayers();
+
             return g;
         }
         

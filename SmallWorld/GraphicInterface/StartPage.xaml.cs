@@ -28,8 +28,6 @@ namespace GraphicInterface
         private NationType nation1, nation2;
         private string nationType1, nationType2;
 
-        private SoundPlayer music;
-
         public StartPage()
         {
             InitializeComponent();
@@ -168,9 +166,7 @@ namespace GraphicInterface
                     throw new Exception("Unexpected game mode");
             }
 
-            game = builder.createGame();
-            game.initPlayer(0, player1, nation1);
-            game.initPlayer(1, player2, nation2);
+            game = builder.createGame(player1, nation1, player2, nation2);
 
             GameBoard main = new GameBoard(game);
             App.Current.MainWindow = main;
