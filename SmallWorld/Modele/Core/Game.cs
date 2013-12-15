@@ -129,9 +129,18 @@ namespace SmallWorld
         /// </summary>
         public void placePlayers()
         {
+            // Get random start position
             Point[] starts = map.getStartPoints();
-            map.initUnits(players[0].Units, starts[0]);
-            map.initUnits(players[1].Units, starts[1]);
+            for (int i = 0; i < 2; i++)
+            {
+                // Update map units list
+                map.initUnits(players[i].Units, starts[i]);
+                // Update unit current position
+                foreach (IUnit u in players[i].Units)
+                {
+                    u.CurrentPosition = starts[i];
+                }
+            }
         }
 
 

@@ -39,8 +39,8 @@ namespace GraphicInterface
             Player1Nickname.Text = game.Players[0].Nickname;
             Player2Nickname.Text = game.Players[1].Nickname;            
 
-            // Draw the map
             drawMap();
+            drawUnits();
 
             CurrentRound.Text = "1";
             MaxRound.Text = game.NbRounds.ToString();
@@ -78,18 +78,7 @@ namespace GraphicInterface
                 Canvas.SetZIndex(tile, 5);
                 
                 // Set tile texture
-                String filename;
-                if (tileType is Sea)
-                    filename = "sea";
-                else if (tileType is Desert)
-                    filename = "desert";
-                else if (tileType is Forest)
-                    filename = "forest";
-                else if (tileType is Plain)
-                    filename = "plain";
-                else
-                    filename = "mountain";
-
+                String filename = tileType.GetType().Name.ToLower();
                 if (!textures.ContainsKey(filename))
                 {
                     BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/terrain/" + filename + ".png"));
@@ -98,6 +87,31 @@ namespace GraphicInterface
                 tile.Fill = textures[filename];
                 
                 canvasMap.Children.Add(tile);
+            }
+        }
+
+        private void drawUnits()
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                // Get unit reference (every units start at the same location)
+                IUnit unit =  Game.Instance.Players[i].Units[0];
+                System.Drawing.Point pt = unit.CurrentPosition;
+
+                Rectangle units = new Rectangle();
+                units.Width = Case.SIZE;
+                units.Height = Case.SIZE;
+
+                Canvas.SetTop(units, pt.Y * Case.SIZE);
+                Canvas.SetLeft(units, pt.X * Case.SIZE);
+                Canvas.SetZIndex(units, 10);
+
+                String filename = unit.GetType().Name.ToLower();
+                BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/units/" + filename + ".png"));
+
+                units.Fill = new ImageBrush(img);
+
+                canvasMap.Children.Add(units);
             }
         }
 
