@@ -51,38 +51,52 @@ namespace GraphicInterface
         {
             // Clear the current view
             canvasMap.Children.Clear();
+            canvasMap.Width = game.Map.Width * Case.SIZE;
+            canvasMap.Height = canvasMap.Width;
+
+            Uri bg = new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/map-background.png");
+            canvasMap.Background = new ImageBrush(new BitmapImage(bg));
+
+            // Flyweight on textures
+            Dictionary<string, ImageBrush> textures = new Dictionary<string, ImageBrush>();
+            System.Drawing.Point pt = new System.Drawing.Point();
 
             for (int i = 0; i < game.Map.Size; i++)
             {
-                int x = (i % game.Map.Width);
-                int y = (i / game.Map.Width);
+                // Get case type
+                pt.X = (i % game.Map.Width);
+                pt.Y = (i / game.Map.Width);
+                ICase tileType = game.Map.getCase(pt);
 
-                ICase tileType = game.Map.getCase(new System.Drawing.Point(x, y));
-
+                // Draw rectangle at the correct position
                 Rectangle tile = new Rectangle();
-                tile.Width = 50;
-                tile.Height = 50;
+                tile.Width = Case.SIZE;
+                tile.Height = Case.SIZE;
 
-                Canvas.SetTop(tile, y * 50);
-                Canvas.SetLeft(tile, x * 50);
+                Canvas.SetTop(tile, pt.Y * Case.SIZE);
+                Canvas.SetLeft(tile, pt.X * Case.SIZE);
                 Canvas.SetZIndex(tile, 5);
-
-                SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-
+                
+                // Set tile texture
+                String filename;
                 if (tileType is Sea)
-                    mySolidColorBrush.Color = Color.FromRgb(135, 196, 250);
+                    filename = "sea";
                 else if (tileType is Desert)
-                    mySolidColorBrush.Color = Color.FromRgb(237, 201, 175);
+                    filename = "desert";
                 else if (tileType is Forest)
-                    mySolidColorBrush.Color = Color.FromRgb(0, 128, 0);
+                    filename = "forest";
                 else if (tileType is Plain)
-                    mySolidColorBrush.Color = Color.FromRgb(0, 255, 0);
+                    filename = "plain";
                 else
-                    mySolidColorBrush.Color = Color.FromRgb(100,100,100);
-                    
+                    filename = "mountain";
 
-                tile.Fill = mySolidColorBrush;
-
+                if (!textures.ContainsKey(filename))
+                {
+                    BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/terrain/" + filename + ".png"));
+                    textures.Add(filename, new ImageBrush(img));
+                }
+                tile.Fill = textures[filename];
+                
                 canvasMap.Children.Add(tile);
             }
         }

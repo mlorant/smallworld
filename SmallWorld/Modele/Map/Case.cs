@@ -8,6 +8,6 @@ namespace SmallWorld
 
     public abstract class Case : ICase
     {
-        private const int SIZE = 50;
+        public static int SIZE = 50;
     }
 }
