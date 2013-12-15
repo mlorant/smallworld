@@ -114,6 +114,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\img\terrain\forest.png" />
+    <Resource Include="Resources\img\terrain\mountain.png" />
+    <Resource Include="Resources\img\terrain\plain.png" />
+    <Resource Include="Resources\img\terrain\desert.png" />
+    <Resource Include="Resources\img\terrain\sea.png" />
+    <Resource Include="Resources\img\map-background.png" />
+    <Resource Include="Resources\img\units\dwarf.png" />
+    <Resource Include="Resources\img\units\gallic.png" />
+    <Resource Include="Resources\img\units\viking.png" />
     <Content Include="Resources\main_menu.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
