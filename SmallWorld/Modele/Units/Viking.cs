@@ -13,9 +13,9 @@ namespace SmallWorld
         /// Check if the unit can move to the position given,
         /// especially on a sea.
         /// </summary>
-        /// <param name="target"></param>
+        /// <param name="tgt"></param>
         /// <returns></returns>
-        public bool canMoveOn(Point tgt)
+        public new bool canMoveOn(Point tgt)
         {
             return this.isNear(tgt);
         }

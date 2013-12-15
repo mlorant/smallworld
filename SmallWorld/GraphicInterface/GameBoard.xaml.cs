@@ -22,18 +22,21 @@ namespace GraphicInterface
     public partial class GameBoard : Window
     {
         Game game;
-        private int _player1Points = 7;
-
-        public int player1Points
+        public int NbUnits1
         {
-            get { return _player1Points; }
-            set { _player1Points = value;  } 
+            get { return game.Players[0].Units.Count; }
+            set { } 
+        }
+        public int NbUnits2
+        {
+            get { return game.Players[1].Units.Count; }
+            set { } 
         }
 
         public GameBoard(Game g)
         {
-            InitializeComponent();
             game = g;
+            InitializeComponent();
 
             // Init players points
             Player1Nickname.Text = game.Players[0].Nickname;
@@ -42,8 +45,10 @@ namespace GraphicInterface
             // Draw the map
             drawMap();
 
-            CurrentRound.Text = "1";
+            CurrentRound.Text = game.CurrentRound.ToString(); ;
             MaxRound.Text = game.NbRounds.ToString();
+            Player1Units.Text = NbUnits1.ToString();
+            Player2Units.Text = NbUnits2.ToString();
         }
 
 
@@ -107,12 +112,9 @@ namespace GraphicInterface
             System.Windows.Point pt = e.GetPosition(canvasMap);
             System.Drawing.Point tile = getPointFromCoordinates(pt);
 
-            
-            
-            foreach(IUnit unit in game.Map.getUnits(tile)) 
-            {
-                MessageBox.Show(unit.GetType().ToString());
-            }
+            CaseInfoOnClick.Visibility = Visibility.Visible;
+            CaseInfo.Text = "Type de terrain : " + game.Map.getCase(tile).GetType().Name;
+            NbUnitOnCase.Text = game.Map.getUnits(tile).Count + " units camp in this region";
         }
     }
 }

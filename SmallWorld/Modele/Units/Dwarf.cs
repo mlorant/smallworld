@@ -30,7 +30,7 @@ namespace SmallWorld
                     {
                         // unit of different type, so can't go on it,
                         // unless the base movement is allowed (to attack)
-                        break; 
+                        return false; 
                     }
                 }
 

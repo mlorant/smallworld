@@ -19,7 +19,7 @@ namespace SmallWorld
 
         bool isAlive();
 
-        void move(Point target);
+        bool move(Point target);
 
         bool canMoveOn(Point target);
     }

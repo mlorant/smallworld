@@ -85,7 +85,7 @@ namespace SmallWorld
         }
 
 
-        public ICase getCaseTypeInstance(int caseIndex)
+        private ICase getCaseTypeInstance(int caseIndex)
         {
             if (casesReferences[caseIndex] == null)
             {
@@ -225,22 +225,6 @@ namespace SmallWorld
             int index = getIndexFromPoint(pos);
             units[index] = playerUnits;
         }
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="unit"></param>
-        /// <param name="newPosition"></param>
-        public void move(IUnit unit, Point newPosition)
-        {
-            // Search the current unit position
-            int index = getIndexFromPoint(unit.CurrentPosition);
-
-
-        }
-
 
         /// <summary>
         /// Returns the best defensive unit on the tile, which will

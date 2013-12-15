@@ -79,9 +79,17 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
-        public void move(Point target)
+        public bool move(Point target)
         {
-            throw new NotImplementedException();
+            if (this.canMoveOn(target))
+            {
+                this.CurrentPosition = target;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
