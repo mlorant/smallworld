@@ -103,9 +103,8 @@ namespace GraphicInterface
 
         private System.Drawing.Point getPointFromCoordinates(System.Windows.Point p)
         {
-            // TODO : use constant 
-            int x = (int) p.X / 50;
-            int y = (int) p.Y / 50;
+            int x = (int) p.X / Case.SIZE;
+            int y = (int) p.Y / Case.SIZE;
 
             return new System.Drawing.Point(x, y);
         }
@@ -119,9 +118,7 @@ namespace GraphicInterface
         private void clickOnMap(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Point pt = e.GetPosition(canvasMap);
-            System.Drawing.Point tile = getPointFromCoordinates(pt);
-
-            
+            System.Drawing.Point tile = getPointFromCoordinates(pt);            
             
             foreach(IUnit unit in game.Map.getUnits(tile)) 
             {
