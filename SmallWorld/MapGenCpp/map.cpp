@@ -2,15 +2,6 @@
 #include <iostream>
 #include <cmath> /* round */
 
-enum CaseType
-{
-	Desert = 0,
-	Forest,
-	Mountain,
-	Plain,
-	Sea
-};
-
 /*!
  * \brief Generate a map with random cases
  *
@@ -23,45 +14,111 @@ enum CaseType
 MapGenerator::MapGenerator() {
 	// Init random seed and map array
 	srand (time(0));
+
+	for(int i = 0; i < NB_TILE_TYPES; i++) {
+		tilesUsed[i] = false;
+	}
+}
+
+
+int rand_between(int min, int max) {
+	return min + (rand() % (int)(max - min + 1));
+}
+
+int MapGenerator::getRandomSpecialTile() {
+
+	int start = rand() % NB_TILE_TYPES;
+	
+	int i = 0;
+	while(tilesUsed[start] == true && static_cast<CaseType>(start) != Plain) {
+		start = (start + 1) % NB_TILE_TYPES;
+
+		// If we have use every tile types, reset the bool array
+		if(i++ == NB_TILE_TYPES) {
+			for(int i = 0; i < NB_TILE_TYPES; i++) {
+				tilesUsed[i] = false;
+			}
+		}
+	}
+	
+	return start;
 }
 
 int* MapGenerator::generate_map(int size) {
 	
-	// Init general parameters for the map generation
-	this->_size = size;
-	this->_seaThickness = (int) _size*0.15; // Create random seas around the map, 20% max
 
+	// Init the base of the map, full of Plain.
+	this->_size = size;
 	this->_map = (int*) malloc(size * size * sizeof(int*));
 	this->buildBase();
-	int i;
 
-	// TODO: Implement map generation algorithm. Idea : Perlin Noise
-	for(i = size*_seaThickness; i < size * (size-_seaThickness); i++) {
-		
-		// Skip borders
-		if((i % _size) <= _seaThickness || (i % _size) >= (_size-_seaThickness)) 
-			continue;
+	// Strategy (depend of the map size)
+	if(size <= 7) {
+		this->pureRandom();
+	}
+	else {
+		this->randomWithPatterns();
+	}
+	return this->_map;
+}
 
-		int proba = rand() % 100; // Between 0 and 99
 
-		if(proba < 15) {				// 15% of chance of a Desert
+void MapGenerator::pureRandom() {
+	
+	for(int i = 0; i < _size * _size; i++) {
+
+		int proba = rand() % 100;
+
+		if(proba < 20) {				// 20% of chance of a Desert
 			this->_map[i] = Desert;
 		}
-		else if(proba < 30) {			// 15% of chance of a Forest
+		else if(proba < 40) {			// 20% of chance of a Forest
 			this->_map[i] = Forest;
 		}
-		else if(proba < 45) {			// 10% of chance of a Mountain
+		else if(proba < 58) {			// 18% of chance of a Mountain
 			this->_map[i] = Mountain;
 		}
-		else if(proba < 50) {			// 5% of chance of a Sea
+		else if(proba < 73) {			// 15% of chance of a Sea
 			this->_map[i] = Sea;
 		}
-		else {							// 50% of chance of a Plain
-			this->_map[i] = Plain;
+	}
+}
+
+void MapGenerator::randomWithPatterns() {
+
+	int quarter = this->_size/4;
+	int points[4];
+
+	int mid = this->_size / 2;
+	
+	for(int i = 0; i < 45; i++) {
+		int tileOrigin = rand() % (_size*_size);
+		int xOrigin = tileOrigin % _size;
+		int yOrigin = tileOrigin / _size;
+
+		// Get random patterns
+		int patNumber = rand() % NB_PATTERNS;
+		int tileType = this->getRandomSpecialTile();
+
+		for(int j = 0; j < PATTERN_HEIGHT; j++) {
+			// If we hit the bottom on the map, we stop the pattern
+			if(yOrigin + j >= _size)
+				break;
+
+			// Draw the line number j of the pattern
+			for(int k = 0; k < PATTERN_WIDTH; k++) {
+
+				// If we hit the right side of map, stop the line
+				if(xOrigin + k >= _size) 
+					break;
+
+				if(patterns[patNumber][j][k] == 1)
+					this->_map[tileOrigin + j*_size + k] = tileType;
+				
+			}
 		}
 	}
-	
-	return this->_map;
+
 }
 
 
@@ -74,66 +131,9 @@ int* MapGenerator::generate_map(int size) {
  *
  */
 void MapGenerator::buildBase() {
-
-	// Limit the number of Sea possible side by side
-	int coefSeaDecrease = 0;
-
-	// First lines
-	for(int i = 0; i < _size*_seaThickness; i++) {
-		int line = i / _size; // x coordinates to lowered the number of sea in the center
-		int coef = this->getSeaChance(i, line, &coefSeaDecrease);
-		this->_map[i] = (rand() % 100 < coef) ? Sea : Plain;
+	int i;
+	for(i = 0; i < this->_size*this->_size; i++) {
+		this->_map[i] = Plain;
 	}
-
-	// Last line (last tile to the center)
-	for(int i = _size*_size; i > (_size*_size) - (_size*_seaThickness); i--) {
-		int line = _size - (i / _size);
-		int coef = this->getSeaChance(i, line, &coefSeaDecrease);
-		this->_map[i] = (rand() % 100 < coef) ? Sea : Plain;
-	}
-	
-	// Sides
-	for(int i = 0; i < _size*_size; i++) {
-		if((i % _size) > _seaThickness &&  (i % _size) < (_size-_seaThickness)) 
-			continue;
-
-		int column = (i > (_size-_seaThickness)) ? _size - (i % _size) : i % _size;
-		int coef = this->getSeaChance(i, column, &coefSeaDecrease);
-		this->_map[i] = (rand() % 100 < coef) ? Sea : Plain;
-	}
-
-}
-
-int MapGenerator::getSeaChance(int i, int lineNumber, int* coefSeaDecrease) {
-	int coef;
-	if(this->isThereSeaNearby(i)) {
-		coef = 75 - 20*(*coefSeaDecrease);
-		*coefSeaDecrease++;
-	}
-	else {
-		coef = 50;
-		*coefSeaDecrease = 0;
-	}
-	
-	coef *= (0.5 - 0.25*(lineNumber - 2)); // Decreasing as in that approach the center
-	return coef;
-}
-
-bool MapGenerator::isThereSeaNearby(int i) {
-	// Left
-	if((i % _size) > 0 && this->_map[i-1] == Sea)
-		return true;
-	// Right
-	if((i % _size) < (_size-1) && this->_map[i+1] == Sea)
-		return true;
-
-	// Up	
-	if(i > _size && this->_map[i-_size] == Sea)
-		return true;
-	// Down
-	if(i < _size*(_size-1) && this->_map[i+_size] == Sea)
-		return true;
-
-	return false;
 }
 
