@@ -79,7 +79,7 @@ namespace SmallWorld
         }
 
 
-        private Game() { }
+        private Game() {}
 
         public static Game Instance
         {

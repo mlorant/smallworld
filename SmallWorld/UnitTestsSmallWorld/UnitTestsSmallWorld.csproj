@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MapTest.cs" />
+    <Compile Include="NationTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -59,6 +62,7 @@
     </Compile>
     <Compile Include="PlayerTest.cs" />
     <Compile Include="GameTest.cs" />
+    <Compile Include="UnitTest.cs" />
     <Compile Include="WrapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,7 +75,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MapGenWrapper\mapWrapper.vcxproj">
       <Project>{7df3c717-cf81-4974-b49d-903bee0c8c54}</Project>
-      <Name>mapWrapper %28Visual Studio 2010%29</Name>
+      <Name>mapWrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modele\SmallWorld.csproj">
       <Project>{c83ec0bf-e9db-4b17-b964-dddb9d0890e8}</Project>
@@ -83,6 +87,9 @@
       <Link>SmallWorldLibCpp.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

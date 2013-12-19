@@ -25,7 +25,7 @@ namespace SmallWorld
         public int Health
         {
             get { return this._health; }
-            set { }
+            set { this._health = value; }
         }
 
         public int Id
