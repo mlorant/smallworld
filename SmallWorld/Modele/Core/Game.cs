@@ -63,6 +63,11 @@ namespace SmallWorld
             }
         }
 
+        public int NbUnits 
+        {
+            get { return this.nbUnits; }
+        }
+
         public int NbRounds
         {
             get { return this.nbRounds; }

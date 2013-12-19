@@ -205,13 +205,11 @@ namespace SmallWorld
         {
             int index = this.getIndexFromPoint(pos);
             if (units[index] == null)
-                return new List<IUnit>();
-            else
-                return units[index];
+                units[index] = new List<IUnit>();
+                
+            return units[index];
+            
         }
-
-
-
 
 
         ///////////////////////////////////

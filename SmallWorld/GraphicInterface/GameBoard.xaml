@@ -6,9 +6,8 @@
 
     <Grid Margin="0,0,0,0">
         <ScrollViewer Margin="0,0,0,120">
-            <Canvas Name="canvasMap" VerticalAlignment="Top" Width="792" MouseLeftButtonDown="clickOnMap">
-
-            </Canvas>
+            <Grid Name="mapGrid" VerticalAlignment="Top" HorizontalAlignment="Center" MouseLeftButtonDown="clickOnMap">
+            </Grid>
         </ScrollViewer>
 
         <DockPanel HorizontalAlignment="Left" Height="120" LastChildFill="False" Margin="0,552,0,0" VerticalAlignment="Top" Width="792">
@@ -20,7 +19,10 @@
                 <StackPanel Name="CaseInfoOnClick" Height="120" VerticalAlignment="Top" Width="300" Visibility="Hidden">
                 <TextBlock TextWrapping="Wrap" Text="Informations sur la case et son contenu"/>
                 <TextBlock Name="CaseInfo"/>
-                <TextBlock Name="NbUnitOnCase"/>
+                <StackPanel Name="UnitsInfo">
+                    <TextBlock Name="NbUnitOnCase"/>
+                </StackPanel>
+                
             </StackPanel>
             <StackPanel Height="120" VerticalAlignment="Top" Width="250">
                 <TextBlock Foreground="Green">

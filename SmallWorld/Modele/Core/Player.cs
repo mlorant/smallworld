@@ -67,7 +67,7 @@ namespace SmallWorld
 
             units = new List<IUnit>();
             for (int i = 0; i < nbUnits; i++)
-                units.Add(nation.fabricUnit());
+                units.Add(nation.fabricUnit(i));
         }
 
     }
