@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="3e3dd912-2175-4343-a3f3-1ca29c65bb8f" name="Ssxz@42 2013-12-19 20:23:46" runUser="42\Ssxz" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Paramètres de test par défaut" id="ea49020d-50a1-47bb-b574-60bfbe323013">
+    <Deployment userDeploymentRoot="D:\Cours\INSA\4INFO\smallworld\SmallWorld\UnitTestsSmallWorld" useDefaultDeploymentRoot="false" runDeploymentRoot="Ssxz_42 2013-12-19 20_23_46" />
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2013-12-19T20:23:46.3961404+01:00" queuing="2013-12-19T20:23:46.8441660+01:00" start="2013-12-19T20:23:47.0161759+01:00" finish="2013-12-19T20:23:47.6532123+01:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="13" executed="13" passed="9" error="0" failed="4" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestFabricVikingUnit" storage="bin\debug\unittestssmallworld.dll" id="8e42c782-7803-20ae-fe53-2f2f761796fb">
+      <Execution id="b05b1dbd-0db6-4c58-994d-150c12e90b56" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.NationTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestFabricVikingUnit" />
+    </UnitTest>
+    <UnitTest name="TestNewUnitLife" storage="bin\debug\unittestssmallworld.dll" id="1fa10208-dcb7-0028-1ebc-b6a0603bb490">
+      <Execution id="1346d811-f8a6-47ed-8d42-61fd895ea563" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.UnitTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestNewUnitLife" />
+    </UnitTest>
+    <UnitTest name="TestFabricGallicUnit" storage="bin\debug\unittestssmallworld.dll" id="2e08d76c-d30a-4cb1-d625-b3ae717722fd">
+      <Execution id="5d7498e1-cbaa-4b43-9b4e-b9e3323c541e" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.NationTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestFabricGallicUnit" />
+    </UnitTest>
+    <UnitTest name="TestCreationGame" storage="bin\debug\unittestssmallworld.dll" id="3d958288-24d8-2f46-cbb0-b036c62e3aa0">
+      <Execution id="a6912574-1072-4e1d-b976-b3fd6261f4d6" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.GameTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCreationGame" />
+    </UnitTest>
+    <UnitTest name="TestMapGeneratedSize" storage="bin\debug\unittestssmallworld.dll" id="7cb13797-abe2-daad-c19d-a2873664743f">
+      <Execution id="80754621-161c-4415-93d0-a36cc1181845" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.WrapperTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestMapGeneratedSize" />
+    </UnitTest>
+    <UnitTest name="TestUnitDeath" storage="bin\debug\unittestssmallworld.dll" id="8ec47325-622b-178a-853f-c9392dfc6991">
+      <Execution id="a39629c9-1958-45b9-83b2-55ed8658e707" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.UnitTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestUnitDeath" />
+    </UnitTest>
+    <UnitTest name="TestCasesRepresented" storage="bin\debug\unittestssmallworld.dll" id="e915bfc7-a5a5-4571-9620-02bddf5d4891">
+      <Execution id="42e6031a-0119-440b-96c2-a8fa5b5107fa" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.WrapperTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCasesRepresented" />
+    </UnitTest>
+    <UnitTest name="TestFabricDwarfUnit" storage="bin\debug\unittestssmallworld.dll" id="5d516ca5-b34e-ecad-62eb-376e113ea63f">
+      <Execution id="f4839578-d241-4674-8f2f-f05df548e387" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.NationTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestFabricDwarfUnit" />
+    </UnitTest>
+    <UnitTest name="TestFlyWeight" storage="bin\debug\unittestssmallworld.dll" id="6b9e69fd-691f-5a18-9c07-9defc58af5c4">
+      <Execution id="02d8899e-ff97-4972-9d02-a7cdde2bc2bc" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.MapTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestFlyWeight" />
+    </UnitTest>
+    <UnitTest name="TestIncrementRound" storage="bin\debug\unittestssmallworld.dll" id="f691b301-6d6b-f4e4-c285-076576ba5a19">
+      <Execution id="9fdd0304-9ffb-4250-a437-9dec57700fd3" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.GameTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestIncrementRound" />
+    </UnitTest>
+    <UnitTest name="TestCreatePlayer" storage="bin\debug\unittestssmallworld.dll" id="6404268f-4e95-2b78-e2d4-52547b30d872">
+      <Execution id="eb1d1513-2b12-45f8-bdfc-bd7883721249" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.PlayerTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCreatePlayer" />
+    </UnitTest>
+    <UnitTest name="TestInitialStats" storage="bin\debug\unittestssmallworld.dll" id="060d93fe-b831-82c9-e6b9-efbfa5a32c7c">
+      <Execution id="d1f00ca3-d086-4a00-94df-c930a9664c26" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.UnitTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestInitialStats" />
+    </UnitTest>
+    <UnitTest name="TestMapSize" storage="bin\debug\unittestssmallworld.dll" id="6dccdc89-9a2c-fbec-55bb-787d3a09f0ed">
+      <Execution id="2d51e063-37b4-496b-8d6f-06b8d7e85b0e" />
+      <TestMethod codeBase="D:/Cours/INSA/4INFO/smallworld/SmallWorld/UnitTestsSmallWorld/bin/Debug/UnitTestsSmallWorld.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTestsSmallWorld.MapTest, UnitTestsSmallWorld, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestMapSize" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Les résultats ne figurent pas dans une liste" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Tous les résultats chargés" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="3d958288-24d8-2f46-cbb0-b036c62e3aa0" executionId="a6912574-1072-4e1d-b976-b3fd6261f4d6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f691b301-6d6b-f4e4-c285-076576ba5a19" executionId="9fdd0304-9ffb-4250-a437-9dec57700fd3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6b9e69fd-691f-5a18-9c07-9defc58af5c4" executionId="02d8899e-ff97-4972-9d02-a7cdde2bc2bc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6dccdc89-9a2c-fbec-55bb-787d3a09f0ed" executionId="2d51e063-37b4-496b-8d6f-06b8d7e85b0e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5d516ca5-b34e-ecad-62eb-376e113ea63f" executionId="f4839578-d241-4674-8f2f-f05df548e387" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2e08d76c-d30a-4cb1-d625-b3ae717722fd" executionId="5d7498e1-cbaa-4b43-9b4e-b9e3323c541e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8e42c782-7803-20ae-fe53-2f2f761796fb" executionId="b05b1dbd-0db6-4c58-994d-150c12e90b56" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6404268f-4e95-2b78-e2d4-52547b30d872" executionId="eb1d1513-2b12-45f8-bdfc-bd7883721249" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="060d93fe-b831-82c9-e6b9-efbfa5a32c7c" executionId="d1f00ca3-d086-4a00-94df-c930a9664c26" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fa10208-dcb7-0028-1ebc-b6a0603bb490" executionId="1346d811-f8a6-47ed-8d42-61fd895ea563" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ec47325-622b-178a-853f-c9392dfc6991" executionId="a39629c9-1958-45b9-83b2-55ed8658e707" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e915bfc7-a5a5-4571-9620-02bddf5d4891" executionId="42e6031a-0119-440b-96c2-a8fa5b5107fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7cb13797-abe2-daad-c19d-a2873664743f" executionId="80754621-161c-4415-93d0-a36cc1181845" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="a6912574-1072-4e1d-b976-b3fd6261f4d6" testId="3d958288-24d8-2f46-cbb0-b036c62e3aa0" testName="TestCreationGame" computerName="42" duration="00:00:00.0237977" startTime="2013-12-19T20:23:47.0731791+01:00" endTime="2013-12-19T20:23:47.4412002+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6912574-1072-4e1d-b976-b3fd6261f4d6">
+    </UnitTestResult>
+    <UnitTestResult executionId="9fdd0304-9ffb-4250-a437-9dec57700fd3" testId="f691b301-6d6b-f4e4-c285-076576ba5a19" testName="TestIncrementRound" computerName="42" duration="00:00:00.0013007" startTime="2013-12-19T20:23:47.4462005+01:00" endTime="2013-12-19T20:23:47.4582012+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9fdd0304-9ffb-4250-a437-9dec57700fd3">
+    </UnitTestResult>
+    <UnitTestResult executionId="02d8899e-ff97-4972-9d02-a7cdde2bc2bc" testId="6b9e69fd-691f-5a18-9c07-9defc58af5c4" testName="TestFlyWeight" computerName="42" duration="00:00:00.0563534" startTime="2013-12-19T20:23:47.4712019+01:00" endTime="2013-12-19T20:23:47.5322054+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="02d8899e-ff97-4972-9d02-a7cdde2bc2bc">
+      <Output>
+        <ErrorInfo>
+          <Message>La méthode de test UnitTestsSmallWorld.MapTest.TestFlyWeight a levé une exception : 
+System.IO.FileNotFoundException: Impossible de charger le fichier ou l'assembly 'mapWrapper.dll' ou une de ses dépendances. Le module spécifié est introuvable.</Message>
+          <StackTrace>    à SmallWorld.Map.generateMap(Int32 mapWidth)
+   à UnitTestsSmallWorld.MapTest.TestFlyWeight() dans d:\Cours\INSA\4INFO\smallworld\SmallWorld\UnitTestsSmallWorld\MapTest.cs:ligne 29
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2d51e063-37b4-496b-8d6f-06b8d7e85b0e" testId="6dccdc89-9a2c-fbec-55bb-787d3a09f0ed" testName="TestMapSize" computerName="42" duration="00:00:00.0037241" startTime="2013-12-19T20:23:47.5342055+01:00" endTime="2013-12-19T20:23:47.5412059+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d51e063-37b4-496b-8d6f-06b8d7e85b0e">
+      <Output>
+        <ErrorInfo>
+          <Message>La méthode de test UnitTestsSmallWorld.MapTest.TestMapSize a levé une exception : 
+System.IO.FileNotFoundException: Impossible de charger le fichier ou l'assembly 'mapWrapper.dll' ou une de ses dépendances. Le module spécifié est introuvable.</Message>
+          <StackTrace>    à SmallWorld.Map.generateMap(Int32 mapWidth)
+   à UnitTestsSmallWorld.MapTest.TestMapSize() dans d:\Cours\INSA\4INFO\smallworld\SmallWorld\UnitTestsSmallWorld\MapTest.cs:ligne 58
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f4839578-d241-4674-8f2f-f05df548e387" testId="5d516ca5-b34e-ecad-62eb-376e113ea63f" testName="TestFabricDwarfUnit" computerName="42" duration="00:00:00.0009465" startTime="2013-12-19T20:23:47.5432060+01:00" endTime="2013-12-19T20:23:47.5462062+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f4839578-d241-4674-8f2f-f05df548e387">
+    </UnitTestResult>
+    <UnitTestResult executionId="5d7498e1-cbaa-4b43-9b4e-b9e3323c541e" testId="2e08d76c-d30a-4cb1-d625-b3ae717722fd" testName="TestFabricGallicUnit" computerName="42" duration="00:00:00.0005230" startTime="2013-12-19T20:23:47.5482063+01:00" endTime="2013-12-19T20:23:47.5522065+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5d7498e1-cbaa-4b43-9b4e-b9e3323c541e">
+    </UnitTestResult>
+    <UnitTestResult executionId="b05b1dbd-0db6-4c58-994d-150c12e90b56" testId="8e42c782-7803-20ae-fe53-2f2f761796fb" testName="TestFabricVikingUnit" computerName="42" duration="00:00:00.0005520" startTime="2013-12-19T20:23:47.5532066+01:00" endTime="2013-12-19T20:23:47.5562068+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b05b1dbd-0db6-4c58-994d-150c12e90b56">
+    </UnitTestResult>
+    <UnitTestResult executionId="eb1d1513-2b12-45f8-bdfc-bd7883721249" testId="6404268f-4e95-2b78-e2d4-52547b30d872" testName="TestCreatePlayer" computerName="42" duration="00:00:00.0016584" startTime="2013-12-19T20:23:47.5572068+01:00" endTime="2013-12-19T20:23:47.5622071+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eb1d1513-2b12-45f8-bdfc-bd7883721249">
+    </UnitTestResult>
+    <UnitTestResult executionId="d1f00ca3-d086-4a00-94df-c930a9664c26" testId="060d93fe-b831-82c9-e6b9-efbfa5a32c7c" testName="TestInitialStats" computerName="42" duration="00:00:00.0005869" startTime="2013-12-19T20:23:47.5632072+01:00" endTime="2013-12-19T20:23:47.5662073+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d1f00ca3-d086-4a00-94df-c930a9664c26">
+    </UnitTestResult>
+    <UnitTestResult executionId="1346d811-f8a6-47ed-8d42-61fd895ea563" testId="1fa10208-dcb7-0028-1ebc-b6a0603bb490" testName="TestNewUnitLife" computerName="42" duration="00:00:00.0004026" startTime="2013-12-19T20:23:47.5682075+01:00" endTime="2013-12-19T20:23:47.5712076+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1346d811-f8a6-47ed-8d42-61fd895ea563">
+    </UnitTestResult>
+    <UnitTestResult executionId="a39629c9-1958-45b9-83b2-55ed8658e707" testId="8ec47325-622b-178a-853f-c9392dfc6991" testName="TestUnitDeath" computerName="42" duration="00:00:00.0004035" startTime="2013-12-19T20:23:47.5722077+01:00" endTime="2013-12-19T20:23:47.5762079+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a39629c9-1958-45b9-83b2-55ed8658e707">
+    </UnitTestResult>
+    <UnitTestResult executionId="42e6031a-0119-440b-96c2-a8fa5b5107fa" testId="e915bfc7-a5a5-4571-9620-02bddf5d4891" testName="TestCasesRepresented" computerName="42" duration="00:00:00.0022078" startTime="2013-12-19T20:23:47.5772080+01:00" endTime="2013-12-19T20:23:47.5852084+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="42e6031a-0119-440b-96c2-a8fa5b5107fa">
+      <Output>
+        <ErrorInfo>
+          <Message>La méthode de test UnitTestsSmallWorld.WrapperTest.TestCasesRepresented a levé une exception : 
+System.IO.FileNotFoundException: Impossible de charger le fichier ou l'assembly 'mapWrapper.dll' ou une de ses dépendances. Le module spécifié est introuvable.</Message>
+          <StackTrace>    à UnitTestsSmallWorld.WrapperTest.TestCasesRepresented()
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="80754621-161c-4415-93d0-a36cc1181845" testId="7cb13797-abe2-daad-c19d-a2873664743f" testName="TestMapGeneratedSize" computerName="42" duration="00:00:00.0016593" startTime="2013-12-19T20:23:47.5882086+01:00" endTime="2013-12-19T20:23:47.5922088+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="80754621-161c-4415-93d0-a36cc1181845">
+      <Output>
+        <ErrorInfo>
+          <Message>La méthode de test UnitTestsSmallWorld.WrapperTest.TestMapGeneratedSize a levé une exception : 
+System.IO.FileNotFoundException: Impossible de charger le fichier ou l'assembly 'mapWrapper.dll' ou une de ses dépendances. Le module spécifié est introuvable.</Message>
+          <StackTrace>    à UnitTestsSmallWorld.WrapperTest.TestMapGeneratedSize()
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

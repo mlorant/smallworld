@@ -23,7 +23,7 @@ namespace SmallWorld
         public int Health
         {
             get { return this.health; }
-            set { }
+            set { this.health = value; }
         }
 
         public int Attack
