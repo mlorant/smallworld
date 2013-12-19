@@ -9,6 +9,6 @@ namespace SmallWorld
 
     public abstract class Nation : INation
     {
-        public abstract IUnit fabricUnit();
+        public abstract IUnit fabricUnit(int id);
     }
 }

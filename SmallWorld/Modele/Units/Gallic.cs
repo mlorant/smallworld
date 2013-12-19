@@ -8,7 +8,10 @@ namespace SmallWorld
 {
     public class Gallic : Unit, IGallic
     {
-
+        public Gallic(int id)
+        {
+            this.Id = id;
+        }
         /// <summary>
         /// Check if the unit can move to the position given.
         /// Gallics can move on 2 Plain tile in 1 round.

@@ -7,7 +7,7 @@ namespace SmallWorld
 {
     public interface INation
     {
-        IUnit fabricUnit();
+        IUnit fabricUnit(int id);
     }
 
     public interface INationDwarf : INation    {}

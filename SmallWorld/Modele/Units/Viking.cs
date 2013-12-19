@@ -8,7 +8,10 @@ namespace SmallWorld
 {
     public class Viking : Unit, IViking
     {
-
+        public Viking(int id)
+        {
+            this.Id = id;
+        }
         /// <summary>
         /// Check if the unit can move to the position given,
         /// especially on a sea.

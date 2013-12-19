@@ -11,35 +11,55 @@ namespace SmallWorld
         /// <summary>
         /// Current health status of the unit
         /// </summary>
-        private int health = maxHealth;
-        private const int maxHealth = 5;
+        private int _health = _maxHealth;
+        private const int _maxHealth = 5;
+        private int _id;
+        private Rectangle _imagePosition;
 
-        private int attackPoints = 2;
-        private int defensePoints = 1;
-        private int movePoint = 1;
+        private int _attackPoints = 2;
+        private int _defensePoints = 1;
+        private int _movePoint = 1;
 
-        private Point currentPosition;
+        private Point _currentPosition;
 
         public int Health
         {
-            get { return this.health; }
+            get { return this._health; }
             set { }
         }
 
+        public int Id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                this._id = value;
+            }
+        }
+
+
         public int Attack
         {
-            get { return (int)(this.attackPoints * ((double)this.health / Unit.maxHealth)); }
+            get { return (int)(this._attackPoints * ((double)this._health / Unit._maxHealth)); }
         }
 
         public int Defense
         {
-            get { return this.defensePoints; }
+            get { return this._defensePoints; }
+        }
+
+        public int MovePoint
+        {
+            get { return this._movePoint; }
         }
 
         public Point CurrentPosition
         {
-            get { return this.currentPosition; }
-            set { this.currentPosition = value; }
+            get { return this._currentPosition; }
+            set { this._currentPosition = value; }
         }
 
         public void attack(Point target)
@@ -47,7 +67,7 @@ namespace SmallWorld
             // Get best defense unit on the tile
             IUnit defender = Game.Instance.Map.getBestDefensiveUnit(target);
 
-            if (defender != null)
+            if (defender != null && (this._movePoint > 0))
             {
 
                 if (defender.Defense == 0)
@@ -56,22 +76,23 @@ namespace SmallWorld
                 }
 
                 // Get number of attacks, between 3 and the maxHeal+2
-                int maxHeal = Math.Max(this.health, defender.Health);
+                int maxHeal = Math.Max(this._health, defender.Health);
                 Random rand = new Random();
                 int attacksCount = rand.Next(3, maxHeal + 2);
 
                 for (int i = 0; i < attacksCount; i++)
                 {
-                    double powerBalance = (double) this.Attack / defender.Defense;
+                    double powerBalance = (double)this.Attack / defender.Defense;
                 }
 
+                this._movePoint--;
             }
-            
+
         }
 
         public bool isAlive()
         {
-            return (health > 0);
+            return (_health > 0);
         }
 
         public int getMoveCost()
@@ -79,12 +100,34 @@ namespace SmallWorld
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// La méthode qui permet au unité de bouger de case. Prend en compte l'autorisation ou non de bouger
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public bool move(Point target)
         {
-            if (this.canMoveOn(target))
+            Console.WriteLine("Move");
+            // Elle doit avoir le droit de bouger
+            if (this._movePoint > 0)
             {
-                this.CurrentPosition = target;
-                return true;
+                Console.WriteLine(this.canMoveOn(target));
+                // On vérifie si sa destination est possible
+                if (this.canMoveOn(target))
+                {
+
+                    Game.Instance.Map.getUnits(target).Add(this);
+                    Game.Instance.Map.getUnits(this.CurrentPosition).Remove(this);
+
+                    this.CurrentPosition = target;
+
+                    this._movePoint--;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -101,10 +144,10 @@ namespace SmallWorld
         /// <returns>True is the position is accessible with 1 movement point</returns>
         protected bool isNear(Point tgt)
         {
-            bool verticalMove = (tgt.X == currentPosition.X &&
-                                    Math.Abs(currentPosition.Y - tgt.Y) == 1);
-            bool horizontalMove = (tgt.Y == currentPosition.Y &&
-                                    Math.Abs(currentPosition.X - tgt.X) == 1);
+            bool verticalMove = (tgt.X == _currentPosition.X &&
+                                    Math.Abs(_currentPosition.Y - tgt.Y) == 1);
+            bool horizontalMove = (tgt.Y == _currentPosition.Y &&
+                                    Math.Abs(_currentPosition.X - tgt.X) == 1);
 
             return (verticalMove || horizontalMove);
         }

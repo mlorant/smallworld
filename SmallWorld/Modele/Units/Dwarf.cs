@@ -9,6 +9,10 @@ namespace SmallWorld
     public class Dwarf : Unit, IDwarf
     {
 
+        public Dwarf(int id)
+        {
+            this.Id = id;
+        }
         /// <summary>
         /// Check if the unit can move to the position given.
         /// Dwarves can move on any mountain without ennemies if
@@ -16,7 +20,8 @@ namespace SmallWorld
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public bool canMoveOn(Point tgt)
+
+        public new bool canMoveOn(Point tgt)
         {
             ICase destType = Game.Instance.Map.getCase(tgt);
             ICase currentType = Game.Instance.Map.getCase(this.CurrentPosition);

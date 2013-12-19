@@ -9,12 +9,11 @@ namespace SmallWorld
     public interface IUnit
     {
 
+        int Id { get; set; }
         int Health { get; set; }
         int Attack { get; }
         int Defense { get; }
         Point CurrentPosition { get; set; }
-        
-
         void attack(Point target);
 
         bool isAlive();
