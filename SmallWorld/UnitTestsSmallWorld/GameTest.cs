@@ -10,7 +10,7 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestCreationGame()
         {
-            Game game = new Game();
+            Game game = Game.Instance;
             Assert.IsFalse(game.isGameFinished());
             Assert.AreEqual(game.Players.Length, 2);
             Assert.AreEqual(game.CurrentRound, 1);
@@ -19,7 +19,7 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestIncrementRound()
         {
-            Game game = new Game();
+            Game game = Game.Instance;
             Assert.AreEqual(game.CurrentRound, 1);
 
             game.CurrentRound += 1;

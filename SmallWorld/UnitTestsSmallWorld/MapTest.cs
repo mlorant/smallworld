@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SmallWorld;
+using System.Drawing;
 
 namespace UnitTestsSmallWorld
 {
@@ -23,12 +24,14 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestFlyWeight()
         {
+            int width = 10;
             List<ICase> instances = new List<ICase>();
-            map.generateMap(20);
-
-            for (int i = 0; i < 20; i++)
+            map.generateMap(width);
+            
+            for (int i = 0; i < width*width; i++)
             {
-                ICase inst = map.getCase(i);
+                
+                ICase inst = map.getCase(new Point(i / width, i % width));
 
                 bool isInList = false;
                 for (int j = 0; j < instances.Count; j++)

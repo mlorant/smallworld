@@ -13,8 +13,9 @@ namespace UnitTestsSmallWorld
             Player p = new Player("Maxime", NationType.GALLIC, 5);
 
             Assert.AreEqual(p.Nickname, "Maxime");
-            Assert.IsTrue(p.Units.Length == 5);
-            for(int i = 0; i < p.Units.Length; i++) {
+            Assert.IsTrue(p.Units.Count == 5);
+            for (int i = 0; i < p.Units.Count; i++)
+            {
                 Assert.IsTrue(p.Units[i] is Gallic);
             }
         }
