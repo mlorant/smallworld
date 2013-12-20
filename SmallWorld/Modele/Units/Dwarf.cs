@@ -13,6 +13,8 @@ namespace SmallWorld
         {
             this.Id = id;
         }
+
+
         /// <summary>
         /// Check if the unit can move to the position given.
         /// Dwarves can move on any mountain without ennemies if
@@ -53,13 +55,8 @@ namespace SmallWorld
         /// </summary>
         /// <returns></returns>
         public override int getPoints()
-        {
-
-            Console.Write("Entering in getPoint of Dwarf...");
-            
+        {            
             ICase targetType = Game.Instance.Map.getCase(this.CurrentPosition);
-
-            Console.Write("case:" + targetType.GetType().ToString());
 
             if (targetType is Forest)
                 return base.getPoints() + 1;
