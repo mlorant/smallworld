@@ -2,6 +2,56 @@
 #include <iostream>
 #include <cmath> /* round */
 
+
+
+#define NB_PATTERNS 5
+#define PATTERN_WIDTH 5
+#define PATTERN_HEIGHT 5
+
+/*
+ * Define many patterns used to make medium and big random
+ * map. Each patterns is composed of 0 and 1, where 1 designed
+ * a tile which will be special (Forest, Mountain, ...) and 0
+ * will be a Plain OR an element of the pattern overlapped.
+ */
+int patterns[NB_PATTERNS][PATTERN_HEIGHT][PATTERN_WIDTH] = {
+	{
+		{0, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0},
+		{0, 1, 1, 1, 0},
+		{0, 0, 1, 0, 0},
+		{0, 0, 0, 0, 0}
+	},
+	{
+		{0, 1, 0, 0, 0},
+		{0, 1, 1, 0, 0},
+		{0, 1, 1, 1, 0},
+		{0, 1, 1, 0, 0},
+		{0, 1, 0, 0, 0}
+	},
+	{
+		{0, 0, 1, 0, 0},
+		{0, 1, 1, 1, 0},
+		{1, 1, 1, 1, 1},
+		{0, 1, 1, 1, 0},
+		{0, 0, 1, 0, 0}
+	},	
+	{
+		{0, 0, 0, 0, 0},
+		{1, 1, 0, 1, 1},
+		{1, 1, 0, 1, 1},
+		{1, 1, 0, 1, 1},
+		{0, 0, 0, 0, 0}
+	},
+	{
+		{0, 1, 1, 1, 0},
+		{0, 1, 0, 1, 0},
+		{0, 1, 0, 1, 0},
+		{0, 1, 1, 1, 0},
+		{0, 0, 0, 0, 0}
+	}
+};
+
 /*!
  * \brief Generate a map with random cases
  *
