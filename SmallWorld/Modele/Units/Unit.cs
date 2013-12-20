@@ -54,6 +54,7 @@ namespace SmallWorld
         public int MovePoint
         {
             get { return this._movePoint; }
+            set { this._movePoint = value; }
         }
 
         public Point CurrentPosition

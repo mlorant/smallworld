@@ -32,6 +32,7 @@ namespace SmallWorld
             g.initPlayer(1, player2, nation2);
 
             g.placePlayers();
+            g.determinePlayOrder();
 
             return g;
         }

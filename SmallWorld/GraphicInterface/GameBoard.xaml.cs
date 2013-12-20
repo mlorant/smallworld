@@ -175,8 +175,9 @@ namespace GraphicInterface
 
         private void endRound(object sender, RoutedEventArgs e)
         {
-            game.CurrentRound += 1;
+            game.endRound();
             CurrentRound.Text = game.CurrentRound.ToString();
+            
         }
 
         /// <summary>
