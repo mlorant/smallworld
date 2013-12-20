@@ -102,6 +102,16 @@ namespace SmallWorld
         }
 
         /// <summary>
+        /// Compute how many points the units worth for
+        /// the player
+        /// </summary>
+        /// <returns></returns>
+        public virtual int getPoints()
+        {
+            return 1;
+        }
+
+        /// <summary>
         /// La méthode qui permet au unité de bouger de case. Prend en compte l'autorisation ou non de bouger
         /// </summary>
         /// <param name="target"></param>

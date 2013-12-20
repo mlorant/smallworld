@@ -46,5 +46,28 @@ namespace SmallWorld
             return base.canMoveOn(tgt);
         }
 
+
+        /// <summary>
+        /// Compute how many points the units worth for
+        /// the player
+        /// </summary>
+        /// <returns></returns>
+        public override int getPoints()
+        {
+
+            Console.Write("Entering in getPoint of Dwarf...");
+            
+            ICase targetType = Game.Instance.Map.getCase(this.CurrentPosition);
+
+            Console.Write("case:" + targetType.GetType().ToString());
+
+            if (targetType is Forest)
+                return base.getPoints() + 1;
+            else if (targetType is Plain)
+                return 0;
+            else
+                return base.getPoints();
+        }
+
     }
 }

@@ -68,7 +68,24 @@ namespace SmallWorld
             units = new List<IUnit>();
             for (int i = 0; i < nbUnits; i++)
                 units.Add(nation.fabricUnit(i));
+        
         }
 
+
+        /// <summary>
+        /// Compute and returns the number of points of the player,
+        /// by suming every points of his units.
+        /// </summary>
+        /// <returns>The score of the player</returns>
+        public int computePoints()
+        {
+            int total = 0;
+            foreach (Unit unit in this.Units)
+            {
+                total += unit.getPoints();
+            }
+
+            return total;
+        }
     }
 }

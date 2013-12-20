@@ -36,5 +36,23 @@ namespace SmallWorld
             return base.canMoveOn(tgt);
         }
 
+
+        /// <summary>
+        /// Compute how many points the units worth for
+        /// the player
+        /// </summary>
+        /// <returns></returns>
+        public override int getPoints()
+        {
+            ICase targetType = Game.Instance.Map.getCase(this.CurrentPosition);
+
+            if (targetType is Plain)
+                return base.getPoints() + 1;
+            else if (targetType is Mountain)
+                return 0;
+            else
+                return base.getPoints();
+        }
+
     }
 }

@@ -28,17 +28,6 @@ namespace GraphicInterface
 
         const string IMAGEUNITS = "pack://application:,,,/GraphicInterface;component/Resources/img/units/";
 
-        public int NbUnits1
-        {
-            get { return game.Players[0].Units.Count; }
-            set { } 
-        }
-        public int NbUnits2
-        {
-            get { return game.Players[1].Units.Count; }
-            set { } 
-        }
-
         public GameBoard(Game g)
         {
             game = g;
@@ -63,11 +52,11 @@ namespace GraphicInterface
 
             drawMap();
             drawUnits();
+            refreshPlayerInfos();
 
-            CurrentRound.Text = game.CurrentRound.ToString(); ;
+            CurrentRound.Text = game.CurrentRound.ToString(); 
             MaxRound.Text = game.NbRounds.ToString();
-            Player1Units.Text = NbUnits1.ToString();
-            Player2Units.Text = NbUnits2.ToString();
+
         }
 
 
@@ -135,6 +124,18 @@ namespace GraphicInterface
             }
         }
 
+        /// <summary>
+        /// Refresh player information (nb units and score)
+        /// </summary>
+        private void refreshPlayerInfos()
+        {
+            Player1Units.Text = game.Players[0].Units.Count.ToString();
+            Player2Units.Text = game.Players[1].Units.Count.ToString();
+
+            Player1Points.Text = game.Players[0].computePoints().ToString();
+            Player2Points.Text = game.Players[1].computePoints().ToString();
+        }
+
         private void moveImageUnit (string nationUnit, System.Drawing.Point sourcePt, System.Drawing.Point destPt){
             // retrieve unit type 
             IUnit unit = game.Map.getUnits(destPt)[0];
@@ -177,7 +178,8 @@ namespace GraphicInterface
         {
             game.endRound();
             CurrentRound.Text = game.CurrentRound.ToString();
-            
+
+            refreshPlayerInfos();
         }
 
         /// <summary>
