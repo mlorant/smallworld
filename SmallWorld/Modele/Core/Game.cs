@@ -36,11 +36,6 @@ namespace SmallWorld
         private int currentRound;
 
         /// <summary>
-        /// Index of the winner
-        /// </summary>
-        private Player winner;
-
-        /// <summary>
         /// Map of the current map
         /// </summary>
         private Map map;
@@ -207,10 +202,10 @@ namespace SmallWorld
         /// the round number and units remaining
         /// </summary>
         /// <returns>A boolean (true if the game is finished)</returns>
-        public bool isGameFinished()
+        public bool isFinished()
         {
             // Check round limit 
-            if (currentRound >= this.nbRounds)
+            if (currentRound > this.nbRounds)
                 return true;
 
             // Check units number
@@ -218,21 +213,15 @@ namespace SmallWorld
                      players[1].Units.Count == 0);
         }
 
-        public void setWinner()
+        public IPlayer getWinner()
         {
-            if (players[1].Units.Count == 0)
-            {
-                winner = players[0];
-            }
-            else if (players[0].Units.Count == 0)
-            {
-                winner = players[1];
-            }
+            // Compute points of each player and takes the maximum
+            int p1 = players[0].computePoints();
+            int p2 = players[1].computePoints();
+            if (p1 > p2 || players[1].Units.Count == 0)
+                return players[0];
             else
-            {
-                // Compute points of each player and takes the maximum
-
-            }
+                return players[1];
         }
     }
 }

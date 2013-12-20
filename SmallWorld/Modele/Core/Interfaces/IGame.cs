@@ -21,8 +21,8 @@ namespace SmallWorld
 
         void determinePlayOrder();
 
-        bool isGameFinished();
+        bool isFinished();
 
-        void setWinner();
+        IPlayer getWinner();
     }
 }

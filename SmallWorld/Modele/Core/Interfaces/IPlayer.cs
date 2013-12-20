@@ -7,5 +7,12 @@ namespace SmallWorld
 {
     public interface IPlayer
     {
+
+        String Nickname { get; }
+
+        List<IUnit> Units { get; }
+
+        INation Nation { get; }
+
     }
 }

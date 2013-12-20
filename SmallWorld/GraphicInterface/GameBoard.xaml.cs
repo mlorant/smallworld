@@ -28,6 +28,11 @@ namespace GraphicInterface
 
         const string IMAGEUNITS = "pack://application:,,,/GraphicInterface;component/Resources/img/units/";
 
+        /// <summary>
+        /// Initialize the game board, by drawing the map,
+        /// initial position of units and players information.
+        /// </summary>
+        /// <param name="g"></param>
         public GameBoard(Game g)
         {
             game = g;
@@ -46,20 +51,21 @@ namespace GraphicInterface
             }
             
 
-            // Init players points
+            // Init player nickname and max round (won't change in the game after)
             Player1Nickname.Text = game.Players[0].Nickname;
-            Player2Nickname.Text = game.Players[1].Nickname;            
-
-            drawMap();
-            drawUnits();
-            refreshPlayerInfos();
-
-            CurrentRound.Text = game.CurrentRound.ToString(); 
+            Player2Nickname.Text = game.Players[1].Nickname;
             MaxRound.Text = game.NbRounds.ToString();
 
+            // First drawing of the map, units, and game info.
+            drawMap();
+            drawUnits();
+            refreshGameInfos();
         }
 
-
+        /// <summary>
+        /// Draw every tiles of the map, with a flyweigh to
+        /// load each tile type image once.
+        /// </summary>
         private void drawMap()
         {
             // Clear the current view
@@ -88,7 +94,7 @@ namespace GraphicInterface
                 Grid.SetColumn(tile, pt.X);
                 Grid.SetZIndex(tile, 5);
                 
-                // Set tile texture
+                // Set tile texture (create it if not used yet)
                 String filename = tileType.GetType().Name.ToLower();
                 if (!textures.ContainsKey(filename))
                 {
@@ -100,7 +106,10 @@ namespace GraphicInterface
                 mapGrid.Children.Add(tile);
             }
         }
-
+        
+        /// <summary>
+        /// Drax initial position of units on the map
+        /// </summary>
         private void drawUnits()
         {
             for (int i = 0; i < 2; i++)
@@ -125,15 +134,18 @@ namespace GraphicInterface
         }
 
         /// <summary>
-        /// Refresh player information (nb units and score)
+        /// Refresh game information: units numbers, scores
+        /// and round.
         /// </summary>
-        private void refreshPlayerInfos()
+        private void refreshGameInfos()
         {
             Player1Units.Text = game.Players[0].Units.Count.ToString();
             Player2Units.Text = game.Players[1].Units.Count.ToString();
 
             Player1Points.Text = game.Players[0].computePoints().ToString();
             Player2Points.Text = game.Players[1].computePoints().ToString();
+
+            CurrentRound.Text = game.CurrentRound.ToString();
         }
 
         private void moveImageUnit (string nationUnit, System.Drawing.Point sourcePt, System.Drawing.Point destPt){
@@ -177,9 +189,12 @@ namespace GraphicInterface
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.endRound();
-            CurrentRound.Text = game.CurrentRound.ToString();
+            refreshGameInfos();
 
-            refreshPlayerInfos();
+            if (game.isFinished())
+            {
+                MessageBox.Show(game.getWinner().Nickname + " won!");
+            }
         }
 
         /// <summary>
