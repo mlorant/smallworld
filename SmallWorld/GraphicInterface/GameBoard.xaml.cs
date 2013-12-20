@@ -207,65 +207,9 @@ namespace GraphicInterface
                 // si il y a des unitées sur la case
                 if (game.Map.getUnits(tile).Count > 0)
                 {
-                    // liste afin de conservé les unités en cas de "back"
-                    List<StackPanel> panel = new List<StackPanel>();
-                    Button back = new Button();
-
-                    foreach (Unit u in game.Map.getUnits(tile))
-                    {
-                        StackPanel unitAndButton = new StackPanel();
-                        unitAndButton.Orientation = Orientation.Horizontal;
-                        TextBlock unitId = new TextBlock();
-                        Button selectUnit = new Button();
-                        unitAndButton.Children.Add(unitId);
-                        unitAndButton.Children.Add(selectUnit);
-                        // Donne un nom à l'unité
-                        unitId.Text = u.GetType().Name.ToLower() + " " + u.Id;
-                        unitId.TextWrapping = TextWrapping.Wrap;
-
-                        // ce clique donne plus d'info sur l'unité en question et la selectionne pour attaquer ou bouger
-                        selectUnit.Content = "Select unit";                        
-                        selectUnit.Click += (source, evt) =>
-                        {
-                            UnitsInfo.Children.Clear();
-                            TextBlock unitName = new TextBlock();
-                            TextBlock unitStat = new TextBlock();
-                            
-                            unitStat.Text = "Health = " + u.Health
-                            + "\nMove left = " + u.MovePoint;
-                                                                                  
-                            selectedUnit = u;
-                            inMove = true;
-                            previous = tile;
-
-                            UnitsInfo.Children.Add(unitName);
-                            UnitsInfo.Children.Add(unitStat);
-                            UnitsInfo.Children.Add(back);
-
-                        };
-
-                        UnitsInfo.Children.Add(unitAndButton);
-
-                        panel.Add(unitAndButton);
-                        inMove = false;
-                        selectedUnit = null;
-                    }
-
-                    // Un bouton retour pour revenir à la liste des unités sur la case.
-                    back.Content = "Back";
-                    back.Click += (s, e2) =>
-                    {
-                        inMove = false;
-                        selectedUnit = null;
-                        UnitsInfo.Children.Clear();
-                        foreach(StackPanel sp in panel)
-                        {                            
-                            UnitsInfo.Children.Add(sp);
-                        }
-                    };
+                    displayUnitsOnCase(tile);                    
                 }
             }
-
             else
             {
                 if (game.Map.getUnits(tile).Count > 0 && game.Map.getUnits(tile)[0].GetType() != selectedUnit.GetType())
@@ -289,5 +233,71 @@ namespace GraphicInterface
                 selectedUnit = null;
             }
         }
+
+        /// <summary>
+        /// Display all units in the "tile" case, with information and a select button
+        /// </summary>
+        /// <param name="tile"></param>
+        private void displayUnitsOnCase(System.Drawing.Point tile)
+        {
+            List<IUnit> listUnit = Game.Instance.Map.getUnits(tile);
+            // liste afin de conserver les unités en cas de "back"
+            List<StackPanel> panel = new List<StackPanel>();
+            Button back = new Button();
+
+            foreach (Unit u in listUnit)
+            {
+                StackPanel unitAndButton = new StackPanel();
+                unitAndButton.Orientation = Orientation.Horizontal;
+                TextBlock unitId = new TextBlock();
+                Button selectUnit = new Button();
+                unitAndButton.Children.Add(unitId);
+                unitAndButton.Children.Add(selectUnit);
+                // Donne un nom à l'unité
+                unitId.Text = u.GetType().Name.ToLower() + " " + u.Id;
+                unitId.TextWrapping = TextWrapping.Wrap;
+
+                // ce clique donne plus d'info sur l'unité en question et la selectionne pour attaquer ou bouger
+                selectUnit.Content = "Select unit";
+                selectUnit.Click += (source, evt) =>
+                {
+                    UnitsInfo.Children.Clear();
+                    TextBlock unitName = new TextBlock();
+                    TextBlock unitStat = new TextBlock();
+
+                    unitStat.Text = "Health = " + u.Health
+                    + "\nMove left = " + u.MovePoint;
+
+                    selectedUnit = u;
+                    inMove = true;
+                    previous = tile;
+
+                    UnitsInfo.Children.Add(unitName);
+                    UnitsInfo.Children.Add(unitStat);
+                    UnitsInfo.Children.Add(back);
+
+                };
+
+                UnitsInfo.Children.Add(unitAndButton);
+
+                panel.Add(unitAndButton);
+                inMove = false;
+                selectedUnit = null;
+            }
+
+            // Un bouton retour pour revenir à la liste des unités sur la case.
+            back.Content = "Back";
+            back.Click += (s, e2) =>
+            {
+                inMove = false;
+                selectedUnit = null;
+                UnitsInfo.Children.Clear();
+                foreach (StackPanel sp in panel)
+                {
+                    UnitsInfo.Children.Add(sp);
+                }
+            };
+        }
+
     }
 }

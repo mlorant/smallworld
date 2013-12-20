@@ -18,7 +18,7 @@ namespace SmallWorld
 
         private int _attackPoints = 2;
         private int _defensePoints = 1;
-        private int _movePoint = 1;
+        private double _movePoint = 1;
 
         private Point _currentPosition;
 
@@ -30,14 +30,8 @@ namespace SmallWorld
 
         public int Id
         {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
+            get { return this._id; }
+            set { this._id = value;}
         }
 
 
@@ -51,7 +45,7 @@ namespace SmallWorld
             get { return this._defensePoints; }
         }
 
-        public int MovePoint
+        public double MovePoint
         {
             get { return this._movePoint; }
             set { this._movePoint = value; }
@@ -118,11 +112,9 @@ namespace SmallWorld
         /// <returns></returns>
         public virtual bool move(Point target)
         {
-            Console.WriteLine("Move");
             // Elle doit avoir le droit de bouger
             if (this._movePoint > 0)
             {
-                Console.WriteLine(this.canMoveOn(target));
                 // On vérifie si sa destination est possible
                 if (this.canMoveOn(target))
                 {
