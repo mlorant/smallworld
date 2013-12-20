@@ -16,7 +16,7 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestNewUnitLife()
         {
-            Unit dwarf = new Dwarf();
+            Unit dwarf = new Dwarf(0);
             Assert.IsTrue(dwarf.isAlive());
             Assert.AreEqual(5, dwarf.Health);
         }
@@ -24,7 +24,7 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestInitialStats()
         {
-            Unit dwarf = new Dwarf();
+            Unit dwarf = new Dwarf(0);
             Assert.AreEqual(5, dwarf.Health);
             Assert.AreEqual(2, dwarf.Attack);
             Assert.AreEqual(1, dwarf.Defense);
@@ -33,7 +33,7 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestUnitDeath()
         {
-            Unit dwarf = new Dwarf();
+            Unit dwarf = new Dwarf(0);
             dwarf.Health -= 5;
             Assert.IsFalse(dwarf.isAlive());
         } 
