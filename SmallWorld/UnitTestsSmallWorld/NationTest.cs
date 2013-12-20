@@ -17,21 +17,21 @@ namespace UnitTestsSmallWorld
         public void TestFabricDwarfUnit()
         {
             Nation dwarves = new NationDwarf();
-            Assert.IsTrue(dwarves.fabricUnit() is Dwarf);
+            Assert.IsTrue(dwarves.fabricUnit(0) is Dwarf);
         }
 
         [TestMethod]
         public void TestFabricGallicUnit()
         {
             Nation gallics = new NationGallic();
-            Assert.IsTrue(gallics.fabricUnit() is Gallic);
+            Assert.IsTrue(gallics.fabricUnit(0) is Gallic);
         }
 
         [TestMethod]
         public void TestFabricVikingUnit()
         {
             Nation vikings = new NationViking();
-            Assert.IsTrue(vikings.fabricUnit() is Viking);
+            Assert.IsTrue(vikings.fabricUnit(0) is Viking);
         }
     }
 }

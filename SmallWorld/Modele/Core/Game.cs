@@ -21,9 +21,14 @@ namespace SmallWorld
         private Player[] players;
 
         /// <summary>
-        /// Index of the current player
+        /// First player who plays
         /// </summary>
-        private int currentPlayer;
+        private Player firstPlayer;
+
+        /// <summary>
+        /// Current player
+        /// </summary>
+        private Player currentPlayer;
 
         /// <summary>
         /// Number of the current round
@@ -33,7 +38,7 @@ namespace SmallWorld
         /// <summary>
         /// Index of the winner
         /// </summary>
-        private int winner;
+        private Player winner;
 
         /// <summary>
         /// Map of the current map
@@ -61,6 +66,18 @@ namespace SmallWorld
 
                 this.currentRound = value;
             }
+        }
+
+        public Player FirstPlayer
+        {
+            get { return this.firstPlayer; }
+            set { throw new NotSupportedException(); }
+        }
+
+        public Player CurrentPlayer
+        {
+            get { return this.currentPlayer;  }
+            set { this.currentPlayer = value; }
         }
 
         public int NbUnits 
@@ -155,7 +172,34 @@ namespace SmallWorld
         public void determinePlayOrder()
         {
             Random random = new Random();
-            currentPlayer = random.Next(0, 2);
+            int index = random.Next(0, 2);
+            firstPlayer = players[index];
+            currentPlayer = players[index];
+        }
+
+        /// <summary>
+        /// End of a round. If it was the first player, passed
+        /// to the second player. Else, move to the next round.
+        /// 
+        /// Also reset every movement points for each units
+        /// </summary>
+        public void endRound()
+        {
+            foreach (Unit unit in this.currentPlayer.Units)
+            {
+                unit.MovePoint = 1;
+            }
+
+            if (this.currentPlayer == this.firstPlayer)
+            {
+                int index = (this.players[0] == this.firstPlayer) ? 1 : 0;
+                this.currentPlayer = this.players[index];
+            }
+            else
+            {
+                this.currentPlayer = this.firstPlayer;
+                this.currentRound++;
+            }
         }
 
         /// <summary>
@@ -176,13 +220,13 @@ namespace SmallWorld
 
         public void setWinner()
         {
-            if (players[0].Units.Count == 0)
+            if (players[1].Units.Count == 0)
             {
-                winner = 0;
+                winner = players[0];
             }
             else if (players[0].Units.Count == 0)
             {
-                winner = 1;
+                winner = players[1];
             }
             else
             {

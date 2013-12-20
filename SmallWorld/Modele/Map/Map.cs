@@ -221,7 +221,11 @@ namespace SmallWorld
         public void initUnits(List<IUnit> playerUnits, Point pos)
         {
             int index = getIndexFromPoint(pos);
-            units[index] = playerUnits;
+            units[index] = new List<IUnit>();
+            foreach (IUnit unit in playerUnits)
+            {
+                units[index].Add(unit);
+            }
         }
 
         /// <summary>
