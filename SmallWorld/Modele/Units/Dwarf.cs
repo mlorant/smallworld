@@ -18,10 +18,10 @@ namespace SmallWorld
         /// Dwarves can move on any mountain without ennemies if
         /// they're on a mountain already.
         /// </summary>
-        /// <param name="target"></param>
+        /// <param name="tgt"></param>
         /// <returns></returns>
 
-        public new bool canMoveOn(Point tgt)
+        public override bool canMoveOn(Point tgt)
         {
             ICase destType = Game.Instance.Map.getCase(tgt);
             ICase currentType = Game.Instance.Map.getCase(this.CurrentPosition);
@@ -29,9 +29,9 @@ namespace SmallWorld
             if(currentType is Mountain && destType is Mountain) 
             {
                 // Check if there's unit of the other player
-                foreach (IUnit unit in Game.Instance.Map.getUnits(tgt))
+                if(Game.Instance.Map.getUnits(tgt).Count != 0)
                 {
-                    if(unit.GetType() != this.GetType()) 
+                    if (Game.Instance.Map.getUnits(tgt)[0].GetType() != this.GetType()) 
                     {
                         // unit of different type, so can't go on it,
                         // unless the base movement is allowed (to attack)

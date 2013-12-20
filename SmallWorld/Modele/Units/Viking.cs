@@ -18,7 +18,7 @@ namespace SmallWorld
         /// </summary>
         /// <param name="tgt"></param>
         /// <returns></returns>
-        public new bool canMoveOn(Point tgt)
+        public override bool canMoveOn(Point tgt)
         {
             return this.isNear(tgt);
         }

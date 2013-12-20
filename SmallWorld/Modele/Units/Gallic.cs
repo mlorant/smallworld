@@ -12,28 +12,27 @@ namespace SmallWorld
         {
             this.Id = id;
         }
+
         /// <summary>
-        /// Check if the unit can move to the position given.
-        /// Gallics can move on 2 Plain tile in 1 round.
+        /// La méthode qui permet au unité de bouger de case. Prend en compte l'autorisation ou non de bouger
+        /// Les Gaulois ont le droit de bouger de 2 cases "plaine".
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public bool canMoveOn(Point tgt)
+        public override bool move(Point target)
         {
-            // Check if the move implies Plain, the speciality of
-            // Gallics
-            ICase destType = Game.Instance.Map.getCase(tgt);
-            if (destType is Plain)
+            bool ret = base.move(target);
+            Console.WriteLine(ret);
+            if (ret)
             {
-                // Pythagoras theorem for the distance between 2 points
-                int xSquared = (CurrentPosition.X - tgt.X) ^ 2;
-                int ySquared = (CurrentPosition.Y - tgt.Y) ^ 2;
-                if(xSquared + ySquared <= 2)
-                    return true;
+                Console.WriteLine("vrai");
+                if (Game.Instance.Map.getCase(target) is Plain)
+                {
+                    Console.WriteLine(Game.Instance.Map.getCase(target));
+                    this.MovePoint += 0.5;
+                }
             }
-
-            // If nothing happened here, check the parent method
-            return base.canMoveOn(tgt);
+            return ret;
         }
 
     }

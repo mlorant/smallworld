@@ -18,7 +18,7 @@ namespace SmallWorld
 
         private int _attackPoints = 2;
         private int _defensePoints = 1;
-        private int _movePoint = 1;
+        private double _movePoint = 1;
 
         private Point _currentPosition;
 
@@ -30,14 +30,8 @@ namespace SmallWorld
 
         public int Id
         {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this._id = value;
-            }
+            get { return this._id; }
+            set { this._id = value;}
         }
 
 
@@ -51,9 +45,10 @@ namespace SmallWorld
             get { return this._defensePoints; }
         }
 
-        public int MovePoint
+        public double MovePoint
         {
             get { return this._movePoint; }
+            set { this._movePoint = value; }
         }
 
         public Point CurrentPosition
@@ -105,13 +100,11 @@ namespace SmallWorld
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public bool move(Point target)
+        public virtual bool move(Point target)
         {
-            Console.WriteLine("Move");
             // Elle doit avoir le droit de bouger
             if (this._movePoint > 0)
             {
-                Console.WriteLine(this.canMoveOn(target));
                 // On vérifie si sa destination est possible
                 if (this.canMoveOn(target))
                 {
@@ -159,7 +152,7 @@ namespace SmallWorld
         /// </summary>
         /// <param name="tgt"></param>
         /// <returns></returns>
-        public bool canMoveOn(Point tgt)
+        public virtual bool canMoveOn(Point tgt)
         {
             ICase targetType = Game.Instance.Map.getCase(tgt);
 
