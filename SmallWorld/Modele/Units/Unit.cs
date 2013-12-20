@@ -106,7 +106,7 @@ namespace SmallWorld
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public bool move(Point target)
+        public virtual bool move(Point target)
         {
             Console.WriteLine("Move");
             // Elle doit avoir le droit de bouger
@@ -160,7 +160,7 @@ namespace SmallWorld
         /// </summary>
         /// <param name="tgt"></param>
         /// <returns></returns>
-        public bool canMoveOn(Point tgt)
+        public virtual bool canMoveOn(Point tgt)
         {
             ICase targetType = Game.Instance.Map.getCase(tgt);
 
