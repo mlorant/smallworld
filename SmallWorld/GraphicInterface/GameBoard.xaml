@@ -5,13 +5,13 @@
         Title="SmallWorld" Height="700" Width="800" MinWidth="800">
 
     <Grid Margin="0,0,0,0">
-        <ScrollViewer Margin="0,0,0,120">
+        <ScrollViewer Name="scrollMap" Margin="0,0,0,120">
             <ScrollViewer.Background>
                 <ImageBrush ImageSource="Resources/img/map-background.png" Stretch="Fill" TileMode="Tile" Viewport="0,0,48,48"
     ViewportUnits="Absolute"></ImageBrush>
 
             </ScrollViewer.Background>
-            <Grid Name="mapGrid" VerticalAlignment="Top" HorizontalAlignment="Center" MouseLeftButtonDown="clickOnMap">
+            <Grid Name="mapGrid" VerticalAlignment="Center" HorizontalAlignment="Center" MouseLeftButtonDown="clickOnMap" MouseMove="hoverOnMap">
             </Grid>
         </ScrollViewer>
 

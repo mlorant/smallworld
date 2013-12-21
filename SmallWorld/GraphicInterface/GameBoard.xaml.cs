@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SmallWorld;
+using System.Threading;
 
 namespace GraphicInterface
 {
@@ -312,6 +313,34 @@ namespace GraphicInterface
                     UnitsInfo.Children.Add(sp);
                 }
             };
+        }
+
+
+        /// <summary>
+        /// Track the cursor position on the map. Allows to move the
+        /// scrollbar when the mouse goes in the bottom (or top) of the
+        /// map.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hoverOnMap(object sender, MouseEventArgs e)
+        {
+            Point pt = e.GetPosition(scrollMap);
+            double viewSize = scrollMap.ActualHeight;
+            int offset = 0;
+
+            // Check if we're either in the top or bottom of the screen
+            if (pt.Y < (viewSize * 0.10))
+                offset = -5;
+            else if ((viewSize - pt.Y) < (viewSize * 0.10))
+                offset = 5;
+
+            if (offset != 0)
+            {
+                scrollMap.ScrollToVerticalOffset(scrollMap.VerticalOffset + offset);
+                Thread.Sleep(20); // Wait a short time to avoid to scroll to the top
+                                  // (or bottom) directly.
+            }
         }
 
     }
