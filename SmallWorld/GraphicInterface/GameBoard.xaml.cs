@@ -148,11 +148,17 @@ namespace GraphicInterface
             CurrentRound.Text = game.CurrentRound.ToString();
         }
 
+        /// <summary>
+        /// Move the image associates to an unit to another case
+        /// </summary>
+        /// <param name="nationUnit">String name of the nation</param>
+        /// <param name="sourcePt">The case where the unit come from</param>
+        /// <param name="destPt">The point where the unit go</param>
         private void moveImageUnit (string nationUnit, System.Drawing.Point sourcePt, System.Drawing.Point destPt){
             // retrieve unit type 
             IUnit unit = game.Map.getUnits(destPt)[0];
 
-            // si l'unité est la première qui ait bougée sur la case
+            // If the unit is the first to move on the case
             if (game.Map.getUnits(destPt).Count == 1)
             {
                 Rectangle units = new Rectangle();
@@ -170,7 +176,7 @@ namespace GraphicInterface
 
                 mapGrid.Children.Add(units);
             }
-            // si c'est la dernière unité sur la case avant d'en partir on la supprime
+            // If it's the last unit in the case then we delete it
             if (game.Map.getUnits(sourcePt).Count == 0)
             {
                 Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == sourcePt.Y && Grid.GetColumn(e) == sourcePt.X);
@@ -178,6 +184,11 @@ namespace GraphicInterface
             }
         }
 
+        /// <summary>
+        /// Translate coorinates in pixel to whole coodinates
+        /// </summary>
+        /// <param name="p">Point in pixel</param>
+        /// <returns>Whole coordinates</returns>
         private System.Drawing.Point getPointFromCoordinates(System.Windows.Point p)
         {
             int x = (int) p.X / Case.SIZE;
@@ -186,6 +197,11 @@ namespace GraphicInterface
             return new System.Drawing.Point(x, y);
         }
 
+        /// <summary>
+        /// Action when a player ends its turn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.endRound();
@@ -198,28 +214,28 @@ namespace GraphicInterface
         }
 
         /// <summary>
-        /// Gère le clique sur une case de la carte
+        /// Allow to ckick on the map and treats the possibility after it
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void clickOnMap(object sender, MouseButtonEventArgs e)
         {
-            // Transforme un point de coordonnée pixels en point de cases.
+            // Translate a point to a case point
             System.Windows.Point pt = e.GetPosition(mapGrid);
             System.Drawing.Point tile = getPointFromCoordinates(pt);
 
-            // rend visible le cadre d'information sur les unitées
-            // et affiche des infos sur le terrain et le nombre d'unité dessus
+            // Make visible the information frame about units
+            // And displays information about the terrain and the number of units above
             CaseInfoOnClick.Visibility = Visibility.Visible;
             CaseInfo.Text = "Type de terrain : " + game.Map.getCase(tile).GetType().Name;
             NbUnitOnCase.Text = game.Map.getUnits(tile).Count + " units camp in this region";
-            // Commence par effacer ce qu'il y a dans le cadre pour mettre à jour
+            // begin to erase all the frame
             UnitsInfo.Children.Clear();
-            // si le clic est un premier clic de selection (pas une attaque ou un déplacement)
-            // sinon l'action deplace ou attaque la case visée
+            // If the click is the first click to select a unit
+            // otherwise it moves the unit or attacks another
             if (!inMove)
             {
-                // si il y a des unitées sur la case
+                // if there is units on the case clicked
                 if (game.Map.getUnits(tile).Count > 0)
                 {
                     displayUnitsOnCase(tile);                    
@@ -227,10 +243,19 @@ namespace GraphicInterface
             }
             else
             {
-                if (game.Map.getUnits(tile).Count > 0 && game.Map.getUnits(tile)[0].GetType() != selectedUnit.GetType())
+                // if the case clicked have units of the oponent
+                if (game.Map.getUnits(tile).Count > 0 && (game.Map.getUnits(tile)[0].GetType() != selectedUnit.GetType()))
                 {
-                    //TODO
-                    selectedUnit.attack(tile);
+                    // If unit wins the battle (defender lose life and no other units in the case) then she moves 
+                    if (selectedUnit.attack(tile) && (game.Map.getUnits(tile).Count == 0))
+                    {
+                        selectedUnit.move(tile);
+                        this.moveImageUnit(selectedUnit.GetType().ToString(), previous, tile);
+                    }
+                    else
+                    {
+                        MessageBox.Show("lose or can't attack !");
+                    }
                 }
                 else
                 {

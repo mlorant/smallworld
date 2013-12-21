@@ -68,7 +68,11 @@ namespace SmallWorld
         /// <returns></returns>
         public override bool canMoveOn(Point tgt)
         {
-            return this.isNear(tgt);
+            if (this.MovePoint > 0)
+            {
+                return this.isNear(tgt);
+            }
+            return false;
         }
     }
 }

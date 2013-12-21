@@ -11,10 +11,9 @@ namespace SmallWorld
         /// <summary>
         /// Current health status of the unit
         /// </summary>
-        private int _health = _maxHealth;
-        private const int _maxHealth = 5;
+        private int _health = MAXHEALTH;
+        private const int MAXHEALTH = 5;
         private int _id;
-        private Rectangle _imagePosition;
 
         private int _attackPoints = 2;
         private int _defensePoints = 1;
@@ -37,7 +36,11 @@ namespace SmallWorld
 
         public int Attack
         {
-            get { return (int)(this._attackPoints * ((double)this._health / Unit._maxHealth)); }
+            get 
+            {                
+                return (int)Math.Round(this._attackPoints * 
+                    ((double)this._health / Unit.MAXHEALTH), 0, MidpointRounding.AwayFromZero); 
+            }
         }
 
         public int Defense
@@ -57,32 +60,82 @@ namespace SmallWorld
             set { this._currentPosition = value; }
         }
 
-        public void attack(Point target)
+        public bool attack(Point target)
         {
             // Get best defense unit on the tile
             IUnit defender = Game.Instance.Map.getBestDefensiveUnit(target);
-
-            if (defender != null && (this._movePoint > 0))
+            // Verify if destination is possible
+            if (this.canMoveOn(target))
             {
-
-                if (defender.Defense == 0)
+                if (defender != null && (this._movePoint > 0))
                 {
-                    // Win 
+                    // When oponent is dead then unit wins.
+                    if (defender.Defense == 0)
+                    {
+                        return true; 
+                    }
+
+                    // Get number of attacks, between 3 and the maxHeal+2
+                    int maxHeal = Math.Max(this._health, defender.Health);
+                    Random rand = new Random();
+                    int attacksCount = rand.Next(3, maxHeal + 2);
+
+                    int i = 0;
+                    // the God of Smalworld choose who must be hurt
+                    Random godHand = new Random();
+                    while( i < attacksCount) 
+                    {
+                        //compute the percentage of victory for the attacker
+                        double percentageAgainstAttacker = computePercentageToWin(defender);
+                       
+                        int attack = godHand.Next(0, 100);
+                        // then god condemns the attacker otherwise the defender!
+                        if (attack < percentageAgainstAttacker)
+                        {
+                            this.Health--;
+                        }
+                        else
+                        {
+                            defender.Health--;
+                        }
+
+                        // When oponent is dead then unit automatically moves.
+                        if (defender.Health == 0)
+                        {
+                            return true;
+                        }
+                        i++;
+                    }
+
+                    this._movePoint = 0;
                 }
+                return false;
+            }
+            return false;
 
-                // Get number of attacks, between 3 and the maxHeal+2
-                int maxHeal = Math.Max(this._health, defender.Health);
-                Random rand = new Random();
-                int attacksCount = rand.Next(3, maxHeal + 2);
+        }
 
-                for (int i = 0; i < attacksCount; i++)
-                {
-                    double powerBalance = (double)this.Attack / defender.Defense;
-                }
-
-                this._movePoint--;
+        public double computePercentageToWin(IUnit defender)
+        {
+            double powerBalance;
+            double percentageAgainstDefender = 50;
+            double percentageAgainstAttacker = 50;
+            // Force against the defense = his attack (see formulas) / oponent defense
+            if (this.Attack < defender.Defense)
+            {
+                powerBalance = 1 - (double)this.Attack / defender.Defense;
+                // Chance to lose the battle = 50% + 50%*powerbalance
+                percentageAgainstAttacker += powerBalance * 50;
+                percentageAgainstDefender = 100 - percentageAgainstAttacker;
+            }
+            else
+            {
+                powerBalance = 1 - (double)defender.Defense / this.Attack;
+                percentageAgainstDefender += powerBalance * 50;
+                percentageAgainstAttacker = 100 - percentageAgainstDefender;
             }
 
+            return percentageAgainstAttacker;
         }
 
         public bool isAlive()
@@ -111,26 +164,18 @@ namespace SmallWorld
         /// <param name="target"></param>
         /// <returns></returns>
         public virtual bool move(Point target)
-        {
-            // Elle doit avoir le droit de bouger
-            if (this._movePoint > 0)
+        {           
+            // On vérifie si sa destination est possible
+            if (this.canMoveOn(target))
             {
-                // On vérifie si sa destination est possible
-                if (this.canMoveOn(target))
-                {
 
-                    Game.Instance.Map.getUnits(target).Add(this);
-                    Game.Instance.Map.getUnits(this.CurrentPosition).Remove(this);
+                Game.Instance.Map.getUnits(target).Add(this);
+                Game.Instance.Map.getUnits(this.CurrentPosition).Remove(this);
 
-                    this.CurrentPosition = target;
+                this.CurrentPosition = target;
 
-                    this._movePoint--;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                this._movePoint--;
+                return true;
             }
             else
             {
@@ -164,9 +209,14 @@ namespace SmallWorld
         /// <returns></returns>
         public virtual bool canMoveOn(Point tgt)
         {
-            ICase targetType = Game.Instance.Map.getCase(tgt);
+            // Elle doit avoir le droit de bouger
+            if (this._movePoint >= 1)
+            {
+                ICase targetType = Game.Instance.Map.getCase(tgt);
 
-            return this.isNear(tgt) && !(targetType is Sea);
+                return this.isNear(tgt) && !(targetType is Sea);
+            }
+            return false;
         }
     }
 }

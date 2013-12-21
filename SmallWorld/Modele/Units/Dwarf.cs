@@ -28,19 +28,8 @@ namespace SmallWorld
             ICase destType = Game.Instance.Map.getCase(tgt);
             ICase currentType = Game.Instance.Map.getCase(this.CurrentPosition);
 
-            if(currentType is Mountain && destType is Mountain) 
+            if(currentType is Mountain && destType is Mountain && this.MovePoint > 0) 
             {
-                // Check if there's unit of the other player
-                if(Game.Instance.Map.getUnits(tgt).Count != 0)
-                {
-                    if (Game.Instance.Map.getUnits(tgt)[0].GetType() != this.GetType()) 
-                    {
-                        // unit of different type, so can't go on it,
-                        // unless the base movement is allowed (to attack)
-                        return false; 
-                    }
-                }
-
                 return true;
             }
 
