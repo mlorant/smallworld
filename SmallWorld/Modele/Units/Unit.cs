@@ -68,8 +68,7 @@ namespace SmallWorld
         public void buryUnit(IPlayer general, System.Drawing.Point assaultLocation)
         {
             general.Units.Remove(this);
-            Game.Instance.NbUnits--;
-            Game.Instance.Map.getUnits(assaultLocation).Remove(this);   
+            Game.Instance.Map.getUnits(assaultLocation).Remove(this);
         }
 
         public bool attack(IUnit defender, Point target)
