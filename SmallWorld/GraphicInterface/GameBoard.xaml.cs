@@ -151,36 +151,46 @@ namespace GraphicInterface
         /// <param name="nb">Number of unit, to determine the image to draw</param>
         private void drawUnits(System.Drawing.Point pt, Type unitType, int nb)
         {
-            // Get unit Rectangle on the grid if already exists
-            Rectangle units = mapGrid.Children.Cast<Rectangle>()
-                                              .FirstOrDefault(e => Grid.GetRow(e) == pt.Y && 
-                                                                   Grid.GetColumn(e) == pt.X &&
-                                                                   Grid.GetZIndex(e) == UNIT_INDEX);
-            if (units == null)
+            // If the tile is now empty, remove the rectangle
+            if (nb == 0)
             {
-                units = new Rectangle();
-                // Set rectangle size and position
-                units.Width = Case.SIZE;
-                units.Height = Case.SIZE;
-                Grid.SetColumn(units, pt.X);
-                Grid.SetRow(units, pt.Y);
-                // Add to map
-                Grid.SetZIndex(units, UNIT_INDEX);
-                mapGrid.Children.Add(units);
+                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && Grid.GetColumn(e) == pt.X);
+                mapGrid.Children.Remove(unitPos);
+
             }
-
-            // Construct the filename of the texture to draw
-            String key = unitType.Name.ToLower();
-            key += (nb > 1) ? "_multiple" : "";
-
-            // Create new brush if the textures hasn't been used yet
-            if (!unitsTextures.ContainsKey(key)) 
+            else
             {
-                BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + key + ".png"));
-                unitsTextures[key] = new ImageBrush(img);
-            }
+                // Get unit Rectangle on the grid if already exists
+                Rectangle units = mapGrid.Children.Cast<Rectangle>()
+                                                  .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
+                                                                       Grid.GetColumn(e) == pt.X &&
+                                                                       Grid.GetZIndex(e) == UNIT_INDEX);
+                if (units == null)
+                {
+                    units = new Rectangle();
+                    // Set rectangle size and position
+                    units.Width = Case.SIZE;
+                    units.Height = Case.SIZE;
+                    Grid.SetColumn(units, pt.X);
+                    Grid.SetRow(units, pt.Y);
+                    // Add to map
+                    Grid.SetZIndex(units, UNIT_INDEX);
+                    mapGrid.Children.Add(units);
+                }
 
-            units.Fill = unitsTextures[key];
+                // Construct the filename of the texture to draw
+                String key = unitType.Name.ToLower();
+                key += (nb > 1) ? "_multiple" : "";
+
+                // Create new brush if the textures hasn't been used yet
+                if (!unitsTextures.ContainsKey(key))
+                {
+                    BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + key + ".png"));
+                    unitsTextures[key] = new ImageBrush(img);
+                }
+
+                units.Fill = unitsTextures[key];
+            }
         }
 
         /// <summary>
@@ -210,13 +220,7 @@ namespace GraphicInterface
             IUnit unit = game.Map.getUnits(destPt)[0];
 
             drawUnits(destPt, unit.GetType(), game.Map.getUnits(destPt).Count);
-
-            // If it's the last unit in the case then we delete it
-            if (game.Map.getUnits(sourcePt).Count == 0)
-            {
-                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == sourcePt.Y && Grid.GetColumn(e) == sourcePt.X);
-                mapGrid.Children.Remove(unitPos);
-            }
+            drawUnits(sourcePt, unit.GetType(), game.Map.getUnits(sourcePt).Count);
         }
 
         /// <summary>
