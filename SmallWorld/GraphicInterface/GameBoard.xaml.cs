@@ -146,7 +146,7 @@ namespace GraphicInterface
         /// <summary>
         /// Draw units icon on a tile of the map
         /// </summary>
-        /// <param name="pt">Destination point, where units will be draw</param>
+        /// <param name="pt">Map point to update</param>
         /// <param name="unitType">Type of the unit to draw</param>
         /// <param name="nb">Number of unit, to determine the image to draw</param>
         private void drawUnits(System.Drawing.Point pt, Type unitType, int nb)
@@ -154,7 +154,9 @@ namespace GraphicInterface
             // If the tile is now empty, remove the rectangle
             if (nb == 0)
             {
-                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && Grid.GetColumn(e) == pt.X);
+                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && 
+                                                                                 Grid.GetColumn(e) == pt.X &&
+                                                                                 Grid.GetZIndex(e) == UNIT_INDEX);
                 mapGrid.Children.Remove(unitPos);
 
             }
@@ -219,25 +221,7 @@ namespace GraphicInterface
             // retrieve unit type 
             IUnit unit = game.Map.getUnits(destPt)[0];
             drawUnits(sourcePt, unit.GetType(), game.Map.getUnits(sourcePt).Count);
-
-            // If it's the last unit in the case then we delete it
-            if (game.Map.getUnits(sourcePt).Count == 0)
-            {
-                buryImageUnit(nationUnit, sourcePt);
-            }
-            
-        }
-
-        /// <summary>
-        /// Use to delete image in case of death after battle and when a unit moves and no 
-        /// other unit remains on the previous case
-        /// </summary>
-        /// <param name="nationUnit">The nation of the unit to delete the image</param>
-        /// <param name="sourcePt">Where it comes from</param>
-        private void buryImageUnit(string nationUnit, System.Drawing.Point sourcePt)
-        {
-            Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == sourcePt.Y && Grid.GetColumn(e) == sourcePt.X);
-            mapGrid.Children.Remove(unitPos);
+            drawUnits(destPt, unit.GetType(), game.Map.getUnits(destPt).Count);
         }
 
         /// <summary>
@@ -326,7 +310,7 @@ namespace GraphicInterface
                         if (!selectedUnit.isAlive())
                         {
                             selectedUnit.buryUnit(Game.Instance.CurrentPlayer, tile);
-                            buryImageUnit(selectedUnit.GetType().ToString(), previous);
+                            drawUnits(tile, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
                         }
                     }
                     
