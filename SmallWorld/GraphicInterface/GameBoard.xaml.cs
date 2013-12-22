@@ -344,7 +344,8 @@ namespace GraphicInterface
                     + "\nMove left = " + u.MovePoint;
 
                     selectedUnit = u;
-                    inMove = true;
+                    if(game.CurrentPlayer.Nation.hasUnit(u))
+                        inMove = true;
                     previous = tile;
 
                     UnitsInfo.Children.Add(unitName);
