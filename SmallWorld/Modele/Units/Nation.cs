@@ -10,5 +10,7 @@ namespace SmallWorld
     public abstract class Nation : INation
     {
         public abstract IUnit fabricUnit(int id);
+
+        public abstract bool hasUnit(IUnit unit);
     }
 }

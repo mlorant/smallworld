@@ -8,6 +8,8 @@ namespace SmallWorld
     public interface INation
     {
         IUnit fabricUnit(int id);
+
+        bool hasUnit(IUnit unit);
     }
 
     public interface INationDwarf : INation    {}
