@@ -14,80 +14,59 @@ namespace SmallWorld
     public class Game : IGame
     {
         private static Game instance;
-
-        /// <summary>
-        /// Players list
-        /// </summary>
-        private Player[] players;
-
-        /// <summary>
-        /// First player who plays
-        /// </summary>
-        private Player firstPlayer;
-
-        /// <summary>
-        /// Current player
-        /// </summary>
-        private Player currentPlayer;
-
-        /// <summary>
-        /// Number of the current round
-        /// </summary>
-        private int currentRound;
-
-        /// <summary>
-        /// Map of the current map
-        /// </summary>
-        private Map map;
-
-        private int nbRounds;
-
-        private int nbUnits;
-
+        
+        private Player[] _players;
+        private Player _firstPlayer;
+        private Player _currentPlayer;
+        private int _currentRound;
+        private Map _map;
+        private int _nbRounds;
+        private int _nbUnits;
 
         public Player[] Players
         {
-            get { return this.players; }
+            get { return this._players; }
         }
 
         public int CurrentRound
         {
-            get { return this.currentRound; }
+            get { return this._currentRound; }
             set 
             { 
-                if(value != this.currentRound+1) {
+                if(value != this._currentRound+1) {
                     throw new Exception("Anormal");
                 }
 
-                this.currentRound = value;
+                this._currentRound = value;
             }
         }
 
         public Player FirstPlayer
         {
-            get { return this.firstPlayer; }
+            get { return this._firstPlayer; }
             set { throw new NotSupportedException(); }
         }
 
         public Player CurrentPlayer
         {
-            get { return this.currentPlayer;  }
-            set { this.currentPlayer = value; }
+            get { return this._currentPlayer;  }
+            set { this._currentPlayer = value; }
         }
 
         public int NbUnits 
         {
-            get { return this.nbUnits; }
+            get { return this._nbUnits; }
+            set { this._nbUnits = value; }
         }
 
         public int NbRounds
         {
-            get { return this.nbRounds; }
+            get { return this._nbRounds; }
         }
 
         public Map Map
         {
-            get { return this.map; }
+            get { return this._map; }
         }
 
 
@@ -110,12 +89,12 @@ namespace SmallWorld
         /// </summary>
         public void initGame(int nbRounds, int nbUnits)
         {
-            map = new Map();
-            players = new Player[2];
-            currentRound = 1;
+            _map = new Map();
+            _players = new Player[2];
+            _currentRound = 1;
 
-            this.nbRounds = nbRounds;
-            this.nbUnits = nbUnits;
+            this._nbRounds = nbRounds;
+            this._nbUnits = nbUnits;
         }
 
 
@@ -127,7 +106,7 @@ namespace SmallWorld
         /// <param name="nation">Nation choosed</param>
         public void initPlayer(int i, string nickname, NationType nation)
         {
-            players[i] = new Player(nickname, nation, this.nbUnits);
+            _players[i] = new Player(nickname, nation, this._nbUnits);
             // TODO: check unicity of nickname and nation?
         }
 
@@ -137,8 +116,8 @@ namespace SmallWorld
         /// </summary>
         public void createMap(int mapSize)
         {
-            map = new Map();
-            map.generateMap(mapSize);
+            _map = new Map();
+            _map.generateMap(mapSize);
         }
 
         /// <summary>
@@ -147,13 +126,13 @@ namespace SmallWorld
         public void placePlayers()
         {
             // Get random start position
-            Point[] starts = map.getStartPoints();
+            Point[] starts = _map.getStartPoints();
             for (int i = 0; i < 2; i++)
             {
                 // Update map units list
-                map.initUnits(players[i].Units, starts[i]);
+                _map.initUnits(_players[i].Units, starts[i]);
                 // Update unit current position
-                foreach (IUnit u in players[i].Units)
+                foreach (IUnit u in _players[i].Units)
                 {
                     u.CurrentPosition = starts[i];
                 }
@@ -168,8 +147,8 @@ namespace SmallWorld
         {
             Random random = new Random();
             int index = random.Next(0, 2);
-            firstPlayer = players[index];
-            currentPlayer = players[index];
+            _firstPlayer = _players[index];
+            _currentPlayer = _players[index];
         }
 
         /// <summary>
@@ -180,20 +159,20 @@ namespace SmallWorld
         /// </summary>
         public void endRound()
         {
-            foreach (Unit unit in this.currentPlayer.Units)
+            foreach (Unit unit in this._currentPlayer.Units)
             {
                 unit.MovePoint = 1;
             }
 
-            if (this.currentPlayer == this.firstPlayer)
+            if (this._currentPlayer == this._firstPlayer)
             {
-                int index = (this.players[0] == this.firstPlayer) ? 1 : 0;
-                this.currentPlayer = this.players[index];
+                int index = (this._players[0] == this._firstPlayer) ? 1 : 0;
+                this._currentPlayer = this._players[index];
             }
             else
             {
-                this.currentPlayer = this.firstPlayer;
-                this.currentRound++;
+                this._currentPlayer = this._firstPlayer;
+                this._currentRound++;
             }
         }
 
@@ -205,23 +184,23 @@ namespace SmallWorld
         public bool isFinished()
         {
             // Check round limit 
-            if (currentRound > this.nbRounds)
+            if (_currentRound > this._nbRounds)
                 return true;
 
             // Check units number
-            return (players[0].Units.Count == 0 ||
-                     players[1].Units.Count == 0);
+            return (_players[0].Units.Count == 0 ||
+                     _players[1].Units.Count == 0);
         }
 
         public IPlayer getWinner()
         {
             // Compute points of each player and takes the maximum
-            int p1 = players[0].computePoints();
-            int p2 = players[1].computePoints();
-            if (p1 > p2 || players[1].Units.Count == 0)
-                return players[0];
+            int p1 = _players[0].computePoints();
+            int p2 = _players[1].computePoints();
+            if (p1 > p2 || _players[1].Units.Count == 0)
+                return _players[0];
             else
-                return players[1];
+                return _players[1];
         }
     }
 }

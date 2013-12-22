@@ -39,15 +39,7 @@ namespace SmallWorld
             get { return this.nation; }
         }
 
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="nickname"></param>
-        /// <param name="nationType"></param>
-        /// <param name="nbUnits"></param>
+        
         public Player(string nickname, NationType nationType, int nbUnits)
         {
             this.nickname = nickname;

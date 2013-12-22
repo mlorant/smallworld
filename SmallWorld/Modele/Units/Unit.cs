@@ -60,16 +60,27 @@ namespace SmallWorld
             set { this._currentPosition = value; }
         }
 
-        public bool attack(Point target)
+        /// <summary>
+        /// Delete the unit of the player list and the map
+        /// </summary>
+        /// <param name="general">Player of the unit dead</param>
+        /// <param name="assaultLocation">Case where it died</param>
+        public void buryUnit(IPlayer general, System.Drawing.Point assaultLocation)
         {
-            // Get best defense unit on the tile
-            IUnit defender = Game.Instance.Map.getBestDefensiveUnit(target);
+            general.Units.Remove(this);
+            Game.Instance.NbUnits--;
+            Game.Instance.Map.getUnits(assaultLocation).Remove(this);   
+        }
+
+        public bool attack(IUnit defender, Point target)
+        {
+            
             // Verify if destination is possible
             if (this.canMoveOn(target))
             {
                 if (defender != null && (this._movePoint > 0))
                 {
-                    // When oponent is dead then unit wins.
+                    // When oponent can't defend itself it died then unit wins.
                     if (defender.Defense == 0)
                     {
                         return true; 
@@ -83,7 +94,7 @@ namespace SmallWorld
                     int i = 0;
                     // the God of Smalworld choose who must be hurt
                     Random godHand = new Random();
-                    while( i < attacksCount) 
+                    while( i < attacksCount && this.isAlive()) 
                     {
                         //compute the percentage of victory for the attacker
                         double percentageAgainstAttacker = computePercentageToWin(defender);
@@ -99,14 +110,14 @@ namespace SmallWorld
                             defender.Health--;
                         }
 
-                        // When oponent is dead then unit automatically moves.
+                        // When oponent is dead then battle is won.
                         if (defender.Health == 0)
                         {
                             return true;
                         }
+
                         i++;
                     }
-
                     this._movePoint = 0;
                 }
                 return false;

@@ -23,29 +23,29 @@ namespace SmallWorld
         /// can be computed with the width of the grid (the grid is 
         /// necessarely a square)
         /// </summary>
-        private ICase[] grid;
+        private ICase[] _grid;
 
         /// <summary>
         /// Instances list of square types (Flyweight pattern)
         /// </summary>
-        private ICase[] casesReferences;
+        private ICase[] _casesReferences;
 
         /// <summary>
         /// List of units present on each tiles
         /// </summary>
-        private List<IUnit>[] units;
+        private List<IUnit>[] _units;
 
         /// <summary>
         /// Width of the map
         /// </summary>
-        private int width;
+        private int _width;
 
         /// <summary>
         /// Size of the map
         /// </summary>
         public int Size
         {
-            get { return grid.Length; }
+            get { return _grid.Length; }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace SmallWorld
         /// </summary>
         public int Width
         {
-            get { return width; }
+            get { return _width; }
         }
 
 
@@ -62,37 +62,37 @@ namespace SmallWorld
         /// </summary>
         public Map()
         {
-            casesReferences = new ICase[5];
+            _casesReferences = new ICase[5];
         }
 
 
         public void generateMap(int mapWidth)
         {
-            this.width = mapWidth;
+            this._width = mapWidth;
 
-            int nbTiles = width * width;
+            int nbTiles = _width * _width;
 
             WrapperMapGenerator wrapper = new WrapperMapGenerator();
-            List<int> cases = wrapper.generate_map(width);
+            List<int> cases = wrapper.generate_map(_width);
 
-            units = new List<IUnit>[nbTiles];
-            grid = new ICase[nbTiles];
+            _units = new List<IUnit>[nbTiles];
+            _grid = new ICase[nbTiles];
 
             for (int i = 0; i < nbTiles; i++)
             {
-                grid[i] = this.getCaseTypeInstance(cases[i]);
+                _grid[i] = this.getCaseTypeInstance(cases[i]);
             }     
         }
 
 
         private ICase getCaseTypeInstance(int caseIndex)
         {
-            if (casesReferences[caseIndex] == null)
+            if (_casesReferences[caseIndex] == null)
             {
-                casesReferences[caseIndex] = generateCase(caseIndex);
+                _casesReferences[caseIndex] = generateCase(caseIndex);
             }
 
-            return casesReferences[caseIndex];
+            return _casesReferences[caseIndex];
         }
 
         /// <summary>
@@ -181,10 +181,10 @@ namespace SmallWorld
 
         private int getIndexFromPoint(Point pos)
         {
-            int index = pos.X * width + pos.Y;
-            if (index > grid.Length)
+            int index = pos.X * _width + pos.Y;
+            if (index > _grid.Length)
             {
-                throw new IndexOutOfRangeException("Out of bounds: there's only " + grid.Length + " tiles in the grid");
+                throw new IndexOutOfRangeException("Out of bounds: there's only " + _grid.Length + " tiles in the grid");
             }
 
             return index;
@@ -193,7 +193,7 @@ namespace SmallWorld
         public ICase getCase(Point pos)
         {
             int index = this.getIndexFromPoint(pos);
-            return grid[index];
+            return _grid[index];
         }
 
         /// <summary>
@@ -204,10 +204,10 @@ namespace SmallWorld
         public List<IUnit> getUnits(Point pos)
         {
             int index = this.getIndexFromPoint(pos);
-            if (units[index] == null)
-                units[index] = new List<IUnit>();
+            if (_units[index] == null)
+                _units[index] = new List<IUnit>();
                 
-            return units[index];
+            return _units[index];
             
         }
 
@@ -221,10 +221,10 @@ namespace SmallWorld
         public void initUnits(List<IUnit> playerUnits, Point pos)
         {
             int index = getIndexFromPoint(pos);
-            units[index] = new List<IUnit>();
+            _units[index] = new List<IUnit>();
             foreach (IUnit unit in playerUnits)
             {
-                units[index].Add(unit);
+                _units[index].Add(unit);
             }
         }
 
@@ -232,14 +232,14 @@ namespace SmallWorld
         /// Returns the best defensive unit on the tile, which will
         /// be used to fight in the battle.
         /// </summary>
-        /// <param name="index">Position (x, y) of the tile</param>
+        /// <param name="tgt">Position (x, y) of the tile</param>
         /// <returns>The best defensive unit of the tile</returns>
         public IUnit getBestDefensiveUnit(Point tgt)
         {
             int index = this.getIndexFromPoint(tgt);
 
             IUnit bestUnit = null;
-            foreach (IUnit unit in this.units[index])
+            foreach (IUnit unit in this._units[index])
             {
                 if (bestUnit == null || bestUnit.Defense < unit.Defense)
                 {
