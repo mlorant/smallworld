@@ -214,10 +214,9 @@ namespace GraphicInterface
         /// <summary>
         /// Move the image associates to an unit to another case
         /// </summary>
-        /// <param name="nationUnit">String name of the nation</param>
         /// <param name="sourcePt">The case where the unit come from</param>
         /// <param name="destPt">The point where the unit go</param>
-        private void moveImageUnit (string nationUnit, System.Drawing.Point sourcePt, System.Drawing.Point destPt){
+        private void moveImageUnit (System.Drawing.Point sourcePt, System.Drawing.Point destPt){
             // retrieve unit type 
             IUnit unit = game.Map.getUnits(destPt)[0];
             drawUnits(sourcePt, unit.GetType(), game.Map.getUnits(sourcePt).Count);
@@ -295,21 +294,21 @@ namespace GraphicInterface
                     if (wonTheBattle)
                     {
                         // Get the oponent player
-                        IPlayer general = (Game.Instance.Players[0] == Game.Instance.FirstPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
+                        IPlayer general = (Game.Instance.Players[0] == Game.Instance.CurrentPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
                         // Delete units
                         defender.buryUnit(general, tile);
 
                         if (Game.Instance.Map.getUnits(tile).Count == 0)
                         {
                             selectedUnit.move(tile);
-                            this.moveImageUnit(selectedUnit.GetType().ToString(), previous, tile);
+                            this.moveImageUnit(previous, tile);
                         }
                     }
                     else
                     {
                         if (!selectedUnit.isAlive())
                         {
-                            selectedUnit.buryUnit(Game.Instance.CurrentPlayer, tile);
+                            selectedUnit.buryUnit(Game.Instance.CurrentPlayer, previous);
                             drawUnits(tile, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
                         }
                     }
@@ -323,7 +322,7 @@ namespace GraphicInterface
                     }
                     else
                     {
-                        this.moveImageUnit(selectedUnit.GetType().ToString(),  previous, tile);
+                        this.moveImageUnit(previous, tile);
                     }
                     
                 }
