@@ -213,9 +213,20 @@ namespace GraphicInterface
             // If it's the last unit in the case then we delete it
             if (game.Map.getUnits(sourcePt).Count == 0)
             {
-                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == sourcePt.Y && Grid.GetColumn(e) == sourcePt.X);
-                mapGrid.Children.Remove(unitPos);
+                buryImageUnit(nationUnit, sourcePt);
             }
+        }
+
+        /// <summary>
+        /// Use to delete image in case of death after battle and when a unit moves and no 
+        /// other unit remains on the previous case
+        /// </summary>
+        /// <param name="nationUnit">The nation of the unit to delete the image</param>
+        /// <param name="sourcePt">Where it comes from</param>
+        private void buryImageUnit(string nationUnit, System.Drawing.Point sourcePt)
+        {
+            Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == sourcePt.Y && Grid.GetColumn(e) == sourcePt.X);
+            mapGrid.Children.Remove(unitPos);
         }
 
         /// <summary>
@@ -270,7 +281,7 @@ namespace GraphicInterface
             if (!inMove)
             {
                 // if there is units on the case clicked
-                if (game.Map.getUnits(tile).Count > 0)
+                if (Game.Instance.Map.getUnits(tile).Count > 0)
                 {
                     displayUnitsOnCase(tile);                    
                 }
@@ -280,22 +291,40 @@ namespace GraphicInterface
                 // if the case clicked have units of the oponent
                 if (game.Map.getUnits(tile).Count > 0 && (game.Map.getUnits(tile)[0].GetType() != selectedUnit.GetType()))
                 {
-                    // If unit wins the battle (defender lose life and no other units in the case) then she moves 
-                    if (selectedUnit.attack(tile) && (game.Map.getUnits(tile).Count == 0))
+                    // Get best defense unit on the tile
+                    IUnit defender = Game.Instance.Map.getBestDefensiveUnit(tile);
+                    // Run the battle
+                    bool wonTheBattle = selectedUnit.attack(defender, tile);
+                    // If unit wins the battle then oponent is dead and we verify if case is free
+                    // otherwise we check if our unit is alive
+                    if (wonTheBattle)
                     {
-                        selectedUnit.move(tile);
-                        this.moveImageUnit(selectedUnit.GetType().ToString(), previous, tile);
+                        // Get the oponent player
+                        IPlayer general = (Game.Instance.Players[0] == Game.Instance.FirstPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
+                        // Delete units
+                        defender.buryUnit(general, tile);
+
+                        if (Game.Instance.Map.getUnits(tile).Count == 0)
+                        {
+                            selectedUnit.move(tile);
+                            this.moveImageUnit(selectedUnit.GetType().ToString(), previous, tile);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("lose or can't attack !");
+                        if (!selectedUnit.isAlive())
+                        {
+                            selectedUnit.buryUnit(Game.Instance.CurrentPlayer, tile);
+                            buryImageUnit(selectedUnit.GetType().ToString(), previous);
+                        }
                     }
+                    
                 }
                 else
                 {
                     if (!selectedUnit.move(tile))
                     {
-                        MessageBox.Show("false");
+                        MessageBox.Show("You can't move here !");
                     }
                     else
                     {
