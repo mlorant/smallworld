@@ -1,4 +1,4 @@
-smallworld
+Smallworld
 ==========
 Jeu au tour par tour inspiré du jeu de société éponyme, en version simplifiée.
 Le but du jeu est de gérer des unités sur une carte pour obtenir le plus de points
@@ -14,6 +14,14 @@ l'INSA de Rennes.
 
 Technologies utilisées
 ======================
-- C++
-- C#
-- WPFL
+- C++ (génération de la carte + proposition de cases)
+- C# 
+- WPF
+
+
+Licence
+=======
+La majorité des images sont inspirés ou reprises du jeu "Battle for Wesnoth", distribué
+sous licence GPL. Plus d'informations ici : https://github.com/wesnoth/wesnoth-old
+
+De ce fait, le jeu "SmallWorld" est distribué sous licence GPL.

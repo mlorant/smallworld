@@ -151,36 +151,46 @@ namespace GraphicInterface
         /// <param name="nb">Number of unit, to determine the image to draw</param>
         private void drawUnits(System.Drawing.Point pt, Type unitType, int nb)
         {
-            // Get unit Rectangle on the grid if already exists
-            Rectangle units = mapGrid.Children.Cast<Rectangle>()
-                                              .FirstOrDefault(e => Grid.GetRow(e) == pt.Y && 
-                                                                   Grid.GetColumn(e) == pt.X &&
-                                                                   Grid.GetZIndex(e) == UNIT_INDEX);
-            if (units == null)
+            // If the tile is now empty, remove the rectangle
+            if (nb == 0)
             {
-                units = new Rectangle();
-                // Set rectangle size and position
-                units.Width = Case.SIZE;
-                units.Height = Case.SIZE;
-                Grid.SetColumn(units, pt.X);
-                Grid.SetRow(units, pt.Y);
-                // Add to map
-                Grid.SetZIndex(units, UNIT_INDEX);
-                mapGrid.Children.Add(units);
+                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && Grid.GetColumn(e) == pt.X);
+                mapGrid.Children.Remove(unitPos);
+
             }
-
-            // Construct the filename of the texture to draw
-            String key = unitType.Name.ToLower();
-            key += (nb > 1) ? "_multiple" : "";
-
-            // Create new brush if the textures hasn't been used yet
-            if (!unitsTextures.ContainsKey(key)) 
+            else
             {
-                BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + key + ".png"));
-                unitsTextures[key] = new ImageBrush(img);
-            }
+                // Get unit Rectangle on the grid if already exists
+                Rectangle units = mapGrid.Children.Cast<Rectangle>()
+                                                  .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
+                                                                       Grid.GetColumn(e) == pt.X &&
+                                                                       Grid.GetZIndex(e) == UNIT_INDEX);
+                if (units == null)
+                {
+                    units = new Rectangle();
+                    // Set rectangle size and position
+                    units.Width = Case.SIZE;
+                    units.Height = Case.SIZE;
+                    Grid.SetColumn(units, pt.X);
+                    Grid.SetRow(units, pt.Y);
+                    // Add to map
+                    Grid.SetZIndex(units, UNIT_INDEX);
+                    mapGrid.Children.Add(units);
+                }
 
-            units.Fill = unitsTextures[key];
+                // Construct the filename of the texture to draw
+                String key = unitType.Name.ToLower();
+                key += (nb > 1) ? "_multiple" : "";
+
+                // Create new brush if the textures hasn't been used yet
+                if (!unitsTextures.ContainsKey(key))
+                {
+                    BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + key + ".png"));
+                    unitsTextures[key] = new ImageBrush(img);
+                }
+
+                units.Fill = unitsTextures[key];
+            }
         }
 
         /// <summary>
@@ -196,6 +206,7 @@ namespace GraphicInterface
             Player2Points.Text = game.Players[1].computePoints().ToString();
 
             CurrentRound.Text = game.CurrentRound.ToString();
+            CurrentPlayer.Text = game.CurrentPlayer.Nickname;
         }
 
         /// <summary>
@@ -207,14 +218,14 @@ namespace GraphicInterface
         private void moveImageUnit (string nationUnit, System.Drawing.Point sourcePt, System.Drawing.Point destPt){
             // retrieve unit type 
             IUnit unit = game.Map.getUnits(destPt)[0];
-
-            drawUnits(destPt, unit.GetType(), game.Map.getUnits(destPt).Count);
+            drawUnits(sourcePt, unit.GetType(), game.Map.getUnits(sourcePt).Count);
 
             // If it's the last unit in the case then we delete it
             if (game.Map.getUnits(sourcePt).Count == 0)
             {
                 buryImageUnit(nationUnit, sourcePt);
             }
+            
         }
 
         /// <summary>
@@ -372,7 +383,8 @@ namespace GraphicInterface
                     + "\nMove left = " + u.MovePoint;
 
                     selectedUnit = u;
-                    inMove = true;
+                    if(game.CurrentPlayer.Nation.hasUnit(u))
+                        inMove = true;
                     previous = tile;
 
                     UnitsInfo.Children.Add(unitName);

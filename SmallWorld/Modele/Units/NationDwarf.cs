@@ -11,5 +11,10 @@ namespace SmallWorld
         {
             return new Dwarf(id);
         }
+
+        public override bool hasUnit(IUnit unit)
+        {
+            return unit is Dwarf;
+        }
     }
 }

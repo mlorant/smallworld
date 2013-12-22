@@ -11,5 +11,10 @@ namespace SmallWorld
         {
             return new Viking(id);
         }
+
+        public override bool hasUnit(IUnit unit)
+        {
+            return unit is Viking;
+        }
     }
 }

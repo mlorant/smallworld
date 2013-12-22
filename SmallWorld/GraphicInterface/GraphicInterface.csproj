@@ -136,7 +136,6 @@
     <Resource Include="Resources\img\units\dwarf_multiple.png" />
     <Resource Include="Resources\img\units\gallic_multiple.png" />
     <Resource Include="Resources\img\units\viking_multiple.png" />
-    <Content Include="Resources\main_menu.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

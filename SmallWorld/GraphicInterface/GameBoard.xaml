@@ -41,13 +41,14 @@
                         - <TextBlock Name="Player2Units" Text="{Binding Path=NbUnits2}"></TextBlock> unités restantes
                 </TextBlock>
             </StackPanel>
+            <StackPanel DockPanel.Dock="Right" Width="225">
+                <TextBlock>Joueur actuel : <TextBlock Name="CurrentPlayer" /></TextBlock>
+                <TextBlock><Run Text="Tour "/>
+            	    <TextBlock Name="CurrentRound" /> <Run Text=" / "/> <TextBlock Name="MaxRound"/>
+            	</TextBlock>
+                <Button Content="Fin du tour" Height="28" Width="75" Click="endRound" Margin="0,25,0,0" />
+            </StackPanel>
 
-            <Button Content="Fin du tour" Height="28" VerticalAlignment="Top" Width="75" Click="endRound" DockPanel.Dock="Right"  Margin="0,15,25,0" />
-            <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" DockPanel.Dock="Top" Margin="0,0,103,0"><Run Text="Tour "/><InlineUIContainer>
-            		<TextBlock x:Name="CurrentRound" />
-            	</InlineUIContainer><Run Text=" / "/><InlineUIContainer>
-            		<TextBlock x:Name="MaxRound"/>
-            	</InlineUIContainer></TextBlock>
         </DockPanel>
     </Grid>
 </Window>
