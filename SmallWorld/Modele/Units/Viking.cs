@@ -44,10 +44,10 @@ namespace SmallWorld
             if (CurrentPosition.X >= 1) // West
                 points.Add(new Point(CurrentPosition.X - 1, CurrentPosition.Y));
 
-            if (CurrentPosition.X < Game.Instance.Map.Width) // East
+            if (CurrentPosition.X < Game.Instance.Map.Width - 1) // East
                 points.Add(new Point(CurrentPosition.X + 1, CurrentPosition.Y));
 
-            if (CurrentPosition.Y < Game.Instance.Map.Width) // South
+            if (CurrentPosition.Y < Game.Instance.Map.Width - 1) // South
                 points.Add(new Point(CurrentPosition.X, CurrentPosition.Y + 1));
 
             // Check for every point if it's a sea tile
