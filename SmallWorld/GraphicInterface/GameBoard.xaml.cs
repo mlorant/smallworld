@@ -30,6 +30,26 @@ namespace GraphicInterface
         const string IMAGEUNITS = "pack://application:,,,/GraphicInterface;component/Resources/img/units/";
 
         /// <summary>
+        /// Flyweight for units textures
+        /// </summary>
+        Dictionary<string, ImageBrush> unitsTextures = new Dictionary<string, ImageBrush>();
+
+        /// <summary>
+        /// Z-index for the background
+        /// </summary>
+        
+        const int BG_INDEX = 1;
+        /// <summary>
+        /// Z-index for map tiles textures
+        /// </summary>
+        const int MAP_INDEX = 5;
+
+        /// <summary>
+        /// Z-index for units textures
+        /// </summary>
+        const int UNIT_INDEX = 10;
+
+        /// <summary>
         /// Initialize the game board, by drawing the map,
         /// initial position of units and players information.
         /// </summary>
@@ -59,7 +79,7 @@ namespace GraphicInterface
 
             // First drawing of the map, units, and game info.
             drawMap();
-            drawUnits();
+            drawInitialUnits();
             refreshGameInfos();
         }
 
@@ -93,7 +113,7 @@ namespace GraphicInterface
 
                 Grid.SetRow(tile, pt.Y);
                 Grid.SetColumn(tile, pt.X);
-                Grid.SetZIndex(tile, 5);
+                Grid.SetZIndex(tile, MAP_INDEX);
                 
                 // Set tile texture (create it if not used yet)
                 String filename = tileType.GetType().Name.ToLower();
@@ -111,27 +131,56 @@ namespace GraphicInterface
         /// <summary>
         /// Drax initial position of units on the map
         /// </summary>
-        private void drawUnits()
+        private void drawInitialUnits()
         {
             for (int i = 0; i < 2; i++)
             {
                 // Get unit reference (every units start at the same location)
-                IUnit unit =  Game.Instance.Players[i].Units[0];
-                System.Drawing.Point pt = unit.CurrentPosition;
+                IUnit unit = Game.Instance.Players[i].Units[0];
+                int nbUnits = Game.Instance.Players[i].Units.Count;
 
-                Rectangle units = new Rectangle();
+                this.drawUnits(unit.CurrentPosition, unit.GetType(), nbUnits); 
+            }
+        }
+
+        /// <summary>
+        /// Draw units icon on a tile of the map
+        /// </summary>
+        /// <param name="pt">Destination point, where units will be draw</param>
+        /// <param name="unitType">Type of the unit to draw</param>
+        /// <param name="nb">Number of unit, to determine the image to draw</param>
+        private void drawUnits(System.Drawing.Point pt, Type unitType, int nb)
+        {
+            // Get unit Rectangle on the grid if already exists
+            Rectangle units = mapGrid.Children.Cast<Rectangle>()
+                                              .FirstOrDefault(e => Grid.GetRow(e) == pt.Y && 
+                                                                   Grid.GetColumn(e) == pt.X &&
+                                                                   Grid.GetZIndex(e) == UNIT_INDEX);
+            if (units == null)
+            {
+                units = new Rectangle();
+                // Set rectangle size and position
                 units.Width = Case.SIZE;
-                units.Height = Case.SIZE;                
-
-                String filename = unit.GetType().Name.ToLower();
-                BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + filename + ".png"));
-                units.Fill = new ImageBrush(img);
-
+                units.Height = Case.SIZE;
                 Grid.SetColumn(units, pt.X);
                 Grid.SetRow(units, pt.Y);
-                Grid.SetZIndex(units, 10);
+                // Add to map
+                Grid.SetZIndex(units, UNIT_INDEX);
                 mapGrid.Children.Add(units);
             }
+
+            // Construct the filename of the texture to draw
+            String key = unitType.Name.ToLower();
+            key += (nb > 1) ? "_multiple" : "";
+
+            // Create new brush if the textures hasn't been used yet
+            if (!unitsTextures.ContainsKey(key)) 
+            {
+                BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + key + ".png"));
+                unitsTextures[key] = new ImageBrush(img);
+            }
+
+            units.Fill = unitsTextures[key];
         }
 
         /// <summary>
@@ -159,24 +208,8 @@ namespace GraphicInterface
             // retrieve unit type 
             IUnit unit = game.Map.getUnits(destPt)[0];
 
-            // If the unit is the first to move on the case
-            if (game.Map.getUnits(destPt).Count == 1)
-            {
-                Rectangle units = new Rectangle();
-                units.Width = Case.SIZE;
-                units.Height = Case.SIZE;
+            drawUnits(destPt, unit.GetType(), game.Map.getUnits(destPt).Count);
 
-                Grid.SetColumn(units, destPt.X);
-                Grid.SetRow(units, destPt.Y);
-                Grid.SetZIndex(units, 10);
-
-                String filename = unit.GetType().Name.ToLower();
-                BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + filename + ".png"));
-
-                units.Fill = new ImageBrush(img);
-
-                mapGrid.Children.Add(units);
-            }
             // If it's the last unit in the case then we delete it
             if (game.Map.getUnits(sourcePt).Count == 0)
             {

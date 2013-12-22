@@ -133,6 +133,9 @@
     <Resource Include="Resources\img\start-background.png" />
     <Resource Include="Resources\img\logo.png" />
     <Resource Include="Resources\img\infos-background.png" />
+    <Resource Include="Resources\img\units\dwarf_multiple.png" />
+    <Resource Include="Resources\img\units\gallic_multiple.png" />
+    <Resource Include="Resources\img\units\viking_multiple.png" />
     <Content Include="Resources\main_menu.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
