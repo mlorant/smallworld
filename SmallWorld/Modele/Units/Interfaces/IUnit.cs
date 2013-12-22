@@ -14,7 +14,9 @@ namespace SmallWorld
         int Attack { get; }
         int Defense { get; }
         Point CurrentPosition { get; set; }
-        void attack(Point target);
+        bool attack(Point target);
+
+        double computePercentageToWin(IUnit defender);
 
         bool isAlive();
 
