@@ -81,6 +81,8 @@ namespace GraphicInterface
             drawMap();
             drawInitialUnits();
             refreshGameInfos();
+
+            InfoBox.Text = "Bienvenue. C'est à " + game.CurrentPlayer.Nickname + " de commencer à jouer";
         }
 
         /// <summary>
@@ -208,7 +210,16 @@ namespace GraphicInterface
             Player2Points.Text = game.Players[1].computePoints().ToString();
 
             CurrentRound.Text = game.CurrentRound.ToString();
-            CurrentPlayer.Text = game.CurrentPlayer.Nickname;
+            if (game.CurrentPlayer == game.Players[0])
+            {
+                Player1Nickname.FontWeight = FontWeights.Black;
+                Player2Nickname.FontWeight = FontWeights.Normal;
+            }
+            else
+            {
+                Player1Nickname.FontWeight = FontWeights.Normal;
+                Player2Nickname.FontWeight = FontWeights.Black;
+            }
         }
 
         /// <summary>
@@ -245,11 +256,22 @@ namespace GraphicInterface
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.endRound();
-            refreshGameInfos();
-
             if (game.isFinished())
             {
                 MessageBox.Show(game.getWinner().Nickname + " won!");
+            }
+            else
+            {
+                refreshGameInfos();
+
+                InfoBox.Text = "";
+                int roundsLeft = game.NbRounds - game.CurrentRound;
+                if(roundsLeft == 0)
+                    InfoBox.Text = "Dernier tour ! ";
+                else if (roundsLeft < 3)
+                    InfoBox.Text = "Attention, plus que " + (roundsLeft+1) + " tours. ";
+
+                InfoBox.Text += "C'est à " + game.CurrentPlayer.Nickname + " de jouer";
             }
         }
 
@@ -267,8 +289,8 @@ namespace GraphicInterface
             // Make visible the information frame about units
             // And displays information about the terrain and the number of units above
             CaseInfoOnClick.Visibility = Visibility.Visible;
-            CaseInfo.Text = "Type de terrain : " + game.Map.getCase(tile).GetType().Name;
-            NbUnitOnCase.Text = game.Map.getUnits(tile).Count + " units camp in this region";
+            CaseInfo.Text = game.Map.getCase(tile).GetType().Name;
+            NbUnitOnCase.Text = game.Map.getUnits(tile).Count.ToString();
             // begin to erase all the frame
             UnitsInfo.Children.Clear();
             // If the click is the first click to select a unit
@@ -347,16 +369,11 @@ namespace GraphicInterface
             {
                 StackPanel unitAndButton = new StackPanel();
                 unitAndButton.Orientation = Orientation.Horizontal;
-                TextBlock unitId = new TextBlock();
                 Button selectUnit = new Button();
-                unitAndButton.Children.Add(unitId);
                 unitAndButton.Children.Add(selectUnit);
-                // Donne un nom à l'unité
-                unitId.Text = u.GetType().Name.ToLower() + " " + u.Id;
-                unitId.TextWrapping = TextWrapping.Wrap;
 
                 // ce clique donne plus d'info sur l'unité en question et la selectionne pour attaquer ou bouger
-                selectUnit.Content = "Select unit";
+                selectUnit.Content = u.GetType().Name.ToLower() + " " + u.Id;
                 selectUnit.Click += (source, evt) =>
                 {
                     UnitsInfo.Children.Clear();
