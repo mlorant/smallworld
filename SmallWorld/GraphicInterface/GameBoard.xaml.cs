@@ -196,6 +196,7 @@ namespace GraphicInterface
             Player2Points.Text = game.Players[1].computePoints().ToString();
 
             CurrentRound.Text = game.CurrentRound.ToString();
+            CurrentPlayer.Text = game.CurrentPlayer.Nickname;
         }
 
         /// <summary>
