@@ -8,19 +8,24 @@
     <Grid Name="mainGrid">
         <!-- Black rectangle to make a fade effect when the menu appears -->
         <Rectangle Opacity="0.7" Fill="Black"></Rectangle>
-        <StackPanel  Width="175" Height="220" Background="White">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="10,12,10,0"/>
-                </Style>
-            </StackPanel.Resources>
-            
-            <TextBlock HorizontalAlignment="Center" FontWeight="Black">Menu</TextBlock>
-            <Button Click="clickResume">Resume</Button>
-            <Button>Load a previous game</Button>
-            <Button>Save current game</Button>
-            <Button>Go to main menu</Button>
-            <Button Click="clickExit">Exit</Button>
-        </StackPanel>
+
+        <Border BorderThickness="2" BorderBrush="Wheat"  Width="175" Height="200" >
+            <StackPanel Width="175" Height="200" Background="#2e3544">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="10,12,10,0"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock HorizontalAlignment="Center" FontWeight="Black" Foreground="White">Menu</TextBlock>
+                <Button Click="clickResume">Resume</Button>
+                <Button>Load a previous game</Button>
+                <Button>Save current game</Button>
+                <Button>Go to main menu</Button>
+                <Button Click="clickExit">Exit</Button>
+            </StackPanel>
+        </Border>
+        
+        
     </Grid>
 </UserControl>

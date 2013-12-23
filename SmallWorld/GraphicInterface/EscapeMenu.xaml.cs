@@ -20,6 +20,9 @@ namespace GraphicInterface
     /// </summary>
     public partial class EscapeMenu : UserControl
     {
+
+        public Action hideEscapeMenu;
+
         public EscapeMenu()
         {
             InitializeComponent();
@@ -30,6 +33,7 @@ namespace GraphicInterface
         /// </summary>
         private void clickResume(object sender, RoutedEventArgs e)
         {
+            this.hideEscapeMenu();
             // Get parent and remove itself
             ((Panel)this.Parent).Children.Remove(this);
         }

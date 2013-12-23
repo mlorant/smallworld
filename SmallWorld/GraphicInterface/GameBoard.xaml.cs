@@ -23,6 +23,9 @@ namespace GraphicInterface
     public partial class GameBoard : Window
     {
         Game game;
+
+        bool inEscapeMenu = false;
+
         bool inMove = false;
         Unit selectedUnit;
         System.Drawing.Point previous;
@@ -448,9 +451,12 @@ namespace GraphicInterface
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             // Show EscapeMenu
-            if (e.Key == Key.Escape)
+            if (e.Key == Key.Escape && !inEscapeMenu)
             {
+                inEscapeMenu = true;
+
                 EscapeMenu menu = new EscapeMenu();
+                menu.hideEscapeMenu = () => { this.inEscapeMenu = false; };
 
                 // Set menu to fill the whole space
                 Canvas.SetZIndex(menu, 999);
