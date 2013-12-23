@@ -17,6 +17,7 @@ using System.Threading;
 
 namespace GraphicInterface
 {
+
     /// <summary>
     /// Logique d'interaction pour GameBoard.xaml
     /// </summary>
@@ -36,20 +37,12 @@ namespace GraphicInterface
         /// Flyweight for units textures
         /// </summary>
         Dictionary<string, ImageBrush> unitsTextures = new Dictionary<string, ImageBrush>();
+        ImageBrush haloImage = new ImageBrush(new BitmapImage(new Uri(IMAGEUNITS + "halo.png")));
 
-        /// <summary>
-        /// Z-index for the background
-        /// </summary>
-        
+        // Z-index definitions
         const int BG_INDEX = 1;
-        /// <summary>
-        /// Z-index for map tiles textures
-        /// </summary>
         const int MAP_INDEX = 5;
-
-        /// <summary>
-        /// Z-index for units textures
-        /// </summary>
+        const int HALO_INDEX = 7;
         const int UNIT_INDEX = 10;
 
         /// <summary>
@@ -85,6 +78,7 @@ namespace GraphicInterface
             // First drawing of the map, units, and game info.
             drawMap();
             drawInitialUnits();
+            drawHalo();
             refreshGameInfos();
 
             InfoBox.Text = "Welcome. It's the turn of " + game.CurrentPlayer.Nickname + ".";
@@ -161,11 +155,16 @@ namespace GraphicInterface
             // If the tile is now empty, remove the rectangle
             if (nb == 0)
             {
-                Rectangle unitPos = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && 
-                                                                                 Grid.GetColumn(e) == pt.X &&
-                                                                                 Grid.GetZIndex(e) == UNIT_INDEX);
-                mapGrid.Children.Remove(unitPos);
-
+                // Remove unit icon
+                Rectangle rect = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && 
+                                                                              Grid.GetColumn(e) == pt.X &&
+                                                                              Grid.GetZIndex(e) == UNIT_INDEX);
+                mapGrid.Children.Remove(rect);
+                // Remove halo
+                rect = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && 
+                                                                    Grid.GetColumn(e) == pt.X &&
+                                                                    Grid.GetZIndex(e) == HALO_INDEX);
+                mapGrid.Children.Remove(rect);
             }
             else
             {
@@ -174,6 +173,8 @@ namespace GraphicInterface
                                                   .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
                                                                        Grid.GetColumn(e) == pt.X &&
                                                                        Grid.GetZIndex(e) == UNIT_INDEX);
+
+                // No units here, draw halo + new unit
                 if (units == null)
                 {
                     units = new Rectangle();
@@ -199,7 +200,52 @@ namespace GraphicInterface
                 }
 
                 units.Fill = unitsTextures[key];
+
+                // Add halo if necessary
+                Rectangle rect = mapGrid.Children.Cast<Rectangle>()
+                                                  .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
+                                                                       Grid.GetColumn(e) == pt.X &&
+                                                                       Grid.GetZIndex(e) == HALO_INDEX);
+                if(rect == null)
+                    mapGrid.Children.Add(getHaloRectangle(pt));
             }
+        }
+
+        /// <summary>
+        /// Draws halo under each 
+        /// </summary>
+        private void drawHalo()
+        {
+            // Erase every halos already present
+            List<Rectangle> rects = mapGrid.Children.Cast<Rectangle>().Where(e => Grid.GetZIndex(e) == HALO_INDEX).ToList();
+            foreach (Rectangle r in rects)
+                mapGrid.Children.Remove(r);
+
+
+            // Get positions of every units
+            HashSet<System.Drawing.Point> points = new HashSet<System.Drawing.Point>();
+            foreach (Unit unit in game.CurrentPlayer.Units)
+            {
+                if (!points.Contains(unit.CurrentPosition)) // works by comparaison
+                    points.Add(unit.CurrentPosition);
+            }
+
+            // Draw halo on each points
+            foreach (System.Drawing.Point pt in points)
+            {
+                mapGrid.Children.Add(getHaloRectangle(pt));
+            }
+        }
+
+        private Rectangle getHaloRectangle(System.Drawing.Point destination)
+        {
+            Rectangle halo = new Rectangle();
+            Grid.SetColumn(halo, destination.X);
+            Grid.SetRow(halo, destination.Y);
+            Grid.SetZIndex(halo, HALO_INDEX);
+            halo.Fill = this.haloImage;
+
+            return halo;
         }
 
         /// <summary>
@@ -266,6 +312,7 @@ namespace GraphicInterface
             }
             else
             {
+                drawHalo();
                 refreshGameInfos();
 
                 InfoBox.Text = "";
@@ -331,14 +378,13 @@ namespace GraphicInterface
                             this.moveImageUnit(previous, tile);
                         }
                     }
-                    else
+                    // If defeat, remove player unit
+                    else if (!selectedUnit.isAlive())
                     {
-                        if (!selectedUnit.isAlive())
-                        {
-                            selectedUnit.buryUnit(Game.Instance.CurrentPlayer, previous);
-                            drawUnits(tile, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
-                        }
+                        selectedUnit.buryUnit(Game.Instance.CurrentPlayer, previous);
+                        drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
                     }
+                    
                     
                 }
                 else
