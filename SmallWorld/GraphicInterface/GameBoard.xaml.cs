@@ -323,12 +323,18 @@ namespace GraphicInterface
                         // Get the oponent player
                         IPlayer general = (Game.Instance.Players[0] == Game.Instance.CurrentPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
                         // Delete units
-                        defender.buryUnit(general, tile);
+                        defender.buryUnit(general, tile);                        
 
                         if (Game.Instance.Map.getUnits(tile).Count == 0)
                         {
                             selectedUnit.move(tile);
                             this.moveImageUnit(previous, tile);
+                        }
+                        else
+                        {
+                            IUnit unit = Game.Instance.Map.getUnits(tile)[0];
+                            // verify modification on the destination tile (in case they were 2 and now 1)
+                            drawUnits(tile, unit.GetType(), Game.Instance.Map.getUnits(tile).Count);
                         }
                     }
                     else
@@ -336,7 +342,7 @@ namespace GraphicInterface
                         if (!selectedUnit.isAlive())
                         {
                             selectedUnit.buryUnit(Game.Instance.CurrentPlayer, previous);
-                            drawUnits(tile, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
+                            drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(previous).Count);
                         }
                     }
                     
