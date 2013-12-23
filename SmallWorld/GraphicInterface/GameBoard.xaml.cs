@@ -59,6 +59,8 @@ namespace GraphicInterface
             game = g;
             InitializeComponent();
 
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+
             mapGrid.Width = game.Map.Width * Case.SIZE;
             mapGrid.Height = mapGrid.Width;
             for (int i = 0; i < g.Map.Width; i++)
@@ -442,5 +444,23 @@ namespace GraphicInterface
             }
         }
 
+
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            // Show EscapeMenu
+            if (e.Key == Key.Escape)
+            {
+                EscapeMenu menu = new EscapeMenu();
+
+                // Set menu to fill the whole space
+                Canvas.SetZIndex(menu, 999);
+                menu.mainGrid.Width = mainCanvas.ActualWidth;
+                menu.mainGrid.Height = mainCanvas.ActualHeight;
+
+                mainCanvas.Children.Add(menu);
+            }
+        }
+
     }
 }
+

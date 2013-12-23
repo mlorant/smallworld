@@ -62,14 +62,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BooleanAndConverter.cs" />
-    <Compile Include="InverseBooleanConverter.cs" />
+    <Compile Include="BindingConverter.cs" />
+    <Compile Include="EscapeMenu.xaml.cs">
+      <DependentUpon>EscapeMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="EscapeMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
