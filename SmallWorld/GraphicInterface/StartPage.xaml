@@ -35,7 +35,7 @@
             <Grid Name="gridInfoPlayer" IsEnabled="False">
                 <StackPanel HorizontalAlignment="Left" Height="150" Margin="30,25,0,26" Width="242">
                     <TextBlock HorizontalAlignment="Center" Text="Player 1" Foreground="White" FontSize="16" FontWeight="Medium" />
-                    <TextBox Height="23" TextWrapping="Wrap" Text="" Name="Player1Nickname" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
+                    <TextBox Height="23" MaxLength="16" TextWrapping="Wrap" Text="" Name="Player1Nickname" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
                     <Grid Height="80" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}">
                         <RadioButton GroupName="nationP1" Name="Dwarf1" Content="Dwarf" IsEnabled="{Binding ElementName=Dwarf2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}" 
                                  HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,16,98,48" Foreground="White"/>
@@ -50,7 +50,7 @@
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Left" Height="150" Margin="380,25,30,26"  Width="244">
                     <TextBlock HorizontalAlignment="Center" Text="Player 2" Foreground="White" FontSize="16" FontWeight="Medium" />
-                    <TextBox Height="23" TextWrapping="Wrap" Text="" Name="Player2Nickname" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
+                    <TextBox Height="23" MaxLength="16" TextWrapping="Wrap" Text="" Name="Player2Nickname" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
                     <Grid Height="80" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}">
                         <RadioButton GroupName="nationP2" Name="Dwarf2" Content="Dwarf" IsEnabled="{Binding ElementName=Dwarf1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
                                   VerticalAlignment="Top" Checked="initNationPlayer2" Margin="84,17,107,0" Height="15" Foreground="White"/>
@@ -66,7 +66,7 @@
             </Grid>
         </StackPanel>
         
-        <Button Name="Start" Content="Jouer" Click="startGame" 
+        <Button Name="Start" Content="Start the game" Click="startGame" 
                     HorizontalAlignment="Center" Width="250" Height="73" Margin="0,20,0,0"
                     Foreground="White">
             <Button.IsEnabled>

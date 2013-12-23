@@ -82,7 +82,7 @@ namespace GraphicInterface
             drawInitialUnits();
             refreshGameInfos();
 
-            InfoBox.Text = "Bienvenue. C'est à " + game.CurrentPlayer.Nickname + " de commencer à jouer";
+            InfoBox.Text = "Welcome. It's the turn of " + game.CurrentPlayer.Nickname + ".";
         }
 
         /// <summary>
@@ -266,11 +266,11 @@ namespace GraphicInterface
                 InfoBox.Text = "";
                 int roundsLeft = game.NbRounds - game.CurrentRound;
                 if(roundsLeft == 0)
-                    InfoBox.Text = "Dernier tour ! ";
+                    InfoBox.Text = "Last turn! ";
                 else if (roundsLeft < 3)
-                    InfoBox.Text = "Attention, plus que " + (roundsLeft+1) + " tours. ";
+                    InfoBox.Text = "Watch out, " + (roundsLeft+1) + " turns left. ";
 
-                InfoBox.Text += "C'est à " + game.CurrentPlayer.Nickname + " de jouer";
+                InfoBox.Text += "It's the turn of " + game.CurrentPlayer.Nickname + ".";
             }
         }
 

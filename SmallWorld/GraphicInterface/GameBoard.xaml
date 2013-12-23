@@ -16,24 +16,24 @@
             
             <!-- Player 1 -->
             <StackPanel Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" Orientation="Horizontal">
-                <TextBlock Name="Player1Nickname" Text="Joueur 1" Foreground="White" FontWeight="Black" />
+                <TextBlock Name="Player1Nickname" Text="Player 1" Foreground="White" FontWeight="Black" />
                 <!-- points --><Rectangle Margin="6,0,6,0"/>
                 <Image Source="Resources/img/icons/score.png" Width="16" Margin="0,0,3,0" /> 
                 <TextBlock Name="Player1Points" Text="0" Foreground="White" /> 
                 <TextBlock Text=" points" Foreground="White" />
                 <!-- units --><Rectangle Margin="6,0,6,0"/>
                 <Image Source="Resources/img/icons/units.png" Width="16" Margin="0,0,3,0" />
-                <TextBlock Name="Player1Units" Text="{Binding Path=NbUnits1}" Foreground="White" /> <TextBlock Text=" unités" Foreground="White" />
+                <TextBlock Name="Player1Units" Text="{Binding Path=NbUnits1}" Foreground="White" /> <TextBlock Text=" units" Foreground="White" />
             </StackPanel>
             
             <!-- Rounds -->
             <TextBlock Grid.Column="1" Foreground="White" HorizontalAlignment="Center" Padding="2">
-                Tour <TextBlock Name="CurrentRound" Text="1" /> / <TextBlock Name="MaxRound" Text="10"/>
+                Round <TextBlock Name="CurrentRound" Text="1" /> / <TextBlock Name="MaxRound" Text="10"/>
             </TextBlock>
             
             <!-- Player 2 -->
             <StackPanel Grid.Column="2" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock Name="Player2Nickname" Text="Joueur 2" Foreground="White" />
+                <TextBlock Name="Player2Nickname" Text="Player 2" Foreground="White" />
                 <Rectangle Margin="6,0,6,0"/>
                 <Image Source="Resources/img/icons/score.png" Width="16" Margin="0,0,3,0" />
                 <TextBlock Name="Player2Points" Text="0" Foreground="White" />
@@ -41,7 +41,7 @@
                 <Rectangle Margin="6,0,6,0"/>
                 <Image Source="Resources/img/icons/units.png" Width="16" Margin="0,0,3,0" />
                 <TextBlock Name="Player2Units" Text="{Binding Path=NbUnits2}" Foreground="White" />
-                <TextBlock Text=" unités" Foreground="White" />
+                <TextBlock Text=" units" Foreground="White" />
             </StackPanel>
         </Grid>
 
@@ -51,20 +51,20 @@
             <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="#465269">
                 <TextBlock Foreground="White" Margin="5,0,0,0">
                     <TextBlock Foreground="Wheat">[INFO]</TextBlock>
-                    <TextBlock Name="InfoBox">Bienvenue, c'est à Joueur 1 de commencer.</TextBlock>
+                    <TextBlock Name="InfoBox">Welcome, it's the turn of "Player 1".</TextBlock>
                 </TextBlock>
             </Border>
             <!-- Right side (end turn button) -->
             <StackPanel DockPanel.Dock="Right" Width="150">
-                <TextBlock Foreground="White" HorizontalAlignment="Center">Reste 2 unités à jouer</TextBlock>
-                <Button Content="Fin du tour" Height="30" Width="100" Click="endRound" Margin="0,25,0,0" />
+                <TextBlock Foreground="White" HorizontalAlignment="Center">2 units available left</TextBlock>
+                <Button Content="End turn" Height="30" Width="100" Click="endRound" Margin="0,25,0,0" />
             </StackPanel>
             
             <DockPanel Name="CaseInfoOnClick" Height="94" VerticalAlignment="Top">
                 <TextBlock TextWrapping="Wrap" Width="125" Foreground="White">
                     Case <TextBlock Text="(0, 2)"/><LineBreak />
                     <TextBlock Name="CaseInfo" Text="Plaine"/><LineBreak />
-                    <TextBlock Name="NbUnitOnCase"/> unités sur la case
+                    <TextBlock Name="NbUnitOnCase"/> units on the tile
                 </TextBlock>
                 
                 <StackPanel Name="UnitsInfo" Orientation="Horizontal">
