@@ -28,7 +28,7 @@ namespace SmallWorld
         /// <summary>
         /// Instances list of square types (Flyweight pattern)
         /// </summary>
-        private ICase[] _casesReferences;
+        static Dictionary<int, ICase> _casesReferences = new Dictionary<int,ICase>();
 
         /// <summary>
         /// List of units present on each tiles
@@ -62,7 +62,15 @@ namespace SmallWorld
         /// </summary>
         public Map()
         {
-            _casesReferences = new ICase[5];
+            // Init flyweight
+            if (_casesReferences.Count == 0)
+            {
+                _casesReferences.Add(0, new Desert());
+                _casesReferences.Add(1, new Forest());
+                _casesReferences.Add(2, new Mountain());
+                _casesReferences.Add(3, new Plain());
+                _casesReferences.Add(4, new Sea());
+            }
         }
 
 
@@ -84,47 +92,20 @@ namespace SmallWorld
             }     
         }
 
-
+        /// <summary>
+        /// Get the tile from the flyweight dictionnary if exists.
+        /// If the index is unknown, return an exception.
+        /// </summary>
+        /// <param name="caseIndex">Tile index to return</param>
+        /// <returns>Tile, if exists</returns>
         private ICase getCaseTypeInstance(int caseIndex)
         {
-            if (_casesReferences[caseIndex] == null)
+            if (!_casesReferences.ContainsKey(caseIndex))
             {
-                _casesReferences[caseIndex] = generateCase(caseIndex);
+                throw new UnknownTileException();
             }
 
             return _casesReferences[caseIndex];
-        }
-
-        /// <summary>
-        /// Create a new instance of case
-        /// </summary>
-        /// <param name="caseIndex"></param>
-        /// <returns></returns>
-        private ICase generateCase(int caseIndex) 
-        {
-            ICase obj = null;
-            switch (caseIndex)
-            {
-                case 0:
-                    obj = new Desert();
-                    break;
-                case 1:
-                    obj = new Forest();
-                    break;
-                case 2:
-                    obj = new Mountain();
-                    break;
-                case 3:
-                    obj = new Plain();
-                    break;
-                case 4:
-                    obj = new Sea();
-                    break;
-                default:
-                    throw new UnknownTileException();
-            }
-            
-            return obj;
         }
 
         /// <summary>
