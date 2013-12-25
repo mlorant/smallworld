@@ -168,9 +168,28 @@ namespace GraphicInterface
 
             game = builder.createGame(player1, nation1, player2, nation2);
 
-            GameBoard main = new GameBoard(game);
+            displayGameBoard();
+        }
+
+        private void loadGame(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
+            dlg.FileName = "myGame";
+            dlg.DefaultExt = ".sw";
+            dlg.Filter = "SmallWorld save file (.sw)|*.sw";
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Game.Instance.restoreGame(dlg.FileName);
+                displayGameBoard();
+            }
+        }
+
+        private void displayGameBoard()
+        {
+            GameBoard main = new GameBoard(Game.Instance);
             App.Current.MainWindow = main;
-            this.Close();
+            Window.GetWindow(this).Close();
             main.Show();
         }
     }
