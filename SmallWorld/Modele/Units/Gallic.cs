@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable()]
     public class Gallic : Unit, IGallic
     {
         public Gallic(int id)
         {
             this.Id = id;
+        }
+
+        /// <summary>
+        /// Constructor for the deserialization
+        /// </summary>
+        public Gallic(SerializationInfo info, StreamingContext ctxt)
+            : base(info, ctxt)
+        {
         }
 
         /// <summary>

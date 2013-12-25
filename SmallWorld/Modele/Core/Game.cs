@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace SmallWorld
@@ -11,21 +14,23 @@ namespace SmallWorld
     /// game, and let play each player when it's
     /// their turn.
     /// </summary>
-    public class Game : IGame
+    [Serializable()]
+    public class Game : IGame, ISerializable
     {
         private static Game instance;
         
-        private Player[] _players;
-        private Player _firstPlayer;
-        private Player _currentPlayer;
+        private IPlayer[] _players;
+        private IPlayer _firstPlayer;
+        private IPlayer _currentPlayer;
         private int _currentRound;
         private Map _map;
         private int _nbRounds;
         private int _nbUnits;
 
-        public Player[] Players
+        public IPlayer[] Players
         {
             get { return this._players; }
+            set { this._players = value; }
         }
 
         public int CurrentRound
@@ -41,13 +46,13 @@ namespace SmallWorld
             }
         }
 
-        public Player FirstPlayer
+        public IPlayer FirstPlayer
         {
             get { return this._firstPlayer; }
             set { throw new NotSupportedException(); }
         }
 
-        public Player CurrentPlayer
+        public IPlayer CurrentPlayer
         {
             get { return this._currentPlayer;  }
             set { this._currentPlayer = value; }
@@ -67,6 +72,7 @@ namespace SmallWorld
         public Map Map
         {
             get { return this._map; }
+            set { this._map = value; }
         }
 
 
@@ -201,6 +207,63 @@ namespace SmallWorld
                 return _players[0];
             else
                 return _players[1];
+        }
+
+
+        /// <summary>
+        /// Serialization of a game instance (for saving feature)
+        /// </summary>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("GamePlayers", this._players);
+            info.AddValue("GameMap", this._map);
+            info.AddValue("GameFirstPlayer", this._firstPlayer);
+            info.AddValue("GameCurrentPlayer", this._currentPlayer);
+            info.AddValue("GameCurrentRound", this._currentRound);
+            info.AddValue("GameNbRounds", this._nbRounds);
+        }
+
+        // Deserialization constructor.
+        public Game(SerializationInfo info, StreamingContext ctxt)
+        {
+            this._players = (IPlayer[]) info.GetValue("GamePlayers", typeof(IPlayer[]));
+            this._map = (Map) info.GetValue("GameMap", typeof(Map));
+            this._firstPlayer = (IPlayer)info.GetValue("GameFirstPlayer", typeof(IPlayer));
+            this._currentPlayer = (IPlayer)info.GetValue("GameCurrentPlayer", typeof(IPlayer));
+            this._currentRound = (int)info.GetValue("GameCurrentRound", typeof(int));
+            this._nbRounds = (int)info.GetValue("GameNbRounds", typeof(int));
+            
+            // Overwrite the current game with the new one created
+            Game.instance = this;
+        }
+
+
+        /// <summary>
+        /// Save the current game state in a serialized file.
+        /// </summary>
+        /// <param name="destination">Destination file of the saved game</param>
+        public void saveCurrentGame(string destination)
+        {
+            Stream stream = File.Open(destination, FileMode.Create);
+            BinaryFormatter bformat = new BinaryFormatter();
+
+            bformat.Serialize(stream, Game.instance);
+            stream.Close();
+
+        }
+
+        /// <summary>
+        /// Load a new game from a file. The previous game
+        /// will be overwritten.
+        /// </summary>
+        /// <param name="saveFile">File to load</param>
+        public void restoreGame(string saveFile)
+        {
+            Stream stream = File.Open(saveFile, FileMode.Open);
+            BinaryFormatter bformat = new BinaryFormatter();
+
+            bformat.Deserialize(stream);
+            stream.Close();
         }
     }
 }

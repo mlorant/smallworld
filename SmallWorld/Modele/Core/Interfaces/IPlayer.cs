@@ -14,5 +14,8 @@ namespace SmallWorld
 
         INation Nation { get; }
 
+
+        int computePoints();
+
     }
 }

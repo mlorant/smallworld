@@ -13,6 +13,7 @@ namespace SmallWorld
         int Health { get; set; }
         int Attack { get; }
         int Defense { get; }
+
         Point CurrentPosition { get; set; }
         bool attack(IUnit defender, Point target);
 

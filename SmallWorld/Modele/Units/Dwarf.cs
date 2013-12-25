@@ -2,16 +2,26 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SmallWorld
 {
+    [Serializable()]
     public class Dwarf : Unit, IDwarf
     {
 
         public Dwarf(int id)
         {
             this.Id = id;
+        }
+
+        /// <summary>
+        /// Constructor for the deserialization
+        /// </summary>
+        public Dwarf(SerializationInfo info, StreamingContext ctxt)
+            : base(info, ctxt)
+        {
         }
 
 

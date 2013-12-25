@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SmallWorld
 {
-    public abstract class Unit : IUnit
+    [Serializable()]
+    public abstract class Unit : IUnit, ISerializable
     {
         /// <summary>
         /// Current health status of the unit
@@ -58,6 +60,22 @@ namespace SmallWorld
         {
             get { return this._currentPosition; }
             set { this._currentPosition = value; }
+        }
+
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Unit() { }
+
+        // Deserialization constructor.
+        public Unit(SerializationInfo info, StreamingContext ctxt)
+        {
+            //Get the values from info and assign them to the appropriate properties
+            this._id = (int)info.GetValue("UnitId", typeof(int));
+            this._health = (int)info.GetValue("UnitHealth", typeof(int));
+            this._movePoint = (int)info.GetValue("UnitMove", typeof(int));
+            this._currentPosition = (Point)info.GetValue("UnitPosition", typeof(Point));
         }
 
         /// <summary>
@@ -227,6 +245,16 @@ namespace SmallWorld
                 return this.isNear(tgt) && !(targetType is Sea);
             }
             return false;
+        }
+
+
+        // Serialization function
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("UnitId", this._id);
+            info.AddValue("UnitHealth", this._health);
+            info.AddValue("UnitMove", this._movePoint);
+            info.AddValue("UnitPosition", this.CurrentPosition);
         }
     }
 }

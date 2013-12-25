@@ -4,6 +4,7 @@ using System.Linq;
 using System.Drawing;
 using System.Text;
 using mapWrapper;
+using System.Runtime.Serialization;
 
 namespace SmallWorld
 {
@@ -12,7 +13,8 @@ namespace SmallWorld
     /// with a flyweight design pattern to optimize ressources.
     /// Units are located on the map via the tile index in the array.
     /// </summary>
-    public class Map : IMap
+    [Serializable()]
+    public class Map : IMap, ISerializable
     {
 
         /// <summary>
@@ -56,21 +58,18 @@ namespace SmallWorld
             get { return _width; }
         }
 
-
         /// <summary>
         /// Init a new map with a new flyweigh pattern
         /// </summary>
-        public Map()
+        static Map()
         {
-            // Init flyweight
-            if (_casesReferences.Count == 0)
-            {
-                _casesReferences.Add(0, new Desert());
-                _casesReferences.Add(1, new Forest());
-                _casesReferences.Add(2, new Mountain());
-                _casesReferences.Add(3, new Plain());
-                _casesReferences.Add(4, new Sea());
-            }
+
+            Console.WriteLine("Populate the casesReferences array");
+            _casesReferences.Add(0, new Desert());
+            _casesReferences.Add(1, new Forest());
+            _casesReferences.Add(2, new Mountain());
+            _casesReferences.Add(3, new Plain());
+            _casesReferences.Add(4, new Sea());
         }
 
 
@@ -231,7 +230,44 @@ namespace SmallWorld
             return bestUnit;
         }
 
-        
+        // Serialization function
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("MapWidth", this._width);
+
+            // Create an invert dict, to get the index of each case easily
+            Dictionary<ICase, int> tilesIndex = new Dictionary<ICase, int>();
+            foreach (KeyValuePair<int, ICase> pair in Map._casesReferences)
+            {
+                tilesIndex.Add(pair.Value, pair.Key);
+            }
+
+            int[] tiles = new int[this.Size];
+            for(int i = 0; i < this.Size; i++) {
+                tiles[i] = tilesIndex[this._grid[i]];
+            }
+
+            info.AddValue("MapGrid", tiles);
+            info.AddValue("MapUnitsPosition", this._units);
+            
+        }
+
+        public Map() { }
+
+        // Deserialization constructor.
+        public Map(SerializationInfo info, StreamingContext ctxt)
+        {
+            this._width = (int) info.GetValue("MapWidth", typeof(int));
+            this._units = (List<IUnit>[])info.GetValue("MapUnitsPosition", typeof(List<IUnit>[]));
+
+
+            int[] tiles = (int[])info.GetValue("MapGrid", typeof(int[]));
+            int nbTiles = _width * _width;
+
+            this._grid = new ICase[nbTiles];
+            for (int i = 0; i < nbTiles; i++)
+                _grid[i] = _casesReferences[tiles[i]];
+        }
     }
 
     class UnknownTileException : Exception

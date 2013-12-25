@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace SmallWorld
 {
-    public class Player : IPlayer
+    [Serializable()]
+    public class Player : IPlayer, ISerializable
     {
 
         /// <summary>
@@ -79,5 +81,22 @@ namespace SmallWorld
 
             return total;
         }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("PlayerNickname", this.nickname);
+            info.AddValue("PlayerUnits", this.units);
+            info.AddValue("PlayerNation", this.nation);
+        }
+
+        // Deserialization constructor.
+        public Player(SerializationInfo info, StreamingContext ctxt)
+        {
+            //Get the values from info and assign them to the appropriate properties
+            this.nickname = (String) info.GetString("PlayerNickname");
+            this.units = (List<IUnit>) info.GetValue("PlayerUnits", typeof(List<IUnit>));
+            this.nation = (INation)info.GetValue("PlayerNation", typeof(INation));
+        }
+    
     }
 }

@@ -19,9 +19,9 @@
 
                 <TextBlock HorizontalAlignment="Center" FontWeight="Black" Foreground="White">Menu</TextBlock>
                 <Button Click="clickResume">Resume</Button>
-                <Button>Load a previous game</Button>
-                <Button>Save current game</Button>
-                <Button>Go to main menu</Button>
+                <Button Click="loadGame">Load a previous game</Button>
+                <Button Click="saveGame">Save current game</Button>
+                <Button Click="backToMenu">Go to main menu</Button>
                 <Button Click="clickExit">Exit</Button>
             </StackPanel>
         </Border>

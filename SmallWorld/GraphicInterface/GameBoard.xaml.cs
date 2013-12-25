@@ -136,11 +136,22 @@ namespace GraphicInterface
         {
             for (int i = 0; i < 2; i++)
             {
-                // Get unit reference (every units start at the same location)
-                IUnit unit = Game.Instance.Players[i].Units[0];
-                int nbUnits = Game.Instance.Players[i].Units.Count;
+                // Type is the same for every unit
+                Type unitType = Game.Instance.Players[i].Units[0].GetType();
 
-                this.drawUnits(unit.CurrentPosition, unit.GetType(), nbUnits); 
+                // Make a dictionnary of points, associated to number of units on it
+                var unitsPositions = new Dictionary<System.Drawing.Point, int>();
+                foreach(IUnit unit in Game.Instance.Players[i].Units) 
+                {
+                    if(unitsPositions.ContainsKey(unit.CurrentPosition)) 
+                        unitsPositions[unit.CurrentPosition]++;
+                    else
+                        unitsPositions[unit.CurrentPosition] = 1;
+                }
+                
+                // Draw each positions
+                foreach (KeyValuePair<System.Drawing.Point, int> pair in unitsPositions)
+                    this.drawUnits(pair.Key, unitType, pair.Value); 
             }
         }
 
