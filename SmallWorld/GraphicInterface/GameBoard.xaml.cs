@@ -512,20 +512,29 @@ namespace GraphicInterface
             // Show EscapeMenu
             if (e.Key == Key.Escape && !inEscapeMenu)
             {
-                inEscapeMenu = true;
-
-                EscapeMenu menu = new EscapeMenu();
-                menu.hideEscapeMenu = () => { this.inEscapeMenu = false; };
-
-                // Set menu to fill the whole space
-                Canvas.SetZIndex(menu, 999);
-                menu.mainGrid.Width = mainCanvas.ActualWidth;
-                menu.mainGrid.Height = mainCanvas.ActualHeight;
-
-                mainCanvas.Children.Add(menu);
+                openEscapeMenu();
             }
         }
 
+        private void clickMenuButton(object sender, RoutedEventArgs e)
+        {
+            openEscapeMenu();
+        }
+
+        private void openEscapeMenu()
+        {
+            inEscapeMenu = true;
+
+            EscapeMenu menu = new EscapeMenu();
+            menu.hideEscapeMenu = () => { this.inEscapeMenu = false; };
+
+            // Set menu to fill the whole space
+            Canvas.SetZIndex(menu, 999);
+            menu.mainGrid.Width = mainCanvas.ActualWidth;
+            menu.mainGrid.Height = mainCanvas.ActualHeight;
+
+            mainCanvas.Children.Add(menu);
+        }
     }
 }
 
