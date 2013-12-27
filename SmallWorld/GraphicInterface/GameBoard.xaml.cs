@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SmallWorld;
 using System.Threading;
+using GraphicInterface.GameInformation;
 
 namespace GraphicInterface
 {
@@ -297,19 +298,6 @@ namespace GraphicInterface
         }
 
         /// <summary>
-        /// Translate coorinates in pixel to whole coodinates
-        /// </summary>
-        /// <param name="p">Point in pixel</param>
-        /// <returns>Whole coordinates</returns>
-        private System.Drawing.Point getPointFromCoordinates(System.Windows.Point p)
-        {
-            int x = (int) p.X / Case.SIZE;
-            int y = (int) p.Y / Case.SIZE;
-
-            return new System.Drawing.Point(x, y);
-        }
-
-        /// <summary>
         /// Action when a player ends its turn
         /// </summary>
         /// <param name="sender"></param>
@@ -338,21 +326,24 @@ namespace GraphicInterface
         }
 
         /// <summary>
-        /// Allow to ckick on the map and treats the possibility after it
+        /// Allow to click on the map and treats the possibility after it
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void clickOnMap(object sender, MouseButtonEventArgs e)
         {
-            // Translate a point to a case point
-            System.Windows.Point pt = e.GetPosition(mapGrid);
-            System.Drawing.Point tile = getPointFromCoordinates(pt);
+            // Get coordinates of the click
+            var rect = (UIElement) e.Source;
+            int row = Grid.GetRow(rect);
+            int col = Grid.GetColumn(rect);
+
+            var tile = new System.Drawing.Point(col, row);
 
             // Make visible the information frame about units
             // And displays information about the terrain and the number of units above
-            CaseInfoOnClick.Visibility = Visibility.Visible;
-            CaseInfo.Text = game.Map.getCase(tile).GetType().Name;
-            NbUnitOnCase.Text = game.Map.getUnits(tile).Count.ToString();
+            UnitsInformation.Visibility = Visibility.Visible;
+            updateTileInformation(tile);
+
             // begin to erase all the frame
             UnitsInfo.Children.Clear();
             // If the click is the first click to select a unit
@@ -360,9 +351,9 @@ namespace GraphicInterface
             if (!inMove)
             {
                 // if there is units on the case clicked
-                if (Game.Instance.Map.getUnits(tile).Count > 0)
+                if (game.Map.getUnits(tile).Count > 0)
                 {
-                    displayUnitsOnCase(tile);                    
+                    displayUnitsOnCase(tile);
                 }
             }
             else
@@ -404,6 +395,9 @@ namespace GraphicInterface
                     
                     
                 }
+                else if(tile == previous) { // Click on the tile of the unit selected
+                    displayUnitsOnCase(tile);
+                }
                 else
                 {
                     if (!selectedUnit.move(tile))
@@ -421,6 +415,24 @@ namespace GraphicInterface
             }
         }
 
+
+        private void updateTileInformation(System.Drawing.Point coord)
+        {
+            TileType.Text = game.Map.getCase(coord).GetType().Name;
+            TileX.Text = coord.X.ToString();
+            TileY.Text = coord.Y.ToString();
+
+            List<IUnit> tileUnits = game.Map.getUnits(coord);
+            NbUnitOnCase.Text = tileUnits.Count.ToString();
+
+            if (tileUnits.Count == 0)
+                TileController.Text = "nobody";
+            else if (Game.Instance.Players[0].Nation.hasUnit(tileUnits[0]))
+                TileController.Text = Game.Instance.Players[0].Nickname;
+            else
+                TileController.Text = Game.Instance.Players[1].Nickname;
+        }
+
         /// <summary>
         /// Display all units in the "tile" case, with information and a select button
         /// </summary>
@@ -428,58 +440,42 @@ namespace GraphicInterface
         private void displayUnitsOnCase(System.Drawing.Point tile)
         {
             List<IUnit> listUnit = Game.Instance.Map.getUnits(tile);
-            // liste afin de conserver les unités en cas de "back"
-            List<StackPanel> panel = new List<StackPanel>();
-            Button back = new Button();
+            inMove = false;
+            selectedUnit = null;
 
             foreach (Unit u in listUnit)
             {
-                StackPanel unitAndButton = new StackPanel();
-                unitAndButton.Orientation = Orientation.Horizontal;
-                Button selectUnit = new Button();
-                unitAndButton.Children.Add(selectUnit);
 
-                // ce clique donne plus d'info sur l'unité en question et la selectionne pour attaquer ou bouger
-                selectUnit.Content = u.GetType().Name.ToLower() + " " + u.Id;
-                selectUnit.Click += (source, evt) =>
+                UnitSelector unitPanel = new UnitSelector(u);
+                // If it's the current player, interaction on click to select the unit
+                if (game.CurrentPlayer.Nation.hasUnit(u))
                 {
-                    UnitsInfo.Children.Clear();
-                    TextBlock unitName = new TextBlock();
-                    TextBlock unitStat = new TextBlock();
+                    unitPanel.MouseLeftButtonDown += (source, evt) =>
+                    {
+                        // Remove any Highlight if a unit is already clicked
+                        foreach (UnitSelector p in UnitsInfo.Children)
+                            p.Highlight(false);
 
-                    unitStat.Text = "Health = " + u.Health
-                    + "\nMove left = " + u.MovePoint;
+                        // Check if this unit isn't already selected
+                        if (selectedUnit != u)
+                        {
+                            unitPanel.Highlight(true);
+                            selectedUnit = u;
 
-                    selectedUnit = u;
-                    if(game.CurrentPlayer.Nation.hasUnit(u))
-                        inMove = true;
-                    previous = tile;
-
-                    UnitsInfo.Children.Add(unitName);
-                    UnitsInfo.Children.Add(unitStat);
-                    UnitsInfo.Children.Add(back);
-
-                };
-
-                UnitsInfo.Children.Add(unitAndButton);
-
-                panel.Add(unitAndButton);
-                inMove = false;
-                selectedUnit = null;
-            }
-
-            // Un bouton retour pour revenir à la liste des unités sur la case.
-            back.Content = "Back";
-            back.Click += (s, e2) =>
-            {
-                inMove = false;
-                selectedUnit = null;
-                UnitsInfo.Children.Clear();
-                foreach (StackPanel sp in panel)
-                {
-                    UnitsInfo.Children.Add(sp);
+                            inMove = true;
+                            previous = tile;
+                        }
+                        else
+                        {
+                            selectedUnit = null;
+                            inMove = false;
+                        }
+                        
+                    };
                 }
-            };
+
+                UnitsInfo.Children.Add(unitPanel);
+            }
         }
 
 

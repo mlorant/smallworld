@@ -15,9 +15,6 @@ namespace SmallWorld
             this.Id = id;
         }
 
-        /// <summary>
-        /// Constructor for the deserialization
-        /// </summary>
         public Gallic(SerializationInfo info, StreamingContext ctxt)
             : base(info, ctxt)
         {

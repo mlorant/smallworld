@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="GraphicInterface.GameInformation.UnitSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+
+    <Border Margin="0,5,10,0" Width="85" Height="40" BorderThickness="1" BorderBrush="#a2bcf1" Background="#7a8eb5" Name="UnitBox">
+            <StackPanel>
+                <Border BorderThickness="0,0,0,1" BorderBrush="#a2bcf1">
+                    <TextBlock Name="UnitName">Unit Name</TextBlock>
+                </Border>
+                <TextBlock Margin="3,2,0,0">
+                    <Image Source="../Resources/img/icons/heart.png" Width="12"/> <TextBlock Name="CurrentHealth" Text="1" />/<TextBlock Name="MaxHealth" Text="5" />
+                    <Image Margin="5,0,0,0" Source="../Resources/img/icons/move.png" Width="12"/>  <TextBlock Name="CurrentMove" Text="1" />/<TextBlock Name="MaxMove" Text="1" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
+</UserControl>

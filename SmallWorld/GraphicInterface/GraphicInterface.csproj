@@ -70,6 +70,9 @@
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameInformation\UnitSelector.xaml.cs">
+      <DependentUpon>UnitSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="GameInformation\UnitSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\img\units\halo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\icons\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\icons\move.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

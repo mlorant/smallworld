@@ -49,7 +49,7 @@
         </Grid>
 
         <!-- Bottom of the screen : units information -->
-        <DockPanel Height="110" DockPanel.Dock="Bottom" Background="#2b3240">
+        <DockPanel Height="120" DockPanel.Dock="Bottom" Background="#2b3240">
             <!-- Notification zone -->
             <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="#465269">
                 <TextBlock Foreground="White" Margin="5,0,0,0">
@@ -57,23 +57,26 @@
                     <TextBlock Name="InfoBox">Welcome, it's the turn of "Player 1".</TextBlock>
                 </TextBlock>
             </Border>
+            
+            <!-- Current tile information -->
+            <StackPanel DockPanel.Dock="Left" Width="150" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" LineHeight="18">
+                    (<TextBlock Name="TileX" Text="0" />, <TextBlock Name="TileY" Text="2" />) : <TextBlock Name="TileType" Text="Plain"/><LineBreak />
+                    Controlled by <TextBlock Name="TileController" Text="Player 1" /><LineBreak />
+                    <TextBlock Name="NbUnitOnCase" Text="0" /> units on the tile
+                </TextBlock>
+            </StackPanel>
+
             <!-- Right side (end turn button) -->
             <StackPanel DockPanel.Dock="Right" Width="150">
                 <TextBlock Foreground="White" HorizontalAlignment="Center">2 units available left</TextBlock>
                 <Button Content="End turn" Height="30" Width="100" Click="endRound" Margin="0,25,0,0" />
             </StackPanel>
             
-            <DockPanel Name="CaseInfoOnClick" Height="94" VerticalAlignment="Top">
-                <TextBlock TextWrapping="Wrap" Width="125" Foreground="White">
-                    Case <TextBlock Text="(0, 2)"/><LineBreak />
-                    <TextBlock Name="CaseInfo" Text="Plaine"/><LineBreak />
-                    <TextBlock Name="NbUnitOnCase"/> units on the tile
-                </TextBlock>
-                
-                <StackPanel Name="UnitsInfo" Orientation="Horizontal">
-                    
-                </StackPanel>
-            </DockPanel>
+            <DockPanel Name="UnitsInformation" Height="94" VerticalAlignment="Top">
+                    <WrapPanel Name="UnitsInfo" Orientation="Horizontal" VerticalAlignment="Top">
+                    </WrapPanel>
+                </DockPanel>
         </DockPanel>
 
         <!-- Map viewer. Placed at the bottom to take the full available space of the dock -->

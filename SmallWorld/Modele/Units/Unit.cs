@@ -23,10 +23,20 @@ namespace SmallWorld
 
         private Point _currentPosition;
 
+        public String Name
+        {
+            get { return this.GetType().Name + " " + this.Id; }
+        }
+
         public int Health
         {
             get { return this._health; }
             set { this._health = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return MAXHEALTH; }
         }
 
         public int Id
@@ -54,6 +64,11 @@ namespace SmallWorld
         {
             get { return this._movePoint; }
             set { this._movePoint = value; }
+        }
+
+        public double MaxMovePoint
+        {
+            get { return 1; }
         }
 
         public Point CurrentPosition

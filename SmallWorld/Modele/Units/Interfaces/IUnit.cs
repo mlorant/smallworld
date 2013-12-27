@@ -9,10 +9,14 @@ namespace SmallWorld
     public interface IUnit
     {
 
+        String Name { get; }
         int Id { get; set; }
         int Health { get; set; }
+        int MaxHealth { get; }
         int Attack { get; }
         int Defense { get; }
+        double MovePoint { get; }
+        double MaxMovePoint { get; }
 
         Point CurrentPosition { get; set; }
         bool attack(IUnit defender, Point target);
