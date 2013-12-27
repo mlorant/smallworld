@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Interfaces\IGameSaving.cs" />
     <Compile Include="Map\Case.cs" />
     <Compile Include="Core\DemoGameBuilder.cs" />
     <Compile Include="Map\Desert.cs" />
