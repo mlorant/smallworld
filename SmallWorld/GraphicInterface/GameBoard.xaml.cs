@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SmallWorld;
 using System.Threading;
-using GraphicInterface.GameInformation;
 
 namespace GraphicInterface
 {

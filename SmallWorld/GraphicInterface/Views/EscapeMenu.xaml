@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GraphicInterface"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid Name="mainGrid">
@@ -19,7 +20,7 @@
 
                 <TextBlock HorizontalAlignment="Center" FontWeight="Black" Foreground="White">Menu</TextBlock>
                 <Button Click="clickResume">Resume</Button>
-                <Button Click="loadGame">Load a previous game</Button>
+                <local:GameLoadFile />
                 <Button Click="saveGame">Save current game</Button>
                 <Button Click="backToMenu">Go to main menu</Button>
                 <Button Click="clickExit">Exit</Button>

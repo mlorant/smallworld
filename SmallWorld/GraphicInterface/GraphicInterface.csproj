@@ -64,19 +64,22 @@
     </ApplicationDefinition>
     <Compile Include="Converters\BooleanAndConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
-    <Compile Include="EscapeMenu.xaml.cs">
+    <Compile Include="Views\EscapeMenu.xaml.cs">
       <DependentUpon>EscapeMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameInformation\UnitSelector.xaml.cs">
+    <Compile Include="Views\GameLoadFile.xaml.cs">
+      <DependentUpon>GameLoadFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UnitSelector.xaml.cs">
       <DependentUpon>UnitSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="EscapeMenu.xaml">
+    <Page Include="Views\EscapeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,7 +91,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="GameInformation\UnitSelector.xaml">
+    <Page Include="Views\GameLoadFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UnitSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

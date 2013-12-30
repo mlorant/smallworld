@@ -171,20 +171,6 @@ namespace GraphicInterface
             displayGameBoard();
         }
 
-        private void loadGame(object sender, RoutedEventArgs e)
-        {
-
-            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
-            dlg.FileName = "myGame";
-            dlg.DefaultExt = ".sw";
-            dlg.Filter = "SmallWorld save file (.sw)|*.sw";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                Game.Instance.restoreGame(dlg.FileName);
-                displayGameBoard();
-            }
-        }
-
         private void displayGameBoard()
         {
             GameBoard main = new GameBoard(Game.Instance);

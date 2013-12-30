@@ -30,6 +30,20 @@ namespace GraphicInterface
         public EscapeMenu()
         {
             InitializeComponent();
+            this.KeyDown += new KeyEventHandler(HandleEsc);
+        }
+
+        /// <summary>
+        /// Handle Escape button interaction
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HandleEsc(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                exitMenu();
+            }
         }
 
         /// <summary>
@@ -37,32 +51,17 @@ namespace GraphicInterface
         /// </summary>
         private void clickResume(object sender, RoutedEventArgs e)
         {
-            this.hideEscapeMenu();
-            // Get parent and remove itself
-            ((Panel)this.Parent).Children.Remove(this);
+            exitMenu();
         }
 
-
         /// <summary>
-        /// Load a game file, previously saved
+        /// Get parent window, remove the black background and 
+        /// then remove the user control itself
         /// </summary>
-        private void loadGame(object sender, RoutedEventArgs e)
+        private void exitMenu()
         {
-
-            System.Windows.Forms.OpenFileDialog dlg = new System.Windows.Forms.OpenFileDialog();
-            dlg.FileName = "myGame";
-            dlg.DefaultExt = ".sw";
-            dlg.Filter = "SmallWorld save file (.sw)|*.sw";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                Game.Instance.restoreGame(dlg.FileName);
-                
-                // Reload the whole window
-                GameBoard main = new GameBoard(Game.Instance);
-                App.Current.MainWindow = main;
-                Window.GetWindow(this).Close();
-                main.Show();
-            }
+            this.hideEscapeMenu();
+            ((Panel)this.Parent).Children.Remove(this);
         }
 
 
@@ -72,7 +71,12 @@ namespace GraphicInterface
         private void saveGame(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.SaveFileDialog dlg = new System.Windows.Forms.SaveFileDialog();
-            dlg.FileName = "myGame";
+
+            // Default filename format: player1_VS_player2_date.sw
+
+            dlg.FileName = Game.Instance.Players[0].Nickname + "_VS_"
+                            + Game.Instance.Players[1].Nickname + "_"
+                            + DateTime.Now.ToString("yyyy-MM-dd");
             dlg.DefaultExt = ".sw";
             dlg.Filter = "SmallWorld save file (.sw)|*.sw";
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)

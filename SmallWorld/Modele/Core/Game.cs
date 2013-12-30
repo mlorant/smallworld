@@ -262,8 +262,24 @@ namespace SmallWorld
             Stream stream = File.Open(saveFile, FileMode.Open);
             BinaryFormatter bformat = new BinaryFormatter();
 
-            bformat.Deserialize(stream);
+
+            // Try to deserialize the file. In case of exception, check if
+            // the exception is due to a bad format file or it's unknown.
+            try
+            {
+                bformat.Deserialize(stream);
+            }
+            catch (Exception e)
+            {
+                if (e is SerializationException || e is System.Reflection.TargetInvocationException)
+                    throw new InvalidSaveFileException();
+                else
+                    throw;
+
+            }
             stream.Close();
         }
     }
+
+    public class InvalidSaveFileException : Exception { }
 }
