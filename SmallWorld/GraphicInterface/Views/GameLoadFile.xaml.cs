@@ -39,7 +39,8 @@ namespace GraphicInterface
             bool ok = false;
             while (!ok)
             {
-                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                System.Windows.Forms.DialogResult res = dlg.ShowDialog();
+                if (res == System.Windows.Forms.DialogResult.OK)
                 {
                     try
                     {
@@ -58,6 +59,10 @@ namespace GraphicInterface
                     App.Current.MainWindow = main;
                     Window.GetWindow(this).Close();
                     main.Show();
+                }
+                else if (res == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    ok = true;
                 }
             }
 
