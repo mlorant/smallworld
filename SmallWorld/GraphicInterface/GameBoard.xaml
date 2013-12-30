@@ -63,7 +63,7 @@
                 </Border>
             
             <!-- Current tile information -->
-            <StackPanel DockPanel.Dock="Left" Width="150" VerticalAlignment="Center">
+            <StackPanel DockPanel.Dock="Left" Width="150" VerticalAlignment="Center" Visibility="Hidden" Name="TileInfo">
                 <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="White" LineHeight="18">
                     (<TextBlock Name="TileX" Text="0" />, <TextBlock Name="TileY" Text="2" />) : <TextBlock Name="TileType" Text="Plain"/><LineBreak />
                     Controlled by <TextBlock Name="TileController" Text="Player 1" /><LineBreak />
@@ -85,17 +85,9 @@
         </DockPanel>
 
         <!-- Map viewer. Placed at the bottom to take the full available space of the dock -->
-        <ScrollViewer Name="scrollMap">
-            <ScrollViewer.Background>
-                <ImageBrush ImageSource="Resources/img/map-background.png" Stretch="Fill" TileMode="Tile" Viewport="0,0,48,48"
-    ViewportUnits="Absolute"></ImageBrush>
+        <local:MapViewer x:Name="mapViewer" />
 
-            </ScrollViewer.Background>
-            <Grid Name="mapGrid" VerticalAlignment="Center" HorizontalAlignment="Center" MouseLeftButtonDown="clickOnMap" MouseMove="hoverOnMap">
-            </Grid>
-        </ScrollViewer>
 
-        
-    </DockPanel>
+        </DockPanel>
     </Canvas>
 </Window>

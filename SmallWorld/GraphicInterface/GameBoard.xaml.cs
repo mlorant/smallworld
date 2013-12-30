@@ -31,19 +31,6 @@ namespace GraphicInterface
         Unit selectedUnit;
         System.Drawing.Point previous;
 
-        const string IMAGEUNITS = "pack://application:,,,/GraphicInterface;component/Resources/img/units/";
-
-        /// <summary>
-        /// Flyweight for units textures
-        /// </summary>
-        Dictionary<string, ImageBrush> unitsTextures = new Dictionary<string, ImageBrush>();
-        ImageBrush haloImage = new ImageBrush(new BitmapImage(new Uri(IMAGEUNITS + "halo.png")));
-
-        // Z-index definitions
-        const int BG_INDEX = 1;
-        const int MAP_INDEX = 5;
-        const int HALO_INDEX = 7;
-        const int UNIT_INDEX = 10;
 
         /// <summary>
         /// Initialize the game board, by drawing the map,
@@ -55,19 +42,8 @@ namespace GraphicInterface
             game = g;
             InitializeComponent();
 
+            // Attack event to display the escape menu
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-
-            mapGrid.Width = game.Map.Width * Case.SIZE;
-            mapGrid.Height = mapGrid.Width;
-            for (int i = 0; i < g.Map.Width; i++)
-            {
-                ColumnDefinition col = new ColumnDefinition();
-                col.Width = new GridLength(Case.SIZE, GridUnitType.Pixel);
-                RowDefinition row = new RowDefinition();
-                row.Height = new GridLength(Case.SIZE, GridUnitType.Pixel);
-                mapGrid.ColumnDefinitions.Add(col);
-                mapGrid.RowDefinitions.Add(row);
-            }
             
 
             // Init player nickname and max round (won't change in the game after)
@@ -76,187 +52,9 @@ namespace GraphicInterface
             MaxRound.Text = game.NbRounds.ToString();
 
             // First drawing of the map, units, and game info.
-            drawMap();
-            drawInitialUnits();
-            drawHalo();
             refreshGameInfos();
 
             InfoBox.Text = "Welcome. It's the turn of " + game.CurrentPlayer.Nickname + ".";
-        }
-
-        /// <summary>
-        /// Draw every tiles of the map, with a flyweigh to
-        /// load each tile type image once.
-        /// </summary>
-        private void drawMap()
-        {
-            // Clear the current view
-            mapGrid.Children.Clear();
-
-            Uri bg = new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/map-background.png");
-            mapGrid.Background = new ImageBrush(new BitmapImage(bg));
-
-            // Flyweight on textures
-            Dictionary<string, ImageBrush> textures = new Dictionary<string, ImageBrush>();
-            System.Drawing.Point pt = new System.Drawing.Point();
-
-            for (int i = 0; i < game.Map.Size; i++)
-            {
-                // Get case type
-                pt.X = (i % game.Map.Width);
-                pt.Y = (i / game.Map.Width);
-                ICase tileType = game.Map.getCase(pt);
-
-                // Draw rectangle at the correct position
-                Rectangle tile = new Rectangle();
-                tile.Width = Case.SIZE;
-                tile.Height = Case.SIZE;
-
-                Grid.SetRow(tile, pt.Y);
-                Grid.SetColumn(tile, pt.X);
-                Grid.SetZIndex(tile, MAP_INDEX);
-                
-                // Set tile texture (create it if not used yet)
-                String filename = tileType.GetType().Name.ToLower();
-                if (!textures.ContainsKey(filename))
-                {
-                    BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/terrain/" + filename + ".png"));
-                    textures.Add(filename, new ImageBrush(img));
-                }
-                tile.Fill = textures[filename];
-
-                mapGrid.Children.Add(tile);
-            }
-        }
-        
-        /// <summary>
-        /// Drax initial position of units on the map
-        /// </summary>
-        private void drawInitialUnits()
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                // Type is the same for every unit
-                Type unitType = Game.Instance.Players[i].Units[0].GetType();
-
-                // Make a dictionnary of points, associated to number of units on it
-                var unitsPositions = new Dictionary<System.Drawing.Point, int>();
-                foreach(IUnit unit in Game.Instance.Players[i].Units) 
-                {
-                    if(unitsPositions.ContainsKey(unit.CurrentPosition)) 
-                        unitsPositions[unit.CurrentPosition]++;
-                    else
-                        unitsPositions[unit.CurrentPosition] = 1;
-                }
-                
-                // Draw each positions
-                foreach (KeyValuePair<System.Drawing.Point, int> pair in unitsPositions)
-                    this.drawUnits(pair.Key, unitType, pair.Value); 
-            }
-        }
-
-        /// <summary>
-        /// Draw units icon on a tile of the map
-        /// </summary>
-        /// <param name="pt">Map point to update</param>
-        /// <param name="unitType">Type of the unit to draw</param>
-        /// <param name="nb">Number of unit, to determine the image to draw</param>
-        private void drawUnits(System.Drawing.Point pt, Type unitType, int nb)
-        {
-            // If the tile is now empty, remove the rectangle
-            if (nb == 0)
-            {
-                // Remove unit icon
-                Rectangle rect = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && 
-                                                                              Grid.GetColumn(e) == pt.X &&
-                                                                              Grid.GetZIndex(e) == UNIT_INDEX);
-                mapGrid.Children.Remove(rect);
-                // Remove halo
-                rect = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y && 
-                                                                    Grid.GetColumn(e) == pt.X &&
-                                                                    Grid.GetZIndex(e) == HALO_INDEX);
-                mapGrid.Children.Remove(rect);
-            }
-            else
-            {
-                // Get unit Rectangle on the grid if already exists
-                Rectangle units = mapGrid.Children.Cast<Rectangle>()
-                                                  .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
-                                                                       Grid.GetColumn(e) == pt.X &&
-                                                                       Grid.GetZIndex(e) == UNIT_INDEX);
-
-                // No units here, draw halo + new unit
-                if (units == null)
-                {
-                    units = new Rectangle();
-                    // Set rectangle size and position
-                    units.Width = Case.SIZE;
-                    units.Height = Case.SIZE;
-                    Grid.SetColumn(units, pt.X);
-                    Grid.SetRow(units, pt.Y);
-                    // Add to map
-                    Grid.SetZIndex(units, UNIT_INDEX);
-                    mapGrid.Children.Add(units);
-                }
-
-                // Construct the filename of the texture to draw
-                String key = unitType.Name.ToLower();
-                key += (nb > 1) ? "_multiple" : "";
-
-                // Create new brush if the textures hasn't been used yet
-                if (!unitsTextures.ContainsKey(key))
-                {
-                    BitmapImage img = new BitmapImage(new Uri(IMAGEUNITS + key + ".png"));
-                    unitsTextures[key] = new ImageBrush(img);
-                }
-
-                units.Fill = unitsTextures[key];
-
-                // Add halo if necessary
-                Rectangle rect = mapGrid.Children.Cast<Rectangle>()
-                                                  .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
-                                                                       Grid.GetColumn(e) == pt.X &&
-                                                                       Grid.GetZIndex(e) == HALO_INDEX);
-                if(rect == null)
-                    mapGrid.Children.Add(getHaloRectangle(pt));
-            }
-        }
-
-        /// <summary>
-        /// Draws halo under each 
-        /// </summary>
-        private void drawHalo()
-        {
-            // Erase every halos already present
-            List<Rectangle> rects = mapGrid.Children.Cast<Rectangle>().Where(e => Grid.GetZIndex(e) == HALO_INDEX).ToList();
-            foreach (Rectangle r in rects)
-                mapGrid.Children.Remove(r);
-
-
-            // Get positions of every units
-            HashSet<System.Drawing.Point> points = new HashSet<System.Drawing.Point>();
-            foreach (Unit unit in game.CurrentPlayer.Units)
-            {
-                if (!points.Contains(unit.CurrentPosition)) // works by comparaison
-                    points.Add(unit.CurrentPosition);
-            }
-
-            // Draw halo on each points
-            foreach (System.Drawing.Point pt in points)
-            {
-                mapGrid.Children.Add(getHaloRectangle(pt));
-            }
-        }
-
-        private Rectangle getHaloRectangle(System.Drawing.Point destination)
-        {
-            Rectangle halo = new Rectangle();
-            Grid.SetColumn(halo, destination.X);
-            Grid.SetRow(halo, destination.Y);
-            Grid.SetZIndex(halo, HALO_INDEX);
-            halo.Fill = this.haloImage;
-
-            return halo;
         }
 
         /// <summary>
@@ -284,17 +82,6 @@ namespace GraphicInterface
             }
         }
 
-        /// <summary>
-        /// Move the image associates to an unit to another case
-        /// </summary>
-        /// <param name="sourcePt">The case where the unit come from</param>
-        /// <param name="destPt">The point where the unit go</param>
-        private void moveImageUnit (System.Drawing.Point sourcePt, System.Drawing.Point destPt){
-            // retrieve unit type 
-            IUnit unit = game.Map.getUnits(destPt)[0];
-            drawUnits(sourcePt, unit.GetType(), game.Map.getUnits(sourcePt).Count);
-            drawUnits(destPt, unit.GetType(), game.Map.getUnits(destPt).Count);
-        }
 
         /// <summary>
         /// Action when a player ends its turn
@@ -310,8 +97,9 @@ namespace GraphicInterface
             }
             else
             {
-                drawHalo();
+                mapViewer.drawHalo();
                 refreshGameInfos();
+                TileInfo.Visibility = Visibility.Hidden;
 
                 InfoBox.Text = "";
                 int roundsLeft = game.NbRounds - game.CurrentRound;
@@ -327,16 +115,9 @@ namespace GraphicInterface
         /// <summary>
         /// Allow to click on the map and treats the possibility after it
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void clickOnMap(object sender, MouseButtonEventArgs e)
+        /// <param name="tile">Coordinates of the tile clicked</param>
+        public void clickOnMap(System.Drawing.Point tile)
         {
-            // Get coordinates of the click
-            var rect = (UIElement) e.Source;
-            int row = Grid.GetRow(rect);
-            int col = Grid.GetColumn(rect);
-
-            var tile = new System.Drawing.Point(col, row);
 
             // Make visible the information frame about units
             // And displays information about the terrain and the number of units above
@@ -371,43 +152,47 @@ namespace GraphicInterface
                         // Get the oponent player
                         IPlayer general = (Game.Instance.Players[0] == Game.Instance.CurrentPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
                         // Delete units
-                        defender.buryUnit(general, tile);                        
+                        defender.buryUnit(general, tile);
 
                         if (Game.Instance.Map.getUnits(tile).Count == 0)
                         {
                             selectedUnit.move(tile);
-                            this.moveImageUnit(previous, tile);
+                            mapViewer.moveImageUnit(previous, tile);
+                            InfoBox.Text = "You won the battle! There's no unit left on the tile, so your unit decide to move on it.";
                         }
                         else
                         {
                             IUnit unit = Game.Instance.Map.getUnits(tile)[0];
                             // verify modification on the destination tile (in case they were 2 and now 1)
-                            drawUnits(tile, unit.GetType(), Game.Instance.Map.getUnits(tile).Count);
+                            mapViewer.drawUnits(tile, unit.GetType(), Game.Instance.Map.getUnits(tile).Count);
+                            InfoBox.Text = "You won the battle!";
                         }
                     }
                     // If defeat, remove player unit
                     else if (!selectedUnit.isAlive())
                     {
                         selectedUnit.buryUnit(Game.Instance.CurrentPlayer, previous);
-                        drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
+                        mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
+                        InfoBox.Text = "Your unit take a fatal hit in the heart. You lost the battle.";
                     }
-                    
-                    
+
+
                 }
-                else if(tile == previous) { // Click on the tile of the unit selected
+                else if (tile == previous)
+                { // Click on the tile of the unit selected
                     displayUnitsOnCase(tile);
                 }
                 else
                 {
                     if (!selectedUnit.move(tile))
                     {
-                        MessageBox.Show("You can't move here !");
+                        InfoBox.Text = "You can't move here!";
                     }
                     else
                     {
-                        this.moveImageUnit(previous, tile);
+                        mapViewer.moveImageUnit(previous, tile);
                     }
-                    
+
                 }
                 inMove = false;
                 selectedUnit = null;
@@ -417,6 +202,8 @@ namespace GraphicInterface
 
         private void updateTileInformation(System.Drawing.Point coord)
         {
+            TileInfo.Visibility = Visibility.Visible;
+
             TileType.Text = game.Map.getCase(coord).GetType().Name;
             TileX.Text = coord.X.ToString();
             TileY.Text = coord.Y.ToString();
@@ -477,33 +264,6 @@ namespace GraphicInterface
             }
         }
 
-
-        /// <summary>
-        /// Track the cursor position on the map. Allows to move the
-        /// scrollbar when the mouse goes in the bottom (or top) of the
-        /// map.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void hoverOnMap(object sender, MouseEventArgs e)
-        {
-            Point pt = e.GetPosition(scrollMap);
-            double viewSize = scrollMap.ActualHeight;
-            int offset = 0;
-
-            // Check if we're either in the top or bottom of the screen
-            if (pt.Y < (viewSize * 0.10))
-                offset = -5;
-            else if ((viewSize - pt.Y) < (viewSize * 0.10))
-                offset = 5;
-
-            if (offset != 0)
-            {
-                scrollMap.ScrollToVerticalOffset(scrollMap.VerticalOffset + offset);
-                Thread.Sleep(20); // Wait a short time to avoid to scroll to the top
-                                  // (or bottom) directly.
-            }
-        }
 
 
         private void HandleEsc(object sender, KeyEventArgs e)

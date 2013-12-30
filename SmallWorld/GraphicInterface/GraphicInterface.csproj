@@ -73,6 +73,9 @@
     <Compile Include="Views\GameLoadFile.xaml.cs">
       <DependentUpon>GameLoadFile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MapViewer.xaml.cs">
+      <DependentUpon>MapViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UnitSelector.xaml.cs">
       <DependentUpon>UnitSelector.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\GameLoadFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MapViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
