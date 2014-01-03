@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -15,8 +16,17 @@ namespace SmallWorld
     /// their turn.
     /// </summary>
     [Serializable()]
-    public class Game : IGame, ISerializable
+    public class Game : IGame, ISerializable, INotifyPropertyChanged 
     {
+
+        // property changed event
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(String property)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
         private static Game instance;
         
         private IPlayer[] _players;
@@ -39,10 +49,11 @@ namespace SmallWorld
             set 
             { 
                 if(value != this._currentRound+1) {
-                    throw new Exception("Anormal");
+                    throw new Exception("Round number shouldn't be increment by more than 1.");
                 }
 
                 this._currentRound = value;
+                OnPropertyChanged("CurrentRound");
             }
         }
 

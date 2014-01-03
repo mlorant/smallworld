@@ -1,5 +1,7 @@
 #ifndef API_H
 #define API_H
+#include "common.h"
+#include <vector>
 
 #define EXTERNC extern "C"
 #ifdef MAP_DLL_EXPORT
@@ -9,6 +11,9 @@
 #endif
 
 
-EXTERNC DLL int* api_generate_map(int size);
+DLL int* api_generate_map(int size);
+
+DLL void init_map_suggestion(CaseType** map, int mapSize);
+DLL std::vector<std::pair<int, int>> api_get_tiles_suggestion(UnitType** units, int currentX, int currentY, double ptDepl, UnitType currentNation);
 
 #endif

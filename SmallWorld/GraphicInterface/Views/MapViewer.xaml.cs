@@ -27,10 +27,11 @@ namespace GraphicInterface
         const string IMAGEUNITS = "pack://application:,,,/GraphicInterface;component/Resources/img/units/";
 
         // Z-index definitions
-        const int BG_INDEX = 1;
-        const int MAP_INDEX = 5;
-        const int HALO_INDEX = 7;
-        const int UNIT_INDEX = 10;
+        const int BG_INDEX = 1;         // Background
+        const int MAP_INDEX = 5;        // Tiles environnement textures
+        const int SUGG_INDEX = 6;       // Blank rectangle for suggestion
+        const int HALO_INDEX = 7;       // Halo under units when current player
+        const int UNIT_INDEX = 10;      // Unit image
 
         // Flyweight textures
         Dictionary<string, ImageBrush> unitsTextures = new Dictionary<string, ImageBrush>();
@@ -267,6 +268,27 @@ namespace GraphicInterface
             return halo;
         }
 
+        public void drawSuggestion(System.Drawing.Point pt)
+        {
+            Rectangle sugg = new Rectangle();
+            Grid.SetColumn(sugg, pt.X);
+            Grid.SetRow(sugg, pt.Y);
+            Grid.SetZIndex(sugg, SUGG_INDEX);
+
+            SolidColorBrush col = new SolidColorBrush(Colors.White);
+            col.Opacity = 0.25;
+
+            sugg.Fill = col;
+
+            mapGrid.Children.Add(sugg);
+        }
+
+        public void cleanSuggestions()
+        {
+            List<Rectangle> rects = mapGrid.Children.Cast<Rectangle>().Where(e => Grid.GetZIndex(e) == SUGG_INDEX).ToList();
+            foreach (Rectangle r in rects)
+                mapGrid.Children.Remove(r);
+        }
 
         /// <summary>
         /// Track the cursor position on the map. Allows to move the

@@ -43,6 +43,12 @@ namespace SmallWorld
         private int _width;
 
         /// <summary>
+        /// Engine which make suggestion of move for units
+        /// </summary>
+        private WrapperMapSuggestion _suggestEngine;
+
+
+        /// <summary>
         /// Size of the map
         /// </summary>
         public int Size
@@ -58,13 +64,16 @@ namespace SmallWorld
             get { return _width; }
         }
 
+
+        public WrapperMapSuggestion SuggestEngine
+        {
+            get { return this._suggestEngine; }
+        }
         /// <summary>
         /// Init a new map with a new flyweigh pattern
         /// </summary>
         static Map()
         {
-
-            Console.WriteLine("Populate the casesReferences array");
             _casesReferences.Add(0, new Desert());
             _casesReferences.Add(1, new Forest());
             _casesReferences.Add(2, new Mountain());
@@ -88,7 +97,9 @@ namespace SmallWorld
             for (int i = 0; i < nbTiles; i++)
             {
                 _grid[i] = this.getCaseTypeInstance(cases[i]);
-            }     
+            }
+
+            _suggestEngine = new WrapperMapSuggestion(cases, _width);
         }
 
         /// <summary>
@@ -252,6 +263,30 @@ namespace SmallWorld
             
         }
 
+
+        public List<int> NativeUnits
+        {
+            get
+            {
+                List<int> res = new List<int>();
+                var revertReferences = _casesReferences.ToDictionary(x => x.Value, x => x.Key);
+                
+                for (int i = 0; i < _width * _width; i++)
+                {
+                    if (_units[i] == null || _units[i].Count == 0)
+                        res.Add((int) UnitType.None);
+                    else
+                    {
+                        UnitType unitEnum = (UnitType)Enum.Parse(typeof(UnitType), _units[i][0].GetType().Name, true);
+                        res.Add((int) unitEnum);
+                    }
+                }
+
+                return res;
+            }
+        }
+
+
         public Map() { }
 
         // Deserialization constructor.
@@ -267,6 +302,15 @@ namespace SmallWorld
             this._grid = new ICase[nbTiles];
             for (int i = 0; i < nbTiles; i++)
                 _grid[i] = _casesReferences[tiles[i]];
+
+            // Recover map suggestion
+            List<int> cases = new List<int>();
+            var revertReferences = _casesReferences.ToDictionary(x => x.Value, x => x.Key);
+
+            for (int i = 0; i < _width*_width; i++)
+                cases.Add(revertReferences[_grid[i]]);
+
+            _suggestEngine = new WrapperMapSuggestion(cases, _width);
         }
     }
 

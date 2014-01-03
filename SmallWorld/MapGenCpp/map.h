@@ -4,17 +4,7 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-
-#define NB_TILE_TYPES 5
-
-enum CaseType
-{
-	Desert = 0,
-	Forest,
-	Mountain,
-	Plain,
-	Sea
-};
+#include "common.h"
 
 /*! \class MapGenerator
  * \brief Generate random map with patterns 
@@ -76,6 +66,13 @@ private:
      *
      */
 	int getRandomSpecialTile();
+
+
+	int** getAccessMatrix();
+
+	void warshall();
+
+	bool hasGoodPath();
 };
 
 #endif

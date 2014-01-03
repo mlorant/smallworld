@@ -196,6 +196,7 @@ namespace GraphicInterface
                 }
                 inMove = false;
                 selectedUnit = null;
+                mapViewer.cleanSuggestions();
             }
         }
 
@@ -248,6 +249,10 @@ namespace GraphicInterface
                             unitPanel.Highlight(true);
                             selectedUnit = u;
 
+                            List<System.Drawing.Point> suggestions = selectedUnit.getSuggestedPoints();
+                            foreach (System.Drawing.Point pt in suggestions)
+                                mapViewer.drawSuggestion(pt);
+
                             inMove = true;
                             previous = tile;
                         }
@@ -255,6 +260,7 @@ namespace GraphicInterface
                         {
                             selectedUnit = null;
                             inMove = false;
+                            mapViewer.cleanSuggestions();
                         }
                         
                     };

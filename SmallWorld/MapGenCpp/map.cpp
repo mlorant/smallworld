@@ -187,3 +187,69 @@ void MapGenerator::buildBase() {
 	}
 }
 
+
+
+int** MapGenerator::getAccessMatrix() {
+	int** matrix = (int**) malloc(_size * sizeof(int*));
+
+	for(int i = 0; i < _size; i++) {
+		matrix[i] = (int*) malloc(_size * sizeof(int));
+		for(int j = 0; j < _size; j++) {
+			if(this->_map[i*_size + j] == Sea)
+				matrix[i][j] = 0;
+			else
+				matrix[i][j] = 1;
+		}
+	}
+
+	return matrix;
+}
+
+/*
+void MapGenerator::warshall() {
+    
+	int** matrix = this->getAccessMatrix();
+
+	int** 
+
+    int k,i,j;
+    int hopdist;
+ 
+    for( k = 0; k < _size; k ++ ) {
+ 
+        for( i = 0; i < _size; i ++ ) {   // row index
+ 
+            for( j = 0; j < _size; j ++ ) {   // column index
+                 
+                if(matrix[i][k] == 0 || matrix[k][j] == 0 )
+                    hopdist = 0;
+                else                    // can hop to k
+                    hopdist = 1;
+                 
+                if( hopdist < gr[i][j]) { // if hopping to k is better
+                    first_hop[i][j] = k;        // if you want to go from i to j then first go to k
+                    gr[i][j] = hopdist;
+                }
+            }
+        }
+    }
+}
+*/
+
+/*
+	Check if the map generated can be traversed
+*//*
+bool MapGenerator::hasGoodPath() {
+
+	int** matrix = this->getAccessMatrix();
+
+	for(int i = 0; i < _size; i++)
+        if(hasPathHelper(m, v, i, 0))
+            return true;
+
+    return false;
+
+
+	return true;
+}
+*/

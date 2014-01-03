@@ -1,5 +1,8 @@
 #include "api.h"
+#include "common.h"
 #include "map.h"
+#include "suggestions.h"
+#include <vector>
 
 /*!
  * \brief Generate a map with random cases
@@ -13,4 +16,14 @@
 int* api_generate_map(int size) {
 	MapGenerator gen;
 	return gen.generate_map(size);
+}
+
+Suggestion* gen;
+
+void init_map_suggestion(CaseType** map, int mapSize) {
+	gen = new Suggestion(map, mapSize);
+}
+
+std::vector<std::pair<int, int>> api_get_tiles_suggestion(UnitType** units, int currentX,int currentY, double ptDepl, UnitType currentNation) {
+	return gen->suggestion(units, currentX, currentY, ptDepl, currentNation);
 }

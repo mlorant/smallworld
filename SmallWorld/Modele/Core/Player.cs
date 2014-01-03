@@ -97,6 +97,5 @@ namespace SmallWorld
             this.units = (List<IUnit>) info.GetValue("PlayerUnits", typeof(List<IUnit>));
             this.nation = (INation)info.GetValue("PlayerNation", typeof(INation));
         }
-    
     }
 }

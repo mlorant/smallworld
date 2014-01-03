@@ -4,9 +4,13 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using mapWrapper;
 
 namespace SmallWorld
 {
+
+    enum UnitType { None, Viking, Gallic, Dwarf }
+    
     [Serializable()]
     public abstract class Unit : IUnit, ISerializable
     {
@@ -207,7 +211,7 @@ namespace SmallWorld
         /// <param name="target"></param>
         /// <returns></returns>
         public virtual bool move(Point target)
-        {           
+        {
             // On vérifie si sa destination est possible
             if (this.canMoveOn(target))
             {
@@ -262,6 +266,28 @@ namespace SmallWorld
             return false;
         }
 
+        /// <summary>
+        /// Returns list of points where the unit can go on the map,
+        /// according to the current units positions and envirronement. 
+        /// (Compute via the C++ library)
+        /// </summary>
+        /// <returns>List of Point where the unit can go on the map</returns>
+        public List<Point> getSuggestedPoints()
+        {
+            // Get tiles suggestion
+            Map map = Game.Instance.Map;
+            UnitType unitEnum = (UnitType) Enum.Parse(typeof(UnitType), this.GetType().Name, true);
+
+            var raw_points = map.SuggestEngine.get_tiles_suggested(map.NativeUnits, CurrentPosition.X, CurrentPosition.Y, 
+                                                                    this._movePoint, (int) unitEnum);
+
+            // Construct a list of Point
+            List<Point> points = new List<Point>();
+            foreach (Tuple<int, int> pt in raw_points)
+                points.Add(new Point(pt.Item1, pt.Item2));
+            
+            return points;
+        }
 
         // Serialization function
         public void GetObjectData(SerializationInfo info, StreamingContext context)
