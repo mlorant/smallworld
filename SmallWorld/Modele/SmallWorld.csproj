@@ -83,19 +83,18 @@
     <None Include="UML\Class diagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MapGenWrapper\mapWrapper.vcxproj">
+    <ProjectReference Include="..\SmallWorldLibWrapper\mapWrapper.vcxproj">
       <Project>{7df3c717-cf81-4974-b49d-903bee0c8c54}</Project>
       <Name>mapWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\Debug\mapWrapper.dll">
-      <Link>mapWrapper.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="..\Debug\SmallWorldLibCpp.dll">
       <Link>SmallWorldLibCpp.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Debug\SmallWorldLibWrapper.dll">
+      <Link>SmallWorldLibWrapper.dll</Link>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
