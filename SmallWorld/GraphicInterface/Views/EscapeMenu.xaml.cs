@@ -30,20 +30,6 @@ namespace GraphicInterface
         public EscapeMenu()
         {
             InitializeComponent();
-            this.KeyDown += new KeyEventHandler(HandleEsc);
-        }
-
-        /// <summary>
-        /// Handle Escape button interaction
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HandleEsc(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Escape)
-            {
-                exitMenu();
-            }
         }
 
         /// <summary>
@@ -51,19 +37,8 @@ namespace GraphicInterface
         /// </summary>
         private void clickResume(object sender, RoutedEventArgs e)
         {
-            exitMenu();
+            ((GameBoard)Window.GetWindow(this)).closeEscapeMenu();
         }
-
-        /// <summary>
-        /// Get parent window, remove the black background and 
-        /// then remove the user control itself
-        /// </summary>
-        private void exitMenu()
-        {
-            this.hideEscapeMenu();
-            ((Panel)this.Parent).Children.Remove(this);
-        }
-
 
         /// <summary>
         /// Save the current game state in a file

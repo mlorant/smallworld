@@ -25,7 +25,7 @@ namespace GraphicInterface
     {
         Game game;
 
-        bool inEscapeMenu = false;
+        EscapeMenu inEscapeMenu = null;
 
         bool inMove = false;
         Unit selectedUnit;
@@ -275,9 +275,12 @@ namespace GraphicInterface
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             // Show EscapeMenu
-            if (e.Key == Key.Escape && !inEscapeMenu)
+            if (e.Key == Key.Escape)
             {
-                openEscapeMenu();
+                if (inEscapeMenu == null)
+                    openEscapeMenu();
+                else
+                    closeEscapeMenu();
             }
         }
 
@@ -288,17 +291,21 @@ namespace GraphicInterface
 
         private void openEscapeMenu()
         {
-            inEscapeMenu = true;
 
-            EscapeMenu menu = new EscapeMenu();
-            menu.hideEscapeMenu = () => { this.inEscapeMenu = false; };
+            inEscapeMenu = new EscapeMenu();
 
             // Set menu to fill the whole space
-            Canvas.SetZIndex(menu, 999);
-            menu.mainGrid.Width = mainCanvas.ActualWidth;
-            menu.mainGrid.Height = mainCanvas.ActualHeight;
+            Canvas.SetZIndex(inEscapeMenu, 999);
+            inEscapeMenu.mainGrid.Width = mainCanvas.ActualWidth;
+            inEscapeMenu.mainGrid.Height = mainCanvas.ActualHeight;
 
-            mainCanvas.Children.Add(menu);
+            mainCanvas.Children.Add(inEscapeMenu);
+        }
+
+        public void closeEscapeMenu()
+        {
+            mainCanvas.Children.Remove(inEscapeMenu);
+            inEscapeMenu = null;
         }
     }
 }
