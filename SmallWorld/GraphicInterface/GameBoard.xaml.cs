@@ -28,7 +28,7 @@ namespace GraphicInterface
         EscapeMenu inEscapeMenu = null;
 
         bool inMove = false;
-        Unit selectedUnit;
+        IUnit selectedUnit;
         System.Drawing.Point previous;
 
 
@@ -43,7 +43,7 @@ namespace GraphicInterface
             InitializeComponent();
 
             // Attack event to display the escape menu
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            this.PreviewKeyDown += new KeyEventHandler(HandleKeyboard);
             
 
             // Init player nickname and max round (won't change in the game after)
@@ -55,6 +55,38 @@ namespace GraphicInterface
             refreshGameInfos();
 
             InfoBox.Text = "Welcome. It's the turn of " + game.CurrentPlayer.Nickname + ".";
+        }
+
+        /// <summary>
+        /// Set actions on keyboard (open menu, pass turn, move units...)
+        /// </summary>
+        private void HandleKeyboard(object sender, KeyEventArgs e)
+        {
+
+            switch (e.Key)
+            {
+                // Show EscapeMenu
+                case Key.Escape:
+                    if (inEscapeMenu == null)
+                        openEscapeMenu();
+                    else
+                        closeEscapeMenu();
+                    break;
+
+                // End of turn
+                case Key.Enter:
+                    this.endRound(sender, e);
+                    break;
+
+                case Key.Up:
+                case Key.Left:
+                case Key.Right:
+                case Key.Down:
+                    // Unit move
+                    moveUnitKeyboard(e.Key);
+                    break;
+            }
+
         }
 
         /// <summary>
@@ -201,6 +233,38 @@ namespace GraphicInterface
         }
 
 
+        private void moveUnitKeyboard(Key direction)
+        {
+            if (selectedUnit != null)
+            {
+                // simulate a click to move the unit (or battle)
+                var moveTo = new System.Drawing.Point(previous.X, previous.Y);
+                switch(direction) {
+                    case Key.Up:
+                        moveTo.Y--;
+                        break;
+                    case Key.Left:
+                        moveTo.X--;
+                        break;
+                    case Key.Right:
+                        moveTo.X++;
+                        break;
+                    case Key.Down:
+                        moveTo.Y++;
+                        break;
+                }
+
+                int width = Game.Instance.Map.Width;
+                if (moveTo.X >= 0 && moveTo.Y >= 0 && moveTo.X < width && moveTo.Y < width)
+                    clickOnMap(moveTo);
+            }
+        }
+
+        /// <summary>
+        /// Update the first block of the bottom panel, with tile
+        /// selected coords, who controls it and its type.
+        /// </summary>
+        /// <param name="coord"></param>
         private void updateTileInformation(System.Drawing.Point coord)
         {
             TileInfo.Visibility = Visibility.Visible;
@@ -227,71 +291,85 @@ namespace GraphicInterface
         private void displayUnitsOnCase(System.Drawing.Point tile)
         {
             List<IUnit> listUnit = Game.Instance.Map.getUnits(tile);
-            inMove = false;
-            selectedUnit = null;
 
+            // If there's no unit on the tile, unselect the current unit 
+            // and display nothing
+            if (listUnit.Count == 0)
+            {
+                inMove = false;
+                selectedUnit = null;
+                return;
+            }
+            
             foreach (Unit u in listUnit)
             {
-
                 UnitSelector unitPanel = new UnitSelector(u);
                 // If it's the current player, interaction on click to select the unit
                 if (game.CurrentPlayer.Nation.hasUnit(u))
                 {
                     unitPanel.MouseLeftButtonDown += (source, evt) =>
                     {
-                        // Remove any Highlight if a unit is already clicked
-                        foreach (UnitSelector p in UnitsInfo.Children)
-                            p.Highlight(false);
-
-                        // Check if this unit isn't already selected
-                        if (selectedUnit != u)
-                        {
-                            unitPanel.Highlight(true);
-                            selectedUnit = u;
-
-                            List<System.Drawing.Point> suggestions = selectedUnit.getSuggestedPoints();
-                            foreach (System.Drawing.Point pt in suggestions)
-                                mapViewer.drawSuggestion(pt);
-
-                            inMove = true;
-                            previous = tile;
-                        }
-                        else
-                        {
-                            selectedUnit = null;
-                            inMove = false;
-                            mapViewer.cleanSuggestions();
-                        }
-                        
+                        this.makeUnitSelected((UnitSelector)source);
                     };
                 }
 
                 UnitsInfo.Children.Add(unitPanel);
             }
-        }
 
-
-
-        private void HandleEsc(object sender, KeyEventArgs e)
-        {
-            // Show EscapeMenu
-            if (e.Key == Key.Escape)
+            // Make the first unit of the tile selected
+            UnitSelector selected = (UnitSelector)UnitsInfo.Children[0];
+            if (game.CurrentPlayer.Nation.hasUnit(selected.Unit))
             {
-                if (inEscapeMenu == null)
-                    openEscapeMenu();
-                else
-                    closeEscapeMenu();
+                this.makeUnitSelected(selected);
             }
         }
 
+        /// <summary>
+        /// Change the unit selected to the one in the selector
+        /// </summary>
+        /// <param name="unitPanel"></param>
+        private void makeUnitSelected(UnitSelector unitPanel)
+        {
+            mapViewer.cleanSuggestions();
+            // Remove any Highlight if a unit is already clicked
+            foreach (UnitSelector p in UnitsInfo.Children)
+                p.Highlight(false);
+
+            // Check if this unit isn't already selected
+            if (selectedUnit != unitPanel.Unit)
+            {
+                unitPanel.Highlight(true);
+                selectedUnit = unitPanel.Unit;
+
+                List<System.Drawing.Point> suggestions = selectedUnit.getSuggestedPoints();
+                foreach (System.Drawing.Point pt in suggestions)
+                    mapViewer.drawSuggestion(pt);
+
+                inMove = true;
+                previous = selectedUnit.CurrentPosition;
+            }
+            else
+            {
+                selectedUnit = null;
+                inMove = false;
+                mapViewer.cleanSuggestions();
+            }
+        }
+
+
+        /// <summary>
+        /// Open the menu via the menu button
+        /// </summary>
         private void clickMenuButton(object sender, RoutedEventArgs e)
         {
             openEscapeMenu();
         }
 
+        /// <summary>
+        /// Display the menu in foreground
+        /// </summary>
         private void openEscapeMenu()
         {
-
             inEscapeMenu = new EscapeMenu();
 
             // Set menu to fill the whole space
@@ -302,6 +380,10 @@ namespace GraphicInterface
             mainCanvas.Children.Add(inEscapeMenu);
         }
 
+
+        /// <summary>
+        /// Hide the menu and destroy its reference
+        /// </summary>
         public void closeEscapeMenu()
         {
             mainCanvas.Children.Remove(inEscapeMenu);

@@ -24,10 +24,19 @@ namespace GraphicInterface
 
         Brush _inactiveColor;
 
+        private IUnit _unit;
+
+        public IUnit Unit
+        {
+            get { return this._unit; }
+        }
+
         public UnitSelector(IUnit unit)
         {
             InitializeComponent();
-
+            
+            this._unit = unit;
+            
             _inactiveColor = this.UnitBox.Background;
 
             UnitName.Text = unit.Name;

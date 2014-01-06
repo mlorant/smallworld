@@ -46,7 +46,7 @@ namespace GraphicInterface
                     {
                         Game.Instance.restoreGame(dlg.FileName);
                     }
-                    catch (InvalidSaveFileException exc)
+                    catch (InvalidSaveFileException)
                     {
                         MessageBox.Show("Incorrect file. Are you sure that " + dlg.FileName + " is a SmallWorld game file?");
                         continue; // Ask a new file

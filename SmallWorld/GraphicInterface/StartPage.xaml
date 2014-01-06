@@ -71,7 +71,7 @@
                 <SolidColorBrush Color="#000000" Opacity="0.60"/>
             </DockPanel.Background>
             <TextBlock DockPanel.Dock="Left" Foreground="White" FontSize="11" Margin="10,10">
-                Game created by Clarisse Renou &amp; Maxime Lorant (2013). <LineBreak />
+                Game created by Clarisse Renou &amp; Maxime Lorant (2013-2014). <LineBreak />
                 Images are from the free game "The Battle for Wesnoth"<LineBreak />
                 Sources available on <TextBlock FontFamily="Consolas">https://github.com/mlorant/smallworld</TextBlock>
             </TextBlock>
