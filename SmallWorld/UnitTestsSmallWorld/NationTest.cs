@@ -16,8 +16,8 @@ namespace UnitTestsSmallWorld
         [TestMethod]
         public void TestFabricDwarfUnit()
         {
-            Nation dwarves = new NationDwarf();
-            Assert.IsTrue(dwarves.fabricUnit(0) is Dwarf);
+            Nation dwarfs = new NationDwarf();
+            Assert.IsTrue(dwarfs.fabricUnit(0) is Dwarf);
         }
 
         [TestMethod]
