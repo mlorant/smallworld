@@ -16,16 +16,8 @@ namespace SmallWorld
     /// their turn.
     /// </summary>
     [Serializable()]
-    public class Game : IGame, ISerializable, INotifyPropertyChanged 
+    public class Game : IGame, ISerializable
     {
-
-        // property changed event
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(String property)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
 
         private static Game instance;
         
@@ -53,7 +45,6 @@ namespace SmallWorld
                 }
 
                 this._currentRound = value;
-                OnPropertyChanged("CurrentRound");
             }
         }
 
