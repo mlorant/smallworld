@@ -38,11 +38,52 @@
                     <TextBox Height="23" MaxLength="16" TextWrapping="Wrap" Text="" Name="Player1Nickname" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
                     <Grid Height="80" IsEnabled="{Binding ElementName=InfoP1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}">
                         <RadioButton GroupName="nationP1" Name="Dwarf1" Content="Dwarf" IsEnabled="{Binding ElementName=Dwarf2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}" 
-                                 HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,16,98,48" Foreground="White"/>
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,16,98,48" Foreground="White">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="305" Orientation="Horizontal">
+                                        <Image Height="30" Width="30" Source="Resources/img/units/dwarf.png"/>
+                                        <TextBlock  Width="270" TextWrapping="Wrap" TextAlignment="Justify">
+                                            Dwarfs are shorter than normal humans and nearly always bearded. 
+                                            Dwarfs tend to be miners, they have a natural fascination with minerals.<LineBreak/> 
+                                            That's why they can <Bold>move on any mountain</Bold> tile and they worth <Bold>1 point more under a forest</Bold>.<LineBreak/> 
+                                            Also, a dwarf <Bold>doesn't gain any point in the plain</Bold>.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
                         <RadioButton GroupName="nationP1" Name="Gallic1" Content="Gallic" IsEnabled="{Binding ElementName=Gallic2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
-                                 HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,32,100,32" Foreground="White"/>
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,32,100,32" Foreground="White" ToolTipService.ShowDuration="15000">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="305" Orientation="Horizontal">
+                                        <Image Height="30" Width="30"  Source="Resources/img/units/gallic.png"/>
+                                        <TextBlock Width="270" TextWrapping="Wrap" TextAlignment="Justify">
+                                            Gallic are tall and light-blue eyed, very pride and insolent.<LineBreak/> 
+                                            They live in huge plain in Gaul, so <Bold>plain tiles supplies one more point</Bold>, and <Bold>move cost is divided</Bold> by two. <LineBreak/> 
+                                            Otherwise a gallic on a <Bold>mountain doesn't provide any point</Bold>.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
                         <RadioButton GroupName="nationP1" Name="Viking1" Content="Viking" IsEnabled="{Binding ElementName=Viking2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
-                                 HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,48,96,16" Foreground="White"/>
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" Checked="initNationPlayer1" Margin="96,48,96,16" Foreground="White" ToolTipService.ShowDuration="15000">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="305" Orientation="Horizontal">
+                                        <Image Height="30" Width="30" Source="Resources/img/units/viking.png"/>
+                                        <TextBlock Width="270" TextWrapping="Wrap" TextAlignment="Justify">
+                                            The Vikings were seafaring Scandinavians engaged in exploring in lands outside of Scandinavia.<LineBreak/> 
+                                            That's why they are the only nation which <Bold>is able to navigate on a Sea tile</Bold> but it
+                                            <Bold>doesn't supply point</Bold>. A viking <Bold>on the edge of water worths one point more</Bold>.<LineBreak/>  
+                                            Otherwise <Bold>Desert tiles provide no point</Bold> cause of the lack of water.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
                     </Grid>
                     <Viewbox Height="18">
                         <CheckBox Name="InfoP1" Content="Ready ?" Checked="verifyInfo1" Foreground="White" />
@@ -53,11 +94,52 @@
                     <TextBox Height="23" MaxLength="16" TextWrapping="Wrap" Text="" Name="Player2Nickname" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
                     <Grid Height="80" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}">
                         <RadioButton GroupName="nationP2" Name="Dwarf2" Content="Dwarf" IsEnabled="{Binding ElementName=Dwarf1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
-                                  VerticalAlignment="Top" Checked="initNationPlayer2" Margin="84,17,107,0" Height="15" Foreground="White"/>
+                                  VerticalAlignment="Top" Checked="initNationPlayer2" Margin="84,17,107,0" Height="15" Foreground="White" ToolTipService.ShowDuration="15000">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="305" Orientation="Horizontal">
+                                        <Image Height="30" Width="30" Source="Resources/img/units/dwarf.png"/>
+                                        <TextBlock  Width="270" TextWrapping="Wrap" TextAlignment="Justify">
+                                            Dwarfs are shorter than normal humans and nearly always bearded. 
+                                            Dwarfs tend to be miners, they have a natural fascination with minerals.<LineBreak/> 
+                                            That's why they can <Bold>move on any mountain</Bold> tile and they worth <Bold>1 point more under a forest</Bold>.<LineBreak/> 
+                                            Also, a dwarf <Bold>doesn't gain any point in the plain</Bold>.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
                         <RadioButton GroupName="nationP2" Name="Gallic2" Content="Gallic" IsEnabled="{Binding ElementName=Gallic1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
-                                 VerticalAlignment="Center" Checked="initNationPlayer2" Margin="84,33,-84,31" Foreground="White"/>
+                                 VerticalAlignment="Center" Checked="initNationPlayer2" Margin="84,33,-84,31" Foreground="White" ToolTipService.ShowDuration="15000">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="305" Orientation="Horizontal">
+                                        <Image Height="30" Width="30" Source="Resources/img/units/gallic.png"/>
+                                        <TextBlock  Width="270" TextWrapping="Wrap" TextAlignment="Justify">
+                                            Gallic are tall and light-blue eyed, very pride and insolent.<LineBreak/> 
+                                            They live in huge plain in Gaul, so <Bold>plain tiles supplies one more point</Bold>, and <Bold>move cost is divided</Bold> by two. <LineBreak/> 
+                                            Otherwise a gallic on a <Bold>mountain doesn't provide any point</Bold>.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
                         <RadioButton GroupName="nationP2" Name="Viking2" Content="Viking" IsEnabled="{Binding ElementName=Viking1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
-                                 VerticalAlignment="Center" Checked="initNationPlayer2" Margin="84,49,-84,15" Foreground="White"/>
+                                 VerticalAlignment="Center" Checked="initNationPlayer2" Margin="84,49,-84,15" Foreground="White" ToolTipService.ShowDuration="15000">
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel Width="305" Orientation="Horizontal">
+                                        <Image Height="30" Width="30" Source="Resources/img/units/viking.png"/>
+                                        <TextBlock  Width="270" TextWrapping="Wrap" TextAlignment="Justify">
+                                            The Vikings were seafaring Scandinavians engaged in exploring in lands outside of Scandinavia.<LineBreak/> 
+                                            That's why they are the only nation which <Bold>is able to navigate on a Sea tile</Bold> but it
+                                            <Bold>doesn't supply point</Bold>. A viking <Bold>on the edge of water worths one point more</Bold>.<LineBreak/>  
+                                            Otherwise <Bold>Desert tiles provide no point</Bold> cause of the lack of water.
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
                     </Grid>
                     <Viewbox Height="18">
                         <CheckBox x:Name="InfoP2" HorizontalAlignment="Center" Content="Ready ?" Checked="verifyInfo2" Foreground="White"/>
