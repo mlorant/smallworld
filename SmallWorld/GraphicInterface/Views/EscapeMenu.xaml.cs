@@ -17,15 +17,11 @@ using SmallWorld;
 namespace GraphicInterface
 {
     /// <summary>
-    /// Logique d'interaction pour EscapeMenu.xaml
+    /// Escape Menu view, displays when the user wants 
+    /// to save/load or quit the game.
     /// </summary>
     public partial class EscapeMenu : UserControl
     {
-        /// <summary>
-        /// Function bind on the main window to remove the escape menu 
-        /// when click on the "Resume" button.
-        /// </summary>
-        public Action hideEscapeMenu;
 
         public EscapeMenu()
         {
@@ -73,7 +69,7 @@ namespace GraphicInterface
         }
 
         /// <summary>
-        /// Close the game
+        /// Close the game by exiting the main window.
         /// </summary>
         private void clickExit(object sender, RoutedEventArgs e)
         {

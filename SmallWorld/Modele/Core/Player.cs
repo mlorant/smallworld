@@ -9,39 +9,35 @@ namespace SmallWorld
     [Serializable()]
     public class Player : IPlayer, ISerializable
     {
-
-        /// <summary>
-        /// Player nickname
-        /// </summary>
+        // Private attributes
         private string nickname;
-
-        /// <summary>
-        /// Units list of the player
-        /// </summary>
         private List<IUnit> units;
-
-        /// <summary>
-        /// Player's nation. Use to fabric units
-        /// </summary>
         private INation nation;
 
-
+        /// <summary>Player nickname</summary>
         public string Nickname
         {
             get { return this.nickname; }
         }
 
+        /// <summary>Units list of the player</summary>
         public List<IUnit> Units
         {
             get { return this.units; }
         }
-        
+
+        /// <summary>Player's nation. Use to fabric units</summary>
         public INation Nation
         {
             get { return this.nation; }
         }
 
-        
+        /// <summary>
+        /// Construct one player with his initial units
+        /// </summary>
+        /// <param name="nickname">Player nickname</param>
+        /// <param name="nationType">Nation chosen by the player</param>
+        /// <param name="nbUnits">Number of units to create</param>
         public Player(string nickname, NationType nationType, int nbUnits)
         {
             this.nickname = nickname;
@@ -75,13 +71,12 @@ namespace SmallWorld
         {
             int total = 0;
             foreach (Unit unit in this.Units)
-            {
                 total += unit.getPoints();
-            }
 
             return total;
         }
-
+        
+        /// <summary>Serialization function</summary>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("PlayerNickname", this.nickname);
@@ -89,10 +84,9 @@ namespace SmallWorld
             info.AddValue("PlayerNation", this.nation);
         }
 
-        // Deserialization constructor.
+        /// <summary> Deserialization constructor.</summary>
         public Player(SerializationInfo info, StreamingContext ctxt)
         {
-            //Get the values from info and assign them to the appropriate properties
             this.nickname = (String) info.GetString("PlayerNickname");
             this.units = (List<IUnit>) info.GetValue("PlayerUnits", typeof(List<IUnit>));
             this.nation = (INation)info.GetValue("PlayerNation", typeof(INation));
