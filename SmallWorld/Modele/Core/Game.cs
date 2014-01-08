@@ -18,83 +18,93 @@ namespace SmallWorld
     [Serializable()]
     public class Game : IGame, ISerializable
     {
-
+        // Singleton attribute - Private instance
         private static Game instance;
-        
+        // List of players
         private IPlayer[] _players;
+        // First player of the game (decided randomly)
         private IPlayer _firstPlayer;
+        // Player reference which's currently playing
         private IPlayer _currentPlayer;
+        // Current round, 1-indexed
         private int _currentRound;
+        // Map instance reference
         private Map _map;
+        // Max rounds number
         private int _nbRounds;
+        // Number of units per players at the beginning
         private int _nbUnits;
 
+        /// <summary>List of players of the game</summary>
         public IPlayer[] Players
         {
             get { return this._players; }
             set { this._players = value; }
         }
 
+        /// <summary>Number of the current round. Can be increment by 1 only</summary>
         public int CurrentRound
         {
             get { return this._currentRound; }
             set 
             { 
-                if(value != this._currentRound+1) {
+                if(value != this._currentRound + 1)
                     throw new Exception("Round number shouldn't be increment by more than 1.");
-                }
 
                 this._currentRound = value;
             }
         }
 
+        /// <summary>First player of the game, chosen randomly</summary>
         public IPlayer FirstPlayer
         {
             get { return this._firstPlayer; }
             set { throw new NotSupportedException(); }
         }
 
+        /// <summary>Player which's currently playing</summary>
         public IPlayer CurrentPlayer
         {
             get { return this._currentPlayer;  }
             set { this._currentPlayer = value; }
         }
 
+        /// <summary>Max number of units per player</summary>
         public int NbUnits 
         {
             get { return this._nbUnits; }
             set { this._nbUnits = value; }
         }
 
+        /// <summary>Max number of rounds</summary>
         public int NbRounds
         {
             get { return this._nbRounds; }
         }
 
+        /// <summary>Map of the game</summary>
         public Map Map
         {
             get { return this._map; }
             set { this._map = value; }
         }
 
-
+        /// <summary>Singleton design pattern: Private constructor</summary>
         private Game() {}
 
+        /// <summary>Unique instance of the class</summary>
         public static Game Instance
         {
             get
             {
                 if (instance == null)
-                {
                     instance = new Game();
-                }
+                
                 return instance;
             }
         }
 
-        /// <summary>
-        /// Initialize game data
-        /// </summary>
+        /// <summary>Initialize game data, with a new map and players</summary>
         public void initGame(int nbRounds, int nbUnits)
         {
             _map = new Map();
@@ -200,9 +210,12 @@ namespace SmallWorld
                      _players[1].Units.Count == 0);
         }
 
+        /// <summary>
+        /// Return the player who wins the current game, by computing
+        /// points for each players
+        /// </summary>
         public IPlayer getWinner()
         {
-            // Compute points of each player and takes the maximum
             int p1 = _players[0].computePoints();
             int p2 = _players[1].computePoints();
             if (p1 > p2 || _players[1].Units.Count == 0)
@@ -283,5 +296,8 @@ namespace SmallWorld
         }
     }
 
+    /// <summary>
+    /// Exception raised when an invalid save file is detected
+    /// </summary>
     public class InvalidSaveFileException : Exception { }
 }
