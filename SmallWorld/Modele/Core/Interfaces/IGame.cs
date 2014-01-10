@@ -23,6 +23,6 @@ namespace SmallWorld
 
         bool isFinished();
 
-        IPlayer getWinner();
+        IPlayer Winner { get; }
     }
 }

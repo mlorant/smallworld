@@ -7,6 +7,6 @@ namespace SmallWorld
 {
     public interface IGameCreation
     {
-        public Game createGame(string player1, NationType nation1, string player2, NationType nation2);
+        Game createGame(string player1, NationType nation1, string player2, NationType nation2);
     }
 }

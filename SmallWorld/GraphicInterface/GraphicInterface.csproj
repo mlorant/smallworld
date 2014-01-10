@@ -70,6 +70,9 @@
     <Compile Include="GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GameEnding.xaml.cs">
+      <DependentUpon>GameEnding.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GameLoadFile.xaml.cs">
       <DependentUpon>GameLoadFile.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\GameEnding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameLoadFile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +186,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\img\icons\move.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\portraits\dwarf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img\portraits\gallic.png" />
+    <Resource Include="Resources\img\portraits\viking.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
