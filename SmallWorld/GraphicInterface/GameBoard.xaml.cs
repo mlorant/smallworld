@@ -141,8 +141,74 @@ namespace GraphicInterface
                     InfoBox.Text = "Watch out, " + (roundsLeft+1) + " turns left. ";
 
                 InfoBox.Text += "It's the turn of " + game.CurrentPlayer.Nickname + ".";
+                selectedUnit = null;
+                inMove = false;
+                UnitsInfo.Children.Clear();
             }
         }
+
+        /// <summary>
+        /// Control behavior of the nextUnit Button.
+        /// Give the control to a new unit automatically instead of click on it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nextUnit(object sender, RoutedEventArgs e)
+        {
+            List<IUnit> unitsOfThePlayer = Game.Instance.CurrentPlayer.Units;
+            UnitSelector selected = null;            
+            System.Drawing.Point tileMovePointRemaining = new System.Drawing.Point(-1,-1);
+           
+            int numPrevious = 0;
+            
+            // if we don't find yet a unit to select, we run through all the units
+            if (selectedUnit != null)
+            {
+                numPrevious = unitsOfThePlayer.IndexOf(selectedUnit);
+            }
+                
+            // Find the first unit still moveable beginning from the last unit already selected
+            for (int i = 0; i < unitsOfThePlayer.Count; i++)
+            {
+                IUnit unit = unitsOfThePlayer[i];
+                System.Drawing.Point tile = unit.CurrentPosition;
+                // To make the right unitselector appeared.   
+                UnitsInfo.Children.Clear();
+                this.displayUnitsOnCase(tile, false);
+
+                int index = Game.Instance.Map.getUnits(tile).IndexOf(unit);
+
+                // If no unit is selected we take the first we find with movePoint available
+                // otherwise we take a unit on another tile
+                if (unit.MovePoint > 0)
+                {
+                    if (tileMovePointRemaining.Equals(new System.Drawing.Point(-1, -1)))
+                        tileMovePointRemaining = tile;
+
+                    if (i >= numPrevious && unit != selectedUnit)
+                    {
+                        selected = (UnitSelector)UnitsInfo.Children[index];
+                        break;
+                    }
+                }
+            }
+            if (selected != null)
+            {
+                InfoBox.Text = "Unit " + selected.Unit.Name + " on " + selected.Unit.CurrentPosition + " selected.";
+                this.makeUnitSelected(selected);
+            }
+            else
+            {
+                UnitsInfo.Children.Clear();
+                if (!tileMovePointRemaining.Equals(new System.Drawing.Point(-1,-1)))
+                {
+                    this.displayUnitsOnCase(tileMovePointRemaining, true);
+                }
+                else
+                    InfoBox.Text = "No units moveable remaining, you must end your turn.";
+            }
+        }
+
 
         /// <summary>
         /// Allow to click on the map and treats the possibility after it
@@ -165,7 +231,7 @@ namespace GraphicInterface
                 // if there is units on the case clicked
                 if (game.Map.getUnits(tile).Count > 0)
                 {
-                    displayUnitsOnCase(tile);
+                    displayUnitsOnCase(tile, true);
                 }
             }
             else
@@ -175,6 +241,7 @@ namespace GraphicInterface
                 {
                     // Get best defense unit on the tile
                     IUnit defender = Game.Instance.Map.getBestDefensiveUnit(tile);
+                    int initLifeOponent = defender.Health;
                     // Run the battle
                     bool wonTheBattle = selectedUnit.attack(defender, tile);
                     // If unit wins the battle then oponent is dead and we verify if case is free
@@ -197,7 +264,7 @@ namespace GraphicInterface
                             IUnit unit = Game.Instance.Map.getUnits(tile)[0];
                             // verify modification on the destination tile (in case they were 2 and now 1)
                             mapViewer.drawUnits(tile, unit.GetType(), Game.Instance.Map.getUnits(tile).Count);
-                            InfoBox.Text = "You won the battle!";
+                            InfoBox.Text = "You won the battle !";
                         }
                     }
                     // If defeat, remove player unit
@@ -207,12 +274,40 @@ namespace GraphicInterface
                         mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
                         InfoBox.Text = "Your unit take a fatal hit in the heart. You lost the battle.";
                     }
+                    // Otherwise the battle is a tie, we customise the message to give a feedback of the battle 
+                    else
+                    {
+                        InfoBox.Text = "The battle is a tie, but ";
+                        int lifeLostOponent = initLifeOponent - defender.Health;
+                        int percentageLost = lifeLostOponent/defender.MaxHealth*100;
+                        // Compare the result in the battle
+                        if(percentageLost > 75) 
+                        {
+                            InfoBox.Text += "your attack was critic, the oponent lost " + lifeLostOponent + 
+                                " points of life.";
+                        }
+                        else if (percentageLost > 50)
+                        {
+                            InfoBox.Text += "It was very efficient, the oponent lost " + lifeLostOponent +
+                                " points of life.";
+                        }
+                        else if (percentageLost > 25)
+                        {
+                            InfoBox.Text += "your attack was'nt very powerfull, the oponent lost " + lifeLostOponent +
+                                " points of life.";
+                        }
+                        else
+                        {
+                            InfoBox.Text += "your had a hard time with the oponent, he lost " + lifeLostOponent +
+                                " points of life.";
+                        }
+                    }
 
 
                 }
                 else if (tile == previous)
                 { // Click on the tile of the unit selected
-                    displayUnitsOnCase(tile);
+                    displayUnitsOnCase(tile, true);
                 }
                 else
                 {
@@ -288,7 +383,7 @@ namespace GraphicInterface
         /// Display all units in the "tile" case, with information and a select button
         /// </summary>
         /// <param name="tile"></param>
-        private void displayUnitsOnCase(System.Drawing.Point tile)
+        private void displayUnitsOnCase(System.Drawing.Point tile, bool selectAUnit)
         {
             List<IUnit> listUnit = Game.Instance.Map.getUnits(tile);
 
@@ -317,10 +412,13 @@ namespace GraphicInterface
             }
 
             // Make the first unit of the tile selected
-            UnitSelector selected = (UnitSelector)UnitsInfo.Children[0];
-            if (game.CurrentPlayer.Nation.hasUnit(selected.Unit))
+            if (selectAUnit)
             {
-                this.makeUnitSelected(selected);
+                UnitSelector selected = (UnitSelector)UnitsInfo.Children[0];
+                if (game.CurrentPlayer.Nation.hasUnit(selected.Unit))
+                {
+                    this.makeUnitSelected(selected);
+                }
             }
         }
 
