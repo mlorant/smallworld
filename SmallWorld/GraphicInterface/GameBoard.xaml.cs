@@ -125,7 +125,13 @@ namespace GraphicInterface
             game.endRound();
             if (game.isFinished())
             {
-                MessageBox.Show(game.getWinner().Nickname + " won!");
+                var ending = new GameEnding(game.Winner);
+
+                Canvas.SetZIndex(ending, 999);
+                ending.mainGrid.Width = mainCanvas.ActualWidth;
+                ending.mainGrid.Height = mainCanvas.ActualHeight;
+
+                mainCanvas.Children.Add(ending);
             }
             else
             {

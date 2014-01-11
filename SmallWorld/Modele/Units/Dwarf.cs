@@ -27,7 +27,7 @@ namespace SmallWorld
 
         /// <summary>
         /// Check if the unit can move to the position given.
-        /// Dwarves can move on any mountain without ennemies if
+        /// Dwarfs can move on any mountain without ennemies if
         /// they're on a mountain already.
         /// </summary>
         /// <param name="tgt"></param>

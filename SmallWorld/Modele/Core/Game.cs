@@ -214,14 +214,16 @@ namespace SmallWorld
         /// Return the player who wins the current game, by computing
         /// points for each players
         /// </summary>
-        public IPlayer getWinner()
+        public IPlayer Winner
         {
-            int p1 = _players[0].computePoints();
-            int p2 = _players[1].computePoints();
-            if (p1 > p2 || _players[1].Units.Count == 0)
-                return _players[0];
-            else
-                return _players[1];
+            get {
+                int p1 = _players[0].computePoints();
+                int p2 = _players[1].computePoints();
+                if (p1 > p2 || _players[1].Units.Count == 0)
+                    return _players[0];
+                else
+                    return _players[1];
+            }
         }
 
 
