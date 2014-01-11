@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmallWorldLibCpp", "SmallWorldLibCpp\SmallWorldLibCpp.vcxproj", "{C71D7BE7-4B79-415C-AFA3-465D4E46FA2E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mapWrapper", "SmallWorldLibWrapper\mapWrapper.vcxproj", "{7DF3C717-CF81-4974-B49D-903BEE0C8C54}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmallWorldLibWrapper", "SmallWorldLibWrapper\mapWrapper.vcxproj", "{7DF3C717-CF81-4974-B49D-903BEE0C8C54}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C71D7BE7-4B79-415C-AFA3-465D4E46FA2E} = {C71D7BE7-4B79-415C-AFA3-465D4E46FA2E}
 	EndProjectSection
