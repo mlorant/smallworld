@@ -1,22 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmallWorldLibCpp", "SmallWorldLibCpp\SmallWorldLibCpp.vcxproj", "{C71D7BE7-4B79-415C-AFA3-465D4E46FA2E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibCpp", "LibCpp\SmallWorldLibCpp.vcxproj", "{C71D7BE7-4B79-415C-AFA3-465D4E46FA2E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SmallWorldLibWrapper", "SmallWorldLibWrapper\SmallWorldLibWrapper.vcxproj", "{7DF3C717-CF81-4974-B49D-903BEE0C8C54}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibWrapper", "LibWrapper\SmallWorldLibWrapper.vcxproj", "{7DF3C717-CF81-4974-B49D-903BEE0C8C54}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C71D7BE7-4B79-415C-AFA3-465D4E46FA2E} = {C71D7BE7-4B79-415C-AFA3-465D4E46FA2E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallWorldCore", "SmallWorldLib\SmallWorldCore.csproj", "{C83EC0BF-E9DB-4B17-B964-DDDB9D0890E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modele", "LibModele\SmallWorldCore.csproj", "{C83EC0BF-E9DB-4B17-B964-DDDB9D0890E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsSmallWorld", "UnitTestsSmallWorld\UnitTestsSmallWorld.csproj", "{6C076C6C-C955-41AC-A871-250C58148994}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTestsSmallWorld.csproj", "{6C076C6C-C955-41AC-A871-250C58148994}"
 	ProjectSection(ProjectDependencies) = postProject
 		{13074ACD-B3AE-47D5-A855-DDCD880FA56F} = {13074ACD-B3AE-47D5-A855-DDCD880FA56F}
 		{C71D7BE7-4B79-415C-AFA3-465D4E46FA2E} = {C71D7BE7-4B79-415C-AFA3-465D4E46FA2E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallWorld", "GraphicInterface\SmallWorld.csproj", "{13074ACD-B3AE-47D5-A855-DDCD880FA56F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallWorldGUI", "GraphicInterface\GraphicInterface.csproj", "{13074ACD-B3AE-47D5-A855-DDCD880FA56F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

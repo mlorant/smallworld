@@ -111,11 +111,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmallWorldLibWrapper\SmallWorldLibWrapper.vcxproj">
+    <ProjectReference Include="..\LibWrapper\SmallWorldLibWrapper.vcxproj">
       <Project>{7df3c717-cf81-4974-b49d-903bee0c8c54}</Project>
       <Name>SmallWorldLibWrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SmallWorldLib\SmallWorldCore.csproj">
+    <ProjectReference Include="..\LibModele\SmallWorldCore.csproj">
       <Project>{c83ec0bf-e9db-4b17-b964-dddb9d0890e8}</Project>
       <Name>SmallWorldCore</Name>
     </ProjectReference>

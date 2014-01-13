@@ -83,7 +83,7 @@
     <None Include="UML\Class diagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmallWorldLibWrapper\SmallWorldLibWrapper.vcxproj">
+    <ProjectReference Include="..\LibWrapper\SmallWorldLibWrapper.vcxproj">
       <Project>{7df3c717-cf81-4974-b49d-903bee0c8c54}</Project>
       <Name>SmallWorldLibWrapper</Name>
     </ProjectReference>
