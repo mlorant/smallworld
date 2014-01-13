@@ -111,13 +111,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmallWorldLibWrapper\mapWrapper.vcxproj">
+    <ProjectReference Include="..\SmallWorldLibWrapper\SmallWorldLibWrapper.vcxproj">
       <Project>{7df3c717-cf81-4974-b49d-903bee0c8c54}</Project>
-      <Name>mapWrapper</Name>
+      <Name>SmallWorldLibWrapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modele\SmallWorld.csproj">
+    <ProjectReference Include="..\SmallWorldLib\SmallWorldCore.csproj">
       <Project>{c83ec0bf-e9db-4b17-b964-dddb9d0890e8}</Project>
-      <Name>SmallWorld</Name>
+      <Name>SmallWorldCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

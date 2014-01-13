@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GraphicInterface</RootNamespace>
-    <AssemblyName>GraphicInterface</AssemblyName>
+    <AssemblyName>SmallWorld</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -150,9 +150,9 @@
     <Resource Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Modele\SmallWorld.csproj">
+    <ProjectReference Include="..\SmallWorldLib\SmallWorldCore.csproj">
       <Project>{c83ec0bf-e9db-4b17-b964-dddb9d0890e8}</Project>
-      <Name>SmallWorld</Name>
+      <Name>SmallWorldCore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
