@@ -68,11 +68,7 @@ private:
 	int getRandomSpecialTile();
 
 
-	int** getAccessMatrix();
-
-	void warshall();
-
-	bool hasGoodPath();
+	void removeWaterFromSides();
 };
 
 #endif

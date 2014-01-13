@@ -1,7 +1,7 @@
 #include "map.h"
 #include <iostream>
 #include <cmath> /* round */
-
+#include <algorithm> /* random_shuffle */
 
 
 #define NB_PATTERNS 5
@@ -103,52 +103,50 @@ int* MapGenerator::generate_map(int size) {
 	this->buildBase();
 
 	// Strategy (depend of the map size)
-	if(size <= 7) {
+	if(size <= 7)
 		this->pureRandom();
-	}
-	else {
+	else
 		this->randomWithPatterns();
-	}
+	
+
+	this->removeWaterFromSides();
+
 	return this->_map;
 }
 
 
 void MapGenerator::pureRandom() {
 	
-	for(int i = 0; i < _size * _size; i++) {
+	int maxNumberTiles = (_size*_size) / NB_TILE_TYPES;
 
-		int proba = rand() % 100;
+	// Create the same number of tile type
+	for(int i = 0; i < NB_TILE_TYPES; i++) 
+		for(int j = 0; j < maxNumberTiles; j++)
+			this->_map[i*maxNumberTiles + j] = i;
 
-		if(proba < 20) {				// 20% of chance of a Desert
-			this->_map[i] = Desert;
-		}
-		else if(proba < 40) {			// 20% of chance of a Forest
-			this->_map[i] = Forest;
-		}
-		else if(proba < 58) {			// 18% of chance of a Mountain
-			this->_map[i] = Mountain;
-		}
-		else if(proba < 73) {			// 15% of chance of a Sea
-			this->_map[i] = Sea;
-		}
-	}
+	std::random_shuffle(&this->_map[0], &this->_map[(_size*_size)-1]);
 }
 
 void MapGenerator::randomWithPatterns() {
 
-	int quarter = this->_size/4;
-	int points[4];
+	int uses[NB_TILE_TYPES] = {0};
+	uses[Plain] = _size*_size;
+	int maxNumberTiles = ((_size*_size) / NB_TILE_TYPES) * 1.2;
 
-	int mid = this->_size / 2;
-	
-	for(int i = 0; i < 45; i++) {
+
+	int nbIterations = (_size*_size)*0.33;
+	for(int i = 0; i < nbIterations; i++) {
 		int tileOrigin = rand() % (_size*_size);
 		int xOrigin = tileOrigin % _size;
 		int yOrigin = tileOrigin / _size;
 
 		// Get random patterns
 		int patNumber = rand() % NB_PATTERNS;
+
 		int tileType = this->getRandomSpecialTile();
+		while(uses[tileType] > maxNumberTiles) {
+			tileType = this->getRandomSpecialTile();
+		}
 
 		for(int j = 0; j < PATTERN_HEIGHT; j++) {
 			// If we hit the bottom on the map, we stop the pattern
@@ -162,8 +160,11 @@ void MapGenerator::randomWithPatterns() {
 				if(xOrigin + k >= _size) 
 					break;
 
-				if(patterns[patNumber][j][k] == 1)
+				if(patterns[patNumber][j][k] == 1) {
+					uses[this->_map[tileOrigin + j*_size + k]]--;
+					uses[tileType]++;
 					this->_map[tileOrigin + j*_size + k] = tileType;
+				}
 				
 			}
 		}
@@ -187,69 +188,32 @@ void MapGenerator::buildBase() {
 	}
 }
 
+/*!
+ * \brief Remove water from sides to avoid map unplayable
+ *
+ */
+void MapGenerator::removeWaterFromSides() {
 
-
-int** MapGenerator::getAccessMatrix() {
-	int** matrix = (int**) malloc(_size * sizeof(int*));
-
+	// Avoid on top side
 	for(int i = 0; i < _size; i++) {
-		matrix[i] = (int*) malloc(_size * sizeof(int));
-		for(int j = 0; j < _size; j++) {
-			if(this->_map[i*_size + j] == Sea)
-				matrix[i][j] = 0;
-			else
-				matrix[i][j] = 1;
+		if(this->_map[i] ==  Sea) {
+			int index = i + _size; // means y++ on the grid
+			// Increment until the swapping tile isn't sea
+			while(this->_map[index] == Sea && index < _size * _size) { index++; }
+			// Swap values
+			this->_map[i] = this->_map[index];
+			this->_map[index] = Sea;
 		}
 	}
 
-	return matrix;
+	// Avoid water on the right side
+	for(int i = (_size-1); i < _size*_size; i += _size) {
+		if(this->_map[i] ==  Sea) {
+			int index = i - 1;
+			while(this->_map[index] == Sea && index < _size * _size) { index--; }
+
+			this->_map[i] = this->_map[index];
+			this->_map[index] = Sea;
+		}
+	}
 }
-
-/*
-void MapGenerator::warshall() {
-    
-	int** matrix = this->getAccessMatrix();
-
-	int** 
-
-    int k,i,j;
-    int hopdist;
- 
-    for( k = 0; k < _size; k ++ ) {
- 
-        for( i = 0; i < _size; i ++ ) {   // row index
- 
-            for( j = 0; j < _size; j ++ ) {   // column index
-                 
-                if(matrix[i][k] == 0 || matrix[k][j] == 0 )
-                    hopdist = 0;
-                else                    // can hop to k
-                    hopdist = 1;
-                 
-                if( hopdist < gr[i][j]) { // if hopping to k is better
-                    first_hop[i][j] = k;        // if you want to go from i to j then first go to k
-                    gr[i][j] = hopdist;
-                }
-            }
-        }
-    }
-}
-*/
-
-/*
-	Check if the map generated can be traversed
-*//*
-bool MapGenerator::hasGoodPath() {
-
-	int** matrix = this->getAccessMatrix();
-
-	for(int i = 0; i < _size; i++)
-        if(hasPathHelper(m, v, i, 0))
-            return true;
-
-    return false;
-
-
-	return true;
-}
-*/

@@ -116,7 +116,7 @@ void Suggestion::moveAround(int x, int y, float movePoints)
 void Suggestion::moveMountains() {
 	for(int i = 0; i < this->_mapSize; i++) {
 		for(int j = 0; j < this->_mapSize; j++) {
-			if(_map[i][j] == Mountain && _units[i][j] == None)
+			if(_map[i][j] == Mountain && (_units[i][j] == None || _units[i][j] == Dwarf))
 				_sugg[i][j] = Possible;
 		}
 	}
