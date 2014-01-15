@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="GraphicInterface.Views.UnitsPortraits.Dwarf"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="305">
+        <StackPanel Width="310" Orientation="Horizontal">
+            <Image Width="60" Source="../../Resources/img/portraits/dwarf.png" Margin="0,0,5,0" />
+            <TextBlock Width="240" TextWrapping="Wrap" TextAlignment="Justify" FontSize="11.5">
+                Dwarfs are shorter than normal humans and nearly always bearded. 
+                Dwarfs tend to be miners, they have a natural fascination with minerals.<LineBreak/> 
+                That's why they can <Bold>move on any mountain</Bold> tile and they worth <Bold>1 point more under a forest</Bold>.<LineBreak/> 
+                Also, a dwarf <Bold>doesn't gain any point in the plain</Bold>.
+            </TextBlock>
+        </StackPanel>
+</UserControl>
