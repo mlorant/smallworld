@@ -29,5 +29,11 @@ namespace SmallWorld
         /// <returns>The score of the player</returns>
         int computePoints();
 
+        /// <summary>
+        /// Returns the number of units the player can still
+        /// play in the round
+        /// </summary>
+        int getNbUnitsToPlay();
+
     }
 }

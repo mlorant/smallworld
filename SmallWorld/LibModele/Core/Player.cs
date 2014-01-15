@@ -75,6 +75,20 @@ namespace SmallWorld
 
             return total;
         }
+
+        /// <summary>
+        /// Returns the number of units the player can still
+        /// play in the round
+        /// </summary>
+        public int getNbUnitsToPlay()
+        {
+            int total = 0;
+            foreach (Unit unit in this.Units)
+                if (unit.MovePoint > 0)
+                    total += 1;
+
+            return total;
+        }
         
         /// <summary>Serialization function</summary>
         public void GetObjectData(SerializationInfo info, StreamingContext context)

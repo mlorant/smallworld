@@ -64,11 +64,14 @@ namespace SmallWorld
             get { return _width; }
         }
 
-
+        /// <summary>
+        /// Engine for the suggestion process. 
+        /// </summary>
         public WrapperMapSuggestion SuggestEngine
         {
             get { return this._suggestEngine; }
         }
+
         /// <summary>
         /// Init a new map with a new flyweigh pattern
         /// </summary>
@@ -175,6 +178,13 @@ namespace SmallWorld
             return points;
         }
 
+        /// <summary>
+        /// Return the index in the list for a coordinates given.
+        /// Grid is stored in a 1-dimension list, so a point can be
+        /// converted into the index by the formula `X*width + Y`.
+        /// </summary>
+        /// <param name="pos">Position to convert</param>
+        /// <returns>Index in the grid computed</returns>
         private int getIndexFromPoint(Point pos)
         {
             int index = pos.X * _width + pos.Y;

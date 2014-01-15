@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dependencies name="SmallWorldCore" version="1.0.0.0">
+  <Assembly name="SmallWorldCore" version="1.0.0.0">
+    <References>
+      <Reference name="mscorlib" fullName="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+      <Reference name="System.Drawing" fullName="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" version="4.0.0.0" />
+      <Reference name="SmallWorldLibWrapper" fullName="SmallWorldLibWrapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" version="0.0.0.0" />
+      <Reference name="System.Core" fullName="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+    </References>
+    <TypeReferences>
+      <From fullname="SmallWorld.Case" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Map\Case.cs">
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IGameCreation">
+        <To fullname="SmallWorld.Game" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.NationType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.GameCreation" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\GameCreation.cs">
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.Game" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.NationType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IDemoGameBuilder">
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.DemoGameBuilder" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\DemoGameBuilder.cs">
+        <To fullname="SmallWorld.GameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IDemoGameBuilder" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IDesert">
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Desert">
+        <To fullname="SmallWorld.Case" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IDesert" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IUnit">
+        <To fullname="SmallWorld.IPlayer" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Unit" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Unit.cs">
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IPlayer" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IMap" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.UnitType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IDwarf">
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Dwarf" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Dwarf.cs">
+        <To fullname="SmallWorld.Unit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IDwarf" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IForest">
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Forest">
+        <To fullname="SmallWorld.Case" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IForest" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IGallic">
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Gallic" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Gallic.cs">
+        <To fullname="SmallWorld.Unit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IGallic" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IGame">
+        <To fullname="SmallWorld.IPlayer" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.NationType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Game" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\Game.cs">
+        <To fullname="SmallWorld.IGame" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IPlayer" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IMap" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.NationType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.Unit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IMountain">
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IPlain">
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.ISea">
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IMap">
+        <To fullname="mapWrapper.WrapperMapSuggestion" assemblyname="SmallWorldLibWrapper" assemblyversion="0.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.INation">
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.INationDwarf">
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.INationGallic">
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.INationViking">
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.INormalGameBuilder">
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.ISmallGameBuiler">
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IViking">
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.IPlayer">
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Map" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Map\Map.cs">
+        <To fullname="SmallWorld.IMap" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="mapWrapper.WrapperMapSuggestion" assemblyname="SmallWorldLibWrapper" assemblyversion="0.0.0.0" />
+        <To fullname="mapWrapper.WrapperMapGenerator" assemblyname="SmallWorldLibWrapper" assemblyversion="0.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.UnitType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Mountain">
+        <To fullname="SmallWorld.Case" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IMountain" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Nation" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Nation.cs">
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.NationDwarf" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\NationDwarf.cs">
+        <To fullname="SmallWorld.Nation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INationDwarf" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.NationGallic" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\NationGallic.cs">
+        <To fullname="SmallWorld.Nation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INationGallic" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.NationViking" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\NationViking.cs">
+        <To fullname="SmallWorld.Nation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INationViking" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.NormalGameBuilder" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\NormalGameBuilder.cs">
+        <To fullname="SmallWorld.GameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INormalGameBuilder" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Plain">
+        <To fullname="SmallWorld.Case" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IPlain" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Player" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\Player.cs">
+        <To fullname="SmallWorld.IPlayer" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.INation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.NationType" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.Unit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Sea">
+        <To fullname="SmallWorld.Case" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ISea" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.SmallGameBuilder" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\SmallGameBuilder.cs">
+        <To fullname="SmallWorld.GameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ISmallGameBuiler" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IGameCreation" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+      <From fullname="SmallWorld.Viking" path="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Viking.cs">
+        <To fullname="SmallWorld.Unit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IViking" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.IUnit" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+        <To fullname="SmallWorld.ICase" assemblyname="SmallWorldCore" assemblyversion="1.0.0.0" />
+      </From>
+    </TypeReferences>
+    <Design>
+      <type fullName="SmallWorld.Case" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Map\Case.cs" rfc="2" dit="1" />
+      <type fullName="SmallWorld.GameCreation" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\GameCreation.cs" rfc="11" dit="1">
+        <block>
+          <element type="Method" name="SmallWorld.Game createGame(System.String, SmallWorld.NationType, System.String, SmallWorld.NationType)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.DemoGameBuilder" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\DemoGameBuilder.cs" rfc="4" dit="2">
+        <block>
+          <element type="Method" name="System.Int32 get_NB_ROUNDS()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 get_MAP_SIZE()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 get_NB_UNITS()" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Unit" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Unit.cs" rfc="67" dit="1">
+        <block>
+          <element type="Method" name="System.Int32 get_MaxHealth()" />
+        </block>
+        <block>
+          <element type="Field" name="_defensePoints" />
+          <element type="Method" name="System.Int32 get_Defense()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Double get_MaxMovePoint()" />
+        </block>
+        <block>
+          <element type="Field" name="_attackPoints" />
+          <element type="Field" name="_currentPosition" />
+          <element type="Field" name="_health" />
+          <element type="Field" name="_id" />
+          <element type="Field" name="_movePoint" />
+          <element type="Method" name="System.Boolean attack(SmallWorld.IUnit, System.Drawing.Point)" />
+          <element type="Method" name="System.Boolean canMoveOn(System.Drawing.Point)" />
+          <element type="Method" name="System.Double computePercentageToWin(SmallWorld.IUnit)" />
+          <element type="Method" name="System.Int32 get_Attack()" />
+          <element type="Method" name="System.Drawing.Point get_CurrentPosition()" />
+          <element type="Method" name="System.Int32 get_Health()" />
+          <element type="Method" name="System.Int32 get_Id()" />
+          <element type="Method" name="System.Double get_MovePoint()" />
+          <element type="Method" name="System.String get_Name()" />
+          <element type="Method" name="System.Void GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)" />
+          <element type="Method" name="System.Collections.Generic.List`1&lt;System.Drawing.Point&gt; getSuggestedPoints()" />
+          <element type="Method" name="System.Boolean isAlive()" />
+          <element type="Method" name="System.Boolean isNear(System.Drawing.Point)" />
+          <element type="Method" name="System.Boolean move(System.Drawing.Point)" />
+          <element type="Method" name="System.Void set_CurrentPosition(System.Drawing.Point)" />
+          <element type="Method" name="System.Void set_Health(System.Int32)" />
+          <element type="Method" name="System.Void set_Id(System.Int32)" />
+          <element type="Method" name="System.Void set_MovePoint(System.Double)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Void buryUnit(SmallWorld.IPlayer, System.Drawing.Point)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 getMoveCost()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 getPoints()" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Dwarf" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Dwarf.cs" rfc="13" dit="2">
+        <block>
+          <element type="Method" name="System.Boolean canMoveOn(System.Drawing.Point)" />
+          <element type="Method" name="System.Boolean canMoveOn(System.Drawing.Point)" />
+          <element type="Method" name="System.Drawing.Point get_CurrentPosition()" />
+          <element type="Method" name="System.Double get_MovePoint()" />
+          <element type="Method" name="System.Int32 getPoints()" />
+          <element type="Method" name="System.Int32 getPoints()" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Gallic" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Gallic.cs" rfc="16" dit="2">
+        <block>
+          <element type="Method" name="System.Boolean canMoveOn(System.Drawing.Point)" />
+          <element type="Method" name="System.Double get_MovePoint()" />
+          <element type="Method" name="System.Boolean isNear(System.Drawing.Point)" />
+          <element type="Method" name="System.Boolean move(System.Drawing.Point)" />
+          <element type="Method" name="System.Boolean move(System.Drawing.Point)" />
+          <element type="Method" name="System.Void set_MovePoint(System.Double)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Drawing.Point get_CurrentPosition()" />
+          <element type="Method" name="System.Int32 getPoints()" />
+          <element type="Method" name="System.Int32 getPoints()" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Game" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\Game.cs" rfc="57" dit="1">
+        <block>
+          <element type="Method" name="System.Void set_FirstPlayer(SmallWorld.IPlayer)" />
+        </block>
+        <block>
+          <element type="Field" name="_currentPlayer" />
+          <element type="Field" name="_currentRound" />
+          <element type="Field" name="_firstPlayer" />
+          <element type="Field" name="_map" />
+          <element type="Field" name="_nbRounds" />
+          <element type="Field" name="_nbUnits" />
+          <element type="Field" name="_players" />
+          <element type="Method" name="System.Void createMap(System.Int32)" />
+          <element type="Method" name="System.Void determinePlayOrder()" />
+          <element type="Method" name="System.Void endRound()" />
+          <element type="Method" name="SmallWorld.IPlayer get_CurrentPlayer()" />
+          <element type="Method" name="System.Int32 get_CurrentRound()" />
+          <element type="Method" name="SmallWorld.IPlayer get_FirstPlayer()" />
+          <element type="Method" name="SmallWorld.IMap get_Map()" />
+          <element type="Method" name="System.Int32 get_NbRounds()" />
+          <element type="Method" name="System.Int32 get_NbUnits()" />
+          <element type="Method" name="SmallWorld.IPlayer[] get_Players()" />
+          <element type="Method" name="SmallWorld.IPlayer get_Winner()" />
+          <element type="Method" name="System.Void GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)" />
+          <element type="Method" name="System.Void initGame(System.Int32, System.Int32)" />
+          <element type="Method" name="System.Void initPlayer(System.Int32, System.String, SmallWorld.NationType)" />
+          <element type="Method" name="System.Boolean isFinished()" />
+          <element type="Method" name="System.Void placePlayers()" />
+          <element type="Method" name="System.Void set_CurrentPlayer(SmallWorld.IPlayer)" />
+          <element type="Method" name="System.Void set_CurrentRound(System.Int32)" />
+          <element type="Method" name="System.Void set_Map(SmallWorld.IMap)" />
+          <element type="Method" name="System.Void set_NbUnits(System.Int32)" />
+          <element type="Method" name="System.Void set_Players(SmallWorld.IPlayer[])" />
+        </block>
+        <block>
+          <element type="Method" name="System.Void saveCurrentGame(System.String)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Void restoreGame(System.String)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Map" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Map\Map.cs" rfc="77" dit="1">
+        <block>
+          <element type="Field" name="_grid" />
+          <element type="Field" name="_suggestEngine" />
+          <element type="Field" name="_units" />
+          <element type="Field" name="_width" />
+          <element type="Method" name="System.Void generateMap(System.Int32)" />
+          <element type="Method" name="System.Collections.Generic.List`1&lt;System.Int32&gt; get_NativeUnits()" />
+          <element type="Method" name="System.Int32 get_Size()" />
+          <element type="Method" name="mapWrapper.WrapperMapSuggestion get_SuggestEngine()" />
+          <element type="Method" name="System.Int32 get_Width()" />
+          <element type="Method" name="SmallWorld.IUnit getBestDefensiveUnit(System.Drawing.Point)" />
+          <element type="Method" name="SmallWorld.ICase getCase(System.Drawing.Point)" />
+          <element type="Method" name="SmallWorld.ICase getCaseTypeInstance(System.Int32)" />
+          <element type="Method" name="System.Int32 getIndexFromPoint(System.Drawing.Point)" />
+          <element type="Method" name="System.Void GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)" />
+          <element type="Method" name="System.Drawing.Point[] getStartPoints()" />
+          <element type="Method" name="System.Collections.Generic.List`1&lt;SmallWorld.IUnit&gt; getUnits(System.Drawing.Point)" />
+          <element type="Method" name="System.Void initUnits(System.Collections.Generic.List`1&lt;SmallWorld.IUnit&gt;, System.Drawing.Point)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Nation" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Nation.cs" rfc="3" dit="1" />
+      <type fullName="SmallWorld.NationDwarf" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\NationDwarf.cs" rfc="6" dit="2">
+        <block>
+          <element type="Method" name="SmallWorld.IUnit fabricUnit(System.Int32)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Boolean hasUnit(SmallWorld.IUnit)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.NationGallic" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\NationGallic.cs" rfc="6" dit="2">
+        <block>
+          <element type="Method" name="SmallWorld.IUnit fabricUnit(System.Int32)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Boolean hasUnit(SmallWorld.IUnit)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.NationViking" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\NationViking.cs" rfc="6" dit="2">
+        <block>
+          <element type="Method" name="SmallWorld.IUnit fabricUnit(System.Int32)" />
+        </block>
+        <block>
+          <element type="Method" name="System.Boolean hasUnit(SmallWorld.IUnit)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.NormalGameBuilder" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\NormalGameBuilder.cs" rfc="4" dit="2">
+        <block>
+          <element type="Method" name="System.Int32 get_NB_ROUNDS()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 get_MAP_SIZE()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 get_NB_UNITS()" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Player" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\Player.cs" rfc="22" dit="1">
+        <block>
+          <element type="Field" name="nation" />
+          <element type="Field" name="nickname" />
+          <element type="Field" name="units" />
+          <element type="Method" name="System.Int32 computePoints()" />
+          <element type="Method" name="SmallWorld.INation get_Nation()" />
+          <element type="Method" name="System.String get_Nickname()" />
+          <element type="Method" name="System.Collections.Generic.List`1&lt;SmallWorld.IUnit&gt; get_Units()" />
+          <element type="Method" name="System.Void GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.SmallGameBuilder" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Core\SmallGameBuilder.cs" rfc="4" dit="2">
+        <block>
+          <element type="Method" name="System.Int32 get_NB_ROUNDS()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 get_MAP_SIZE()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Int32 get_NB_UNITS()" />
+        </block>
+      </type>
+      <type fullName="SmallWorld.Viking" source="d:\Cours\INSA\4INFO\smallworld\SmallWorld\LibModele\Units\Viking.cs" rfc="27" dit="2">
+        <block>
+          <element type="Method" name="System.Drawing.Point get_CurrentPosition()" />
+          <element type="Method" name="System.Int32 getPoints()" />
+          <element type="Method" name="System.Int32 getPoints()" />
+          <element type="Method" name="System.Boolean isNearWater()" />
+        </block>
+        <block>
+          <element type="Method" name="System.Boolean canMoveOn(System.Drawing.Point)" />
+          <element type="Method" name="System.Double get_MovePoint()" />
+          <element type="Method" name="System.Boolean isNear(System.Drawing.Point)" />
+        </block>
+      </type>
+      <type fullName="&lt;Module&gt;" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.ICase" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IGameCreation" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IDemoGameBuilder" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IDesert" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.Desert" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.IUnit" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IDwarf" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IForest" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.Forest" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.IGallic" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IGame" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.InvalidSaveFileException" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.GameSize" source="" rfc="0" dit="3" />
+      <type fullName="SmallWorld.IMountain" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IPlain" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.ISea" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IMap" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.INation" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.INationDwarf" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.INationGallic" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.INationViking" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.INormalGameBuilder" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.ISmallGameBuiler" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IViking" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.IPlayer" source="" rfc="0" dit="0" />
+      <type fullName="SmallWorld.UnknownTileException" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.Mountain" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.NationType" source="" rfc="0" dit="3" />
+      <type fullName="SmallWorld.Plain" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.Sea" source="" rfc="1" dit="2" />
+      <type fullName="SmallWorld.UnitType" source="" rfc="0" dit="3" />
+    </Design>
+  </Assembly>
+  <Assembly name="SmallWorldLibWrapper" version="0.0.0.0">
+    <References>
+      <Reference name="mscorlib" fullName="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+      <Reference name="System.Data" fullName="System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+      <Reference name="System" fullName="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+      <Reference name="System.Xml" fullName="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+    </References>
+  </Assembly>
+</Dependencies>

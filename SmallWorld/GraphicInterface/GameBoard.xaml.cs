@@ -113,6 +113,8 @@ namespace GraphicInterface
                 Player1Nickname.FontWeight = FontWeights.Normal;
                 Player2Nickname.FontWeight = FontWeights.Black;
             }
+
+            UnitsToPlayLeft.Text = game.CurrentPlayer.getNbUnitsToPlay().ToString();
         }
 
 
@@ -302,7 +304,7 @@ namespace GraphicInterface
                         }
                         else if (percentageLost > 25)
                         {
-                            InfoBox.Text += "your attack was'nt very powerfull, the oponent lost " + lifeLostOponent +
+                            InfoBox.Text += "your attack wasn't very powerfull, the oponent lost " + lifeLostOponent +
                                 " points of life.";
                         }
                         else
@@ -330,9 +332,11 @@ namespace GraphicInterface
                     }
 
                 }
+
                 inMove = false;
                 selectedUnit = null;
                 mapViewer.cleanSuggestions();
+                refreshGameInfos();
             }
         }
 

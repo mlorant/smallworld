@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FxCopProject Version="1.36">
+    <ProjectOptions>
+        <SharedProject>False</SharedProject>
+        <SaveMessages>
+            <Project NewOnly="False" Status="Active, Excluded"/>
+            <Report NewOnly="False" Status="Active"/>
+        </SaveMessages>
+        <ProjectFile Deterministic="True" SaveByRuleGroup="" DefaultRuleCheck="True" DefaultTargetCheck="True" Compress="True"/>
+        <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+        <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+        <SourceLookup>True</SourceLookup>
+        <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+        <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+        <Spelling Locale="en-US"/>
+        <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+        <CustomDictionaries SearchProjectDir="True" SearchUserProfile="True" SearchFxCopDir="True"/>
+        <IgnoreGeneratedCode>True</IgnoreGeneratedCode>
+    </ProjectOptions>
+    <Rules>
+        <RuleFiles>
+            <RuleFile AllRulesEnabled="False" Enabled="True" Name="$(FxCopDir)\Rules\GlobalizationRules.dll">
+                <Rule Enabled="True" Name="AvoidDuplicateAccelerators" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotHardcodeLocaleSpecificStrings" SonarPriority="major"/>
+                <Rule Enabled="True" Name="NormalizeStringsToUppercase" SonarPriority="major"/>
+                <Rule Enabled="True" Name="SetLocaleForDataTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="SpecifyMarshalingForPInvokeStringArguments" SonarPriority="major"/>
+                <Rule Enabled="True" Name="SpecifyStringComparison" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UseOrdinalStringComparison" SonarPriority="major"/>
+                <Rule Enabled="True" Name="SpecifyIFormatProvider" SonarPriority="info"/>
+            </RuleFile>
+            <RuleFile AllRulesEnabled="False" Enabled="True" Name="$(FxCopDir)\Rules\PerformanceRules.dll">
+                <Rule Enabled="True" Name="AvoidExcessiveLocals" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotCastUnnecessarily" SonarPriority="major"/>
+                <Rule Enabled="True" Name="InitializeReferenceTypeStaticFieldsInline" SonarPriority="major"/>
+                <Rule Enabled="True" Name="OverrideEqualsAndOperatorEqualsOnValueTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="RemoveEmptyFinalizers" SonarPriority="major"/>
+                <Rule Enabled="True" Name="TestForEmptyStringsUsingStringLength" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UseLiteralsWhereAppropriate" SonarPriority="major"/>
+            </RuleFile>
+            <RuleFile AllRulesEnabled="False" Enabled="True" Name="$(FxCopDir)\Rules\DesignRules.dll">
+                <Rule Enabled="True" Name="AssembliesShouldHaveValidStrongNames" SonarPriority="major"/>
+                <Rule Enabled="True" Name="AvoidEmptyInterfaces" SonarPriority="critical"/>
+                <Rule Enabled="True" Name="AvoidExcessiveParametersOnGenericTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="AvoidNamespacesWithFewTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="AvoidOutParameters" SonarPriority="critical"/>
+                <Rule Enabled="True" Name="CollectionsShouldImplementGenericInterface" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ConsiderPassingBaseTypesAsParameters" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DeclareEventHandlersCorrectly" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DeclareTypesInNamespaces" SonarPriority="blocker"/>
+                <Rule Enabled="True" Name="DefaultParametersShouldNotBeUsed" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DefineAccessorsForAttributeArguments" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotCatchGeneralExceptionTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotDeclareProtectedMembersInSealedTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotDeclareStaticMembersOnGenericTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotDeclareVirtualMembersInSealedTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotDeclareVisibleInstanceFields" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotExposeGenericLists" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotHideBaseClassMethods" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotNestGenericTypesInMemberSignatures" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotOverloadOperatorEqualsOnReferenceTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotPassTypesByReference" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotRaiseExceptionsInUnexpectedLocations" SonarPriority="critical"/>
+                <Rule Enabled="True" Name="EnumeratorsShouldBeStronglyTyped" SonarPriority="major"/>
+                <Rule Enabled="True" Name="EnumsShouldHaveZeroValue" SonarPriority="major"/>
+                <Rule Enabled="True" Name="EnumStorageShouldBeInt32" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ExceptionsShouldBePublic" SonarPriority="major"/>
+                <Rule Enabled="True" Name="GenericMethodsShouldProvideTypeParameter" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ICollectionImplementationsHaveStronglyTypedMembers" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ImplementIDisposableCorrectly" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ImplementStandardExceptionConstructors" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IndexersShouldNotBeMultidimensional" SonarPriority="major"/>
+                <Rule Enabled="True" Name="InterfaceMethodsShouldBeCallableByChildTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ListsAreStronglyTyped" SonarPriority="major"/>
+                <Rule Enabled="True" Name="MarkEnumsWithFlags" SonarPriority="major"/>
+                <Rule Enabled="True" Name="MembersShouldNotExposeCertainConcreteTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="MovePInvokesToNativeMethodsClass" SonarPriority="major"/>
+                <Rule Enabled="True" Name="NestedTypesShouldNotBeVisible" SonarPriority="major"/>
+                <Rule Enabled="True" Name="OverloadOperatorEqualsOnOverloadingAddAndSubtract" SonarPriority="major"/>
+                <Rule Enabled="True" Name="OverrideMethodsOnComparableTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="PropertiesShouldNotBeWriteOnly" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ProvideObsoleteAttributeMessage" SonarPriority="critical"/>
+                <Rule Enabled="True" Name="ReplaceRepetitiveArgumentsWithParamsArray" SonarPriority="major"/>
+                <Rule Enabled="True" Name="StaticHolderTypesShouldBeSealed" SonarPriority="major"/>
+                <Rule Enabled="True" Name="StaticHolderTypesShouldNotHaveConstructors" SonarPriority="major"/>
+                <Rule Enabled="True" Name="StringUriOverloadsCallSystemUriOverloads" SonarPriority="major"/>
+                <Rule Enabled="True" Name="TypesShouldNotExtendCertainBaseTypes" SonarPriority="major"/>
+                <Rule Enabled="True" Name="TypesThatOwnDisposableFieldsShouldBeDisposable" SonarPriority="major"/>
+                <Rule Enabled="True" Name="TypesThatOwnNativeResourcesShouldBeDisposable" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UriParametersShouldNotBeStrings" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UriPropertiesShouldNotBeStrings" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UriReturnValuesShouldNotBeStrings" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UseEventsWhereAppropriate" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UseGenericEventHandlerInstances" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UseGenericsWhereAppropriate" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UseIntegralOrStringArgumentForIndexers" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UsePropertiesWhereAppropriate" SonarPriority="major"/>
+            </RuleFile>
+            <RuleFile AllRulesEnabled="False" Enabled="True" Name="$(FxCopDir)\Rules\NamingRules.dll">
+                <Rule Enabled="True" Name="CompoundWordsShouldBeCasedCorrectly" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotNameEnumValuesReserved" SonarPriority="major"/>
+                <Rule Enabled="True" Name="DoNotPrefixEnumValuesWithTypeName" SonarPriority="major"/>
+                <Rule Enabled="True" Name="EventsShouldNotHaveBeforeOrAfterPrefix" SonarPriority="major"/>
+                <Rule Enabled="True" Name="FlagsEnumsShouldHavePluralNames" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldDifferByMoreThanCase" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldHaveCorrectPrefix" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldHaveCorrectSuffix" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldNotContainTypeNames" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldNotHaveIncorrectPrefix" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldNotHaveIncorrectSuffix" SonarPriority="major"/>
+                <Rule Enabled="True" Name="IdentifiersShouldNotMatchKeywords" SonarPriority="major"/>
+                <Rule Enabled="True" Name="OnlyFlagsEnumsShouldHavePluralNames" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ParameterNamesShouldMatchBaseDeclaration" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ParameterNamesShouldNotMatchMemberNames" SonarPriority="major"/>
+                <Rule Enabled="True" Name="PropertyNamesShouldNotMatchGetMethods" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ResourceStringCompoundWordsShouldBeCasedCorrectly" SonarPriority="major"/>
+                <Rule Enabled="True" Name="ResourceStringsShouldBeSpelledCorrectly" SonarPriority="major"/>
+                <Rule Enabled="True" Name="TypeNamesShouldNotMatchNamespaces" SonarPriority="major"/>
+                <Rule Enabled="True" Name="UsePreferredTerms" SonarPriority="major"/>
+            </RuleFile>
+        </RuleFiles>
+    </Rules>
+</FxCopProject>

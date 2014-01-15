@@ -73,7 +73,7 @@
 
             <!-- Right side (end turn button) -->
             <StackPanel DockPanel.Dock="Right" Width="150">
-                <TextBlock Foreground="White" HorizontalAlignment="Center">2 units available left</TextBlock>
+                <TextBlock Foreground="White" HorizontalAlignment="Center"><TextBlock Name="UnitsToPlayLeft" Text="0" /> units available left</TextBlock>
                     <Button Content="Next Unit" Height="25" Width="100" Click="nextUnit" Margin="0,10,0,0" />
                     <Button Content="End turn" Height="25" Width="100" Click="endRound" Margin="0,10,0,0" />
             </StackPanel>
