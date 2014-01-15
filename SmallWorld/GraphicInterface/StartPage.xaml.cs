@@ -163,7 +163,7 @@ namespace GraphicInterface
                     builder = new SmallGameBuilder();
                     break;
                 default:
-                    throw new Exception("Unexpected game mode");
+                    throw new ArgumentException("Unexpected game mode");
             }
 
             game = builder.createGame(player1, nation1, player2, nation2);

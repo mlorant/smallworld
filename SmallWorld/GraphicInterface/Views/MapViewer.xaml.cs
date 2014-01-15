@@ -257,17 +257,18 @@ namespace GraphicInterface
             return halo;
         }
 
-        public void drawSuggestion(System.Drawing.Point pt)
+        public void drawSuggestion(System.Drawing.Point pt, MoveType moveType)
         {
             Rectangle sugg = new Rectangle();
+            
             Grid.SetColumn(sugg, pt.X);
             Grid.SetRow(sugg, pt.Y);
             Grid.SetZIndex(sugg, SUGG_INDEX);
+            
+            Color color = (moveType == MoveType.Suggested) ? Colors.Honeydew : Colors.PowderBlue;
 
-            SolidColorBrush col = new SolidColorBrush(Colors.White);
-            col.Opacity = 0.25;
-
-            sugg.Fill = col;
+            sugg.Stroke = new SolidColorBrush(color);
+            sugg.StrokeThickness = 2.25;
 
             mapGrid.Children.Add(sugg);
         }

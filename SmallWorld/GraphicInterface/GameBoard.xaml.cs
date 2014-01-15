@@ -452,9 +452,9 @@ namespace GraphicInterface
                 unitPanel.Highlight(true);
                 selectedUnit = unitPanel.Unit;
 
-                List<System.Drawing.Point> suggestions = selectedUnit.getSuggestedPoints();
-                foreach (System.Drawing.Point pt in suggestions)
-                    mapViewer.drawSuggestion(pt);
+                var suggestions = selectedUnit.getSuggestedPoints();
+                foreach (Tuple<System.Drawing.Point, MoveType> pt in suggestions)
+                    mapViewer.drawSuggestion(pt.Item1, pt.Item2);
 
                 inMove = true;
                 previous = selectedUnit.CurrentPosition;

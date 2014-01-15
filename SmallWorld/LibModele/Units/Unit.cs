@@ -9,7 +9,8 @@ using mapWrapper;
 namespace SmallWorld
 {
 
-    enum UnitType { None, Viking, Gallic, Dwarf }
+    public enum UnitType { None, Viking, Gallic, Dwarf }
+    public enum MoveType { Impossible = 0,	Possible, Suggested }
     
     [Serializable()]
     public abstract class Unit : IUnit, ISerializable
@@ -255,8 +256,9 @@ namespace SmallWorld
         /// according to the current units positions and envirronement. 
         /// (Compute via the C++ library)
         /// </summary>
-        /// <returns>List of Point where the unit can go on the map</returns>
-        public List<Point> getSuggestedPoints()
+        /// <returns>List of Point where the unit can go on the map, with the 
+        /// type of suggestion : Possible or Suggested</returns>
+        public List<Tuple<Point, MoveType>> getSuggestedPoints()
         {
             // Get tiles suggestion
             IMap map = Game.Instance.Map;
@@ -266,9 +268,12 @@ namespace SmallWorld
                                                                     this._movePoint, (int) unitEnum);
 
             // Construct a list of Point
-            List<Point> points = new List<Point>();
-            foreach (Tuple<int, int> pt in raw_points)
-                points.Add(new Point(pt.Item1, pt.Item2));
+            var points = new List<Tuple<Point, MoveType>>();
+            foreach (Tuple<int, int, int> pt in raw_points)
+            {
+                MoveType mt = (MoveType)pt.Item3;
+                points.Add(new Tuple<Point, MoveType>(new Point(pt.Item1, pt.Item2), mt));
+            }
             
             return points;
         }

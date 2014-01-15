@@ -49,7 +49,7 @@ namespace SmallWorld
             set 
             { 
                 if(value != this._currentRound + 1)
-                    throw new Exception("Round number shouldn't be increment by more than 1.");
+                    throw new ArgumentException("Round number shouldn't be increment by more than 1.");
 
                 this._currentRound = value;
             }

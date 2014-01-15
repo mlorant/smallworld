@@ -30,7 +30,7 @@ namespace SmallWorld
 
         bool canMoveOn(Point target);
 
-        List<Point> getSuggestedPoints();
+        List<Tuple<Point, MoveType>> getSuggestedPoints();
     }
 
     public interface IDwarf : IUnit    {}
