@@ -273,6 +273,7 @@ namespace GraphicInterface
                             IUnit unit = Game.Instance.Map.getUnits(tile)[0];
                             // verify modification on the destination tile (in case they were 2 and now 1)
                             mapViewer.drawUnits(tile, unit.GetType(), Game.Instance.Map.getUnits(tile).Count);
+                            selectedUnit.MovePoint = 0;
                             InfoBox.Text = "You won the battle !";
                         }
                     }
@@ -281,7 +282,7 @@ namespace GraphicInterface
                     {
                         Game.Instance.CurrentPlayer.buryUnit(selectedUnit);
                         mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
-                        InfoBox.Text = "Your unit take a fatal hit in the heart. You lost the battle.";
+                        InfoBox.Text = "Your unit takes a fatal hit in the heart. You lost the battle.";
                     }
                     // Otherwise the battle is a tie, we customise the message to give a feedback of the battle 
                     else

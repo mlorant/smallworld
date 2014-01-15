@@ -28,7 +28,7 @@ namespace SmallWorld
         /// <summary>Base defense points</summary>
         int Defense { get; }
         /// <summary>Current move points available</summary>
-        double MovePoint { get; }
+        double MovePoint { get; set; }
         /// <summary>Max move points possible in a round</summary>
         double MaxMovePoint { get; }
         /// <summary>Position on the map</summary>
