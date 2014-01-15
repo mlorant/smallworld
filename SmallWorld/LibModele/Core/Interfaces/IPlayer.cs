@@ -35,6 +35,10 @@ namespace SmallWorld
         /// </summary>
         int getNbUnitsToPlay();
 
+        /// <summary>
+        /// Delete the unit of the player list and the map
+        /// </summary>
+        /// <param name="general">Player of the unit dead</param>
         void buryUnit(IUnit unit);
 
     }

@@ -87,6 +87,8 @@ namespace GraphicInterface
             IUnit unit = Game.Instance.Map.getUnits(destPt)[0];
             drawUnits(sourcePt, unit.GetType(), Game.Instance.Map.getUnits(sourcePt).Count);
             drawUnits(destPt, unit.GetType(), Game.Instance.Map.getUnits(destPt).Count);
+            // Refresh halos
+            drawHalo();
         }
 
 
@@ -180,11 +182,6 @@ namespace GraphicInterface
                                                                               Grid.GetColumn(e) == pt.X &&
                                                                               Grid.GetZIndex(e) == UNIT_INDEX);
                 mapGrid.Children.Remove(rect);
-                // Remove halo
-                rect = mapGrid.Children.Cast<Rectangle>().Last(e => Grid.GetRow(e) == pt.Y &&
-                                                                    Grid.GetColumn(e) == pt.X &&
-                                                                    Grid.GetZIndex(e) == HALO_INDEX);
-                mapGrid.Children.Remove(rect);
             }
             else
             {
@@ -220,14 +217,6 @@ namespace GraphicInterface
                 }
 
                 units.Fill = unitsTextures[key];
-
-                // Add halo if necessary
-                Rectangle rect = mapGrid.Children.Cast<Rectangle>()
-                                                  .FirstOrDefault(e => Grid.GetRow(e) == pt.Y &&
-                                                                       Grid.GetColumn(e) == pt.X &&
-                                                                       Grid.GetZIndex(e) == HALO_INDEX);
-                if (rect == null)
-                    mapGrid.Children.Add(getHaloRectangle(pt));
             }
         }
 
