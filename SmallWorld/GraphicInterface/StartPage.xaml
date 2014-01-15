@@ -70,6 +70,7 @@
                 <StackPanel HorizontalAlignment="Left" Height="150" Margin="380,25,30,26"  Width="244">
                     <TextBlock HorizontalAlignment="Center" Text="Player 2" Foreground="White" FontSize="16" FontWeight="Medium" />
                     <TextBox Height="23" MaxLength="16" TextWrapping="Wrap" Text="" Name="Player2Nickname" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"/>
+                    
                     <Grid Height="80" IsEnabled="{Binding ElementName=InfoP2, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}">
                         <RadioButton GroupName="nationP2" Name="Dwarf2" Content="Dwarf" IsEnabled="{Binding ElementName=Dwarf1, Path=IsChecked, Converter={StaticResource inverseBooleanConverter}}"
                                   VerticalAlignment="Top" Checked="initNationPlayer2" Margin="84,17,107,0" Height="15" Foreground="White" ToolTipService.ShowDuration="15000">

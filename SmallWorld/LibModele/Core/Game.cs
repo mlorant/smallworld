@@ -118,13 +118,25 @@ namespace SmallWorld
         /// <summary>
         /// Init a player according to its configuration
         /// </summary>
-        /// <param name="i">Player number</param>
+        /// <param name="index">Player number</param>
         /// <param name="nickname">Personal nickname</param>
         /// <param name="nation">Nation choosed</param>
-        public void initPlayer(int i, string nickname, NationType nation)
+        public void initPlayer(int index, string nickname, NationType nation)
         {
-            _players[i] = new Player(nickname, nation, this._nbUnits);
-            // TODO: check unicity of nickname and nation?
+            IPlayer p = new Player(nickname, nation, this._nbUnits);
+
+            // Check unicity of nation and nickname
+            for (int i = 0; i < _players.Length; i++)
+            {
+                if (_players[i] != null) {
+                    if(_players[i].Nickname == nickname)
+                        throw new IllegalPlayerException("Two players can't have the same name");
+                    if(_players[i].Nation.GetType() == p.Nation.GetType())
+                        throw new IllegalPlayerException("Two players can't have the same nation");
+                }
+            }
+
+            _players[index] = p;
         }
 
         /// <summary>
@@ -301,4 +313,14 @@ namespace SmallWorld
     /// Exception raised when an invalid save file is detected
     /// </summary>
     public class InvalidSaveFileException : Exception { }
+
+
+    /// <summary>
+    /// Exception raised when an invalid player is set
+    /// </summary>
+    public class IllegalPlayerException : Exception {
+        public IllegalPlayerException(string msg) : base(msg)
+        {
+        }
+    }
 }

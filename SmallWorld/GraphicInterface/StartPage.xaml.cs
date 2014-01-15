@@ -106,7 +106,7 @@ namespace GraphicInterface
 
             Player1Nickname.ClearValue(TextBox.BorderBrushProperty);
             
-            if (player1 == null || player1 == "")
+            if (player1 == null || player1 == "" || player1 == Player2Nickname.Text)
             {
                 Player1Nickname.BorderBrush = Brushes.Red;
                 InfoP1.IsChecked = false;
@@ -132,7 +132,7 @@ namespace GraphicInterface
 
             Player2Nickname.ClearValue(TextBox.BorderBrushProperty);
 
-            if (player2 == null || player2 == "")
+            if (player2 == null || player2 == "" || player2 == Player1Nickname.Text)
             {
                 Player2Nickname.BorderBrush = Brushes.Red;
                 InfoP2.IsChecked = false;
