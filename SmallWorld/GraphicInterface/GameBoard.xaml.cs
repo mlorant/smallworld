@@ -280,7 +280,8 @@ namespace GraphicInterface
                     else if (!selectedUnit.isAlive())
                     {
                         Game.Instance.CurrentPlayer.buryUnit(selectedUnit);
-                        mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
+                        mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(selectedUnit.CurrentPosition).Count);
+                        mapViewer.drawHalo();
                         InfoBox.Text = "Your unit take a fatal hit in the heart. You lost the battle.";
                     }
                     // Otherwise the battle is a tie, we customise the message to give a feedback of the battle 
