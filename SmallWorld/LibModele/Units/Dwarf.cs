@@ -7,6 +7,11 @@ using System.Text;
 
 namespace SmallWorld
 {
+    /// <summary>
+    /// Dwarf unit representation.
+    /// Can move on any mountain without ennemies if he's 
+    /// already on a mountain
+    /// </summary>
     [Serializable()]
     public class Dwarf : Unit, IDwarf
     {

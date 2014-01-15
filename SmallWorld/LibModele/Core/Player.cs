@@ -6,6 +6,12 @@ using System.Text;
 
 namespace SmallWorld
 {
+
+    /// <summary>
+    /// Representation of a player in the SmallWorld game.
+    /// A player has a nickname and a list of units associated
+    /// to one nation.
+    /// </summary>
     [Serializable()]
     public class Player : IPlayer, ISerializable
     {

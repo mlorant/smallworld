@@ -7,6 +7,13 @@ using System.Text;
 
 namespace SmallWorld
 {
+
+    /// <summary>
+    /// Representation of a map in the game.
+    /// A map is compose of a squared grid of 
+    /// tiles and units in tiles. Several units 
+    /// can be on a single tile.
+    /// </summary>
     public interface IMap
     {
 

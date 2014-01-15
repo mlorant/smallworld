@@ -9,15 +9,25 @@ using mapWrapper;
 namespace SmallWorld
 {
 
+    /// <summary>
+    /// Enumeration of possible Unit Type, including None
+    /// </summary>
     public enum UnitType { None, Viking, Gallic, Dwarf }
+
+    /// <summary>
+    /// Move type possible in suggestions
+    /// </summary>
     public enum MoveType { Impossible = 0,	Possible, Suggested }
-    
+
+    /// <summary>
+    /// Unit base class. An unit has a name, 
+    /// an health status and attack/defense points, compute
+    /// according to the attacker/defender.
+    /// Each unit known it own position. 
+    /// </summary>
     [Serializable()]
     public abstract class Unit : IUnit, ISerializable
     {
-        /// <summary>
-        /// Current health status of the unit
-        /// </summary>
         private int _health = MAXHEALTH;
         private const int MAXHEALTH = 5;
         private int _id;
@@ -28,29 +38,43 @@ namespace SmallWorld
 
         private Point _currentPosition;
 
+        /// <summary>
+        /// Name of the unit
+        /// </summary>
         public string Name
         {
             get { return this.GetType().Name + " " + this.Id; }
         }
 
+        /// <summary>
+        /// Current health status
+        /// </summary>
         public int Health
         {
             get { return this._health; }
             set { this._health = value; }
         }
 
+        /// <summary>
+        /// Max Health (at the beginning of the game)
+        /// </summary>
         public int MaxHealth
         {
             get { return MAXHEALTH; }
         }
 
+        /// <summary>
+        /// Unique identifier for the unit in its nation
+        /// </summary>
         public int Id
         {
             get { return this._id; }
             set { this._id = value;}
         }
 
-
+        /// <summary>
+        /// Base attack points
+        /// </summary>
         public int Attack
         {
             get 
@@ -60,35 +84,51 @@ namespace SmallWorld
             }
         }
 
+        /// <summary>
+        /// Base defense points
+        /// </summary>
+        ///
         public int Defense
         {
             get { return this._defensePoints; }
         }
 
+        /// <summary>
+        /// Current move points available
+        /// </summary>
         public double MovePoint
         {
             get { return this._movePoint; }
             set { this._movePoint = value; }
         }
 
+        /// <summary>
+        /// Max move points possible in a round
+        /// </summary>
         public double MaxMovePoint
         {
             get { return 1; }
         }
 
+        /// <summary>
+        /// Position on the map
+        /// </summary>
         public Point CurrentPosition
         {
             get { return this._currentPosition; }
             set { this._currentPosition = value; }
         }
 
-
         /// <summary>
         /// Default constructor
         /// </summary>
         public Unit() { }
 
-        // Deserialization constructor.
+        /// <summary>
+        /// Deserialization constructor.
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="ctxt"></param>
         public Unit(SerializationInfo info, StreamingContext ctxt)
         {
             //Get the values from info and assign them to the appropriate properties
@@ -98,6 +138,8 @@ namespace SmallWorld
             this._currentPosition = (Point)info.GetValue("UnitPosition", typeof(Point));
         }
 
+        /// <summary>Attack another unit located on the `target` point.
+        /// Returns true if the current unit wins</summary>
         public bool attack(IUnit defender, Point target)
         {
             
@@ -152,6 +194,11 @@ namespace SmallWorld
 
         }
 
+        /// <summary>
+        /// Get percentage of chance to win the battle
+        /// against the defender unit given
+        /// </summary>
+        /// <param name="defender">Enemy unit</param>
         public double computePercentageToWin(IUnit defender)
         {
             double powerBalance;
@@ -175,6 +222,10 @@ namespace SmallWorld
             return percentageAgainstAttacker;
         }
 
+        /// <summary>
+        /// Check if the unit is still alive
+        /// </summary>
+        /// <returns></returns>
         public bool isAlive()
         {
             return (_health > 0);
