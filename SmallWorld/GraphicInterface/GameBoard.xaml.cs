@@ -203,9 +203,6 @@ namespace GraphicInterface
             }
             if (selected != null)
             {
-                int x = selected.Unit.CurrentPosition.X;
-                int y = selected.Unit.CurrentPosition.Y;
-                InfoBox.Text = "Unit " + selected.Unit.Name + " on (" + x + ", " + y + ") selected.";
                 this.makeUnitSelected(selected);
             }
             else
@@ -247,12 +244,15 @@ namespace GraphicInterface
             }
             else
             {
+                
                 // if the case clicked have units of the oponent
-                if (game.Map.getUnits(tile).Count > 0 && (game.Map.getUnits(tile)[0].GetType() != selectedUnit.GetType()))
+                if (game.Map.getUnits(tile).Count > 0 && (game.Map.getUnits(tile)[0].GetType() != selectedUnit.GetType())
+                    && selectedUnit.canMoveOn(tile))
                 {
                     // Get best defense unit on the tile
                     IUnit defender = Game.Instance.Map.getBestDefensiveUnit(tile);
                     int initLifeOponent = defender.Health;
+                    MessageBox.Show(initLifeOponent.ToString());
                     // Run the battle
                     bool wonTheBattle = selectedUnit.attack(defender, tile);
                     // If unit wins the battle then oponent is dead and we verify if case is free
@@ -290,7 +290,10 @@ namespace GraphicInterface
                     {
                         InfoBox.Text = "The battle is a tie, but ";
                         int lifeLostOponent = initLifeOponent - defender.Health;
-                        int percentageLost = lifeLostOponent/defender.MaxHealth*100;
+                        MessageBox.Show(lifeLostOponent.ToString());
+                        float percentageLost = ((float)lifeLostOponent / defender.MaxHealth) * 100;
+                        MessageBox.Show(defender.Health.ToString());
+                        MessageBox.Show(percentageLost.ToString());
                         // Compare the result in the battle
                         if(percentageLost > 75) 
                         {
@@ -299,7 +302,7 @@ namespace GraphicInterface
                         }
                         else if (percentageLost > 50)
                         {
-                            InfoBox.Text += "It was very efficient, the oponent lost " + lifeLostOponent +
+                            InfoBox.Text += "it was very efficient, the oponent lost " + lifeLostOponent +
                                 " points of life.";
                         }
                         else if (percentageLost > 25)
@@ -309,7 +312,7 @@ namespace GraphicInterface
                         }
                         else
                         {
-                            InfoBox.Text += "your had a hard time with the oponent, he lost " + lifeLostOponent +
+                            InfoBox.Text += "you had a hard time with the oponent, he lost " + lifeLostOponent +
                                 " points of life.";
                         }
                     }
@@ -330,7 +333,6 @@ namespace GraphicInterface
                     {
                         mapViewer.moveImageUnit(previous, tile);
                     }
-
                 }
 
                 inMove = false;
