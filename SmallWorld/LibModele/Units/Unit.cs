@@ -181,7 +181,6 @@ namespace SmallWorld
                         // When oponent is dead then battle is won.
                         if (defender.Health == 0)
                         {
-                            this._movePoint = 0;
                             return true;
                         }
 

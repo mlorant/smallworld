@@ -251,7 +251,6 @@ namespace GraphicInterface
                     // Get best defense unit on the tile
                     IUnit defender = Game.Instance.Map.getBestDefensiveUnit(tile);
                     int initLifeOponent = defender.Health;
-                    MessageBox.Show(initLifeOponent.ToString());
                     // Run the battle
                     bool wonTheBattle = selectedUnit.attack(defender, tile);
                     // If unit wins the battle then oponent is dead and we verify if case is free
@@ -289,10 +288,7 @@ namespace GraphicInterface
                     {
                         InfoBox.Text = "The battle is a tie, but ";
                         int lifeLostOponent = initLifeOponent - defender.Health;
-                        MessageBox.Show(lifeLostOponent.ToString());
                         float percentageLost = ((float)lifeLostOponent / defender.MaxHealth) * 100;
-                        MessageBox.Show(defender.Health.ToString());
-                        MessageBox.Show(percentageLost.ToString());
                         // Compare the result in the battle
                         if(percentageLost > 75) 
                         {
