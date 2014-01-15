@@ -302,7 +302,7 @@ namespace GraphicInterface
                         }
                         else if (percentageLost > 25)
                         {
-                            InfoBox.Text += "your attack wasn't very powerfull, the oponent lost " + lifeLostOponent +
+                            InfoBox.Text += "your attack wasn't very powerful, the oponent lost " + lifeLostOponent +
                                 " points of life.";
                         }
                         else
