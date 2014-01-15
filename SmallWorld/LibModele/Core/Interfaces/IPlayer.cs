@@ -14,7 +14,7 @@ namespace SmallWorld
     public interface IPlayer
     {
         /// <summary>Player nickname</summary>
-        String Nickname { get; }
+        string Nickname { get; }
 
         /// <summary>Units list of the player</summary>
         List<IUnit> Units { get; }

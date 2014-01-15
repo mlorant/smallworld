@@ -86,6 +86,8 @@ namespace GraphicInterface
                 case Key.Down:
                     moveUnitKeyboard(e.Key);
                     break;
+                default:
+                    break;
             }
 
         }
@@ -124,7 +126,7 @@ namespace GraphicInterface
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.endRound();
-            if (game.isFinished())
+            if (game.Finished)
             {
                 // Game finished, show ending game panel with the winner
                 var ending = new GameEnding(game.Winner);
@@ -165,16 +167,14 @@ namespace GraphicInterface
         private void nextUnit(object sender, RoutedEventArgs e)
         {
             List<IUnit> unitsOfThePlayer = Game.Instance.CurrentPlayer.Units;
-            UnitSelector selected = null;            
+            UnitSelector selected = null;     
             System.Drawing.Point tileMovePointRemaining = new System.Drawing.Point(-1,-1);
            
             int numPrevious = 0;
             
             // if we don't find yet a unit to select, we run through all the units
             if (selectedUnit != null)
-            {
                 numPrevious = unitsOfThePlayer.IndexOf(selectedUnit);
-            }
                 
             // Find the first unit still moveable beginning from the last unit already selected
             for (int i = 0; i < unitsOfThePlayer.Count; i++)
@@ -201,6 +201,7 @@ namespace GraphicInterface
                     }
                 }
             }
+
             if (selected != null)
             {
                 int x = selected.Unit.CurrentPosition.X;
@@ -212,9 +213,7 @@ namespace GraphicInterface
             {
                 UnitsInfo.Children.Clear();
                 if (!tileMovePointRemaining.Equals(new System.Drawing.Point(-1,-1)))
-                {
                     this.displayUnitsOnCase(tileMovePointRemaining, true);
-                }
                 else
                     InfoBox.Text = "No units moveable remaining, you must end your turn.";
             }
@@ -359,6 +358,8 @@ namespace GraphicInterface
                         break;
                     case Key.Down:
                         moveTo.Y++;
+                        break;
+                    default:
                         break;
                 }
 

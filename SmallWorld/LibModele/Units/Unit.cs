@@ -28,7 +28,7 @@ namespace SmallWorld
 
         private Point _currentPosition;
 
-        public String Name
+        public string Name
         {
             get { return this.GetType().Name + " " + this.Id; }
         }

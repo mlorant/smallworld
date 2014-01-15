@@ -26,6 +26,8 @@ namespace GraphicInterface
         // Base folder for units images
         const string IMAGEUNITS = "pack://application:,,,/GraphicInterface;component/Resources/img/units/";
 
+        const int TILE_SIZE = 50;
+
         // Z-index definitions
         const int BG_INDEX = 1;         // Background
         const int MAP_INDEX = 5;        // Tiles environnement textures
@@ -54,16 +56,16 @@ namespace GraphicInterface
             }
 
             // Initialization of the map grid
-            mapGrid.Width = Game.Instance.Map.Width * Case.SIZE;
+            mapGrid.Width = Game.Instance.Map.Width * TILE_SIZE;
             mapGrid.Height = mapGrid.Width;
 
             // Define the correct number of column with a size defined in the model
             for (int i = 0; i < Game.Instance.Map.Width; i++)
             {
                 ColumnDefinition col = new ColumnDefinition();
-                col.Width = new GridLength(Case.SIZE, GridUnitType.Pixel);
+                col.Width = new GridLength(TILE_SIZE, GridUnitType.Pixel);
                 RowDefinition row = new RowDefinition();
-                row.Height = new GridLength(Case.SIZE, GridUnitType.Pixel);
+                row.Height = new GridLength(TILE_SIZE, GridUnitType.Pixel);
                 mapGrid.ColumnDefinitions.Add(col);
                 mapGrid.RowDefinitions.Add(row);
             }
@@ -118,15 +120,15 @@ namespace GraphicInterface
 
                 // Draw square at the correct position
                 Rectangle tile = new Rectangle();
-                tile.Width = Case.SIZE;
-                tile.Height = Case.SIZE;
+                tile.Width = TILE_SIZE;
+                tile.Height = TILE_SIZE;
 
                 Grid.SetRow(tile, pt.Y);
                 Grid.SetColumn(tile, pt.X);
                 Grid.SetZIndex(tile, MAP_INDEX);
 
                 // Set tile texture (create it if not used yet)
-                String filename = tileType.GetType().Name.ToLower();
+                string filename = tileType.GetType().Name.ToLower();
                 if (!textures.ContainsKey(filename))
                 {
                     BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/terrain/" + filename + ".png"));
@@ -196,8 +198,8 @@ namespace GraphicInterface
                 {
                     units = new Rectangle();
                     // Set rectangle size and position
-                    units.Width = Case.SIZE;
-                    units.Height = Case.SIZE;
+                    units.Width = TILE_SIZE;
+                    units.Height = TILE_SIZE;
                     Grid.SetColumn(units, pt.X);
                     Grid.SetRow(units, pt.Y);
                     // Add to map
@@ -206,7 +208,7 @@ namespace GraphicInterface
                 }
 
                 // Construct the filename of the texture to draw
-                String key = unitType.Name.ToLower();
+                string key = unitType.Name.ToLower();
                 key += (nb > 1) ? "_multiple" : "";
 
                 // Create new brush if the textures hasn't been used yet

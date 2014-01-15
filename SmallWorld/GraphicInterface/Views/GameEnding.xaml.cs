@@ -32,7 +32,7 @@ namespace GraphicInterface
             PlayerPoints.Text = winner.computePoints().ToString();
             
             // Unit image
-            string unitType = winner.Units[0].GetType().Name.ToString().ToLower();
+            string unitType = winner.Units[0].GetType().Name.ToLower();
             Uri bg = new Uri("pack://application:,,,/GraphicInterface;component/Resources/img/portraits/"+unitType+".png");
             UnitImg.Source = new BitmapImage(bg);
 

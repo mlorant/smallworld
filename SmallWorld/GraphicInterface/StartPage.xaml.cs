@@ -59,6 +59,8 @@ namespace GraphicInterface
                 case "Viking":
                     nation = NationType.VIKING;
                     break;
+                default:
+                    throw new ArgumentException("This nation is unknown");
             }
             return nation;
         }

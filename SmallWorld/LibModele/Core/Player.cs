@@ -53,6 +53,8 @@ namespace SmallWorld
                 case NationType.VIKING:
                     nation = new NationViking();
                     break;
+                default:
+                    throw new ArgumentException("Unknown nation");
             }
 
             units = new List<IUnit>();
@@ -113,7 +115,7 @@ namespace SmallWorld
         /// <summary> Deserialization constructor.</summary>
         public Player(SerializationInfo info, StreamingContext ctxt)
         {
-            this.nickname = (String) info.GetString("PlayerNickname");
+            this.nickname = (string) info.GetString("PlayerNickname");
             this.units = (List<IUnit>) info.GetValue("PlayerUnits", typeof(List<IUnit>));
             this.nation = (INation)info.GetValue("PlayerNation", typeof(INation));
         }

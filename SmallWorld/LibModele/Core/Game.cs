@@ -88,6 +88,40 @@ namespace SmallWorld
             set { this._map = value; }
         }
 
+
+        /// <summary>
+        /// Check if the game is finished or not, according to
+        /// the round number and units remaining
+        /// </summary>
+        /// <returns>A boolean (true if the game is finished)</returns>
+        public bool Finished
+        {
+            get
+            {
+                return (_currentRound > this._nbRounds) // Check round limit 
+                    || _players[0].Units.Count == 0 
+                    || _players[1].Units.Count == 0; // Units
+            }
+        }
+
+        /// <summary>
+        /// Return the player who wins the current game, by computing
+        /// points for each players
+        /// </summary>
+        public IPlayer Winner
+        {
+            get
+            {
+                int p1 = _players[0].computePoints();
+                int p2 = _players[1].computePoints();
+                if (p1 > p2 || _players[1].Units.Count == 0)
+                    return _players[0];
+                else
+                    return _players[1];
+            }
+        }
+
+
         /// <summary>Singleton design pattern: Private constructor</summary>
         private Game() {}
 
@@ -205,37 +239,6 @@ namespace SmallWorld
             }
         }
 
-        /// <summary>
-        /// Check if the game is finished or not, according to
-        /// the round number and units remaining
-        /// </summary>
-        /// <returns>A boolean (true if the game is finished)</returns>
-        public bool isFinished()
-        {
-            // Check round limit 
-            if (_currentRound > this._nbRounds)
-                return true;
-
-            // Check units number
-            return (_players[0].Units.Count == 0 ||
-                     _players[1].Units.Count == 0);
-        }
-
-        /// <summary>
-        /// Return the player who wins the current game, by computing
-        /// points for each players
-        /// </summary>
-        public IPlayer Winner
-        {
-            get {
-                int p1 = _players[0].computePoints();
-                int p2 = _players[1].computePoints();
-                if (p1 > p2 || _players[1].Units.Count == 0)
-                    return _players[0];
-                else
-                    return _players[1];
-            }
-        }
 
 
         /// <summary>

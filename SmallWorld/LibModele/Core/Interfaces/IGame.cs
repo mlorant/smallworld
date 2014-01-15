@@ -43,7 +43,7 @@ namespace SmallWorld
         /// the round number and units remaining
         /// </summary>
         /// <returns>A boolean (true if the game is finished)</returns>
-        bool isFinished();
+        bool Finished { get; }
 
         /// <summary>
         /// Return the player who wins the current game, by computing

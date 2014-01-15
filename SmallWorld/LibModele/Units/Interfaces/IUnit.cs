@@ -9,7 +9,7 @@ namespace SmallWorld
     public interface IUnit
     {
 
-        String Name { get; }
+        string Name { get; }
         int Id { get; set; }
         int Health { get; set; }
         int MaxHealth { get; }
