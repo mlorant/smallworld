@@ -260,9 +260,9 @@ namespace GraphicInterface
                     if (wonTheBattle)
                     {
                         // Get the oponent player
-                        IPlayer general = (Game.Instance.Players[0] == Game.Instance.CurrentPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
+                        IPlayer looser = (Game.Instance.Players[0] == Game.Instance.CurrentPlayer) ? Game.Instance.Players[1] : Game.Instance.Players[0];
                         // Delete units
-                        defender.buryUnit(general, tile);
+                        looser.buryUnit(defender);
 
                         if (Game.Instance.Map.getUnits(tile).Count == 0)
                         {
@@ -281,7 +281,7 @@ namespace GraphicInterface
                     // If defeat, remove player unit
                     else if (!selectedUnit.isAlive())
                     {
-                        selectedUnit.buryUnit(Game.Instance.CurrentPlayer, previous);
+                        Game.Instance.CurrentPlayer.buryUnit(selectedUnit);
                         mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
                         InfoBox.Text = "Your unit take a fatal hit in the heart. You lost the battle.";
                     }

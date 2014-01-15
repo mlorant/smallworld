@@ -97,17 +97,6 @@ namespace SmallWorld
             this._currentPosition = (Point)info.GetValue("UnitPosition", typeof(Point));
         }
 
-        /// <summary>
-        /// Delete the unit of the player list and the map
-        /// </summary>
-        /// <param name="general">Player of the unit dead</param>
-        /// <param name="assaultLocation">Case where it died</param>
-        public void buryUnit(IPlayer general, System.Drawing.Point assaultLocation)
-        {
-            general.Units.Remove(this);
-            Game.Instance.Map.getUnits(assaultLocation).Remove(this);
-        }
-
         public bool attack(IUnit defender, Point target)
         {
             
@@ -188,11 +177,6 @@ namespace SmallWorld
         public bool isAlive()
         {
             return (_health > 0);
-        }
-
-        public int getMoveCost()
-        {
-            throw new System.NotImplementedException();
         }
 
         /// <summary>

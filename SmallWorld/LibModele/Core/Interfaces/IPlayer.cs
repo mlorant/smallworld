@@ -35,5 +35,7 @@ namespace SmallWorld
         /// </summary>
         int getNbUnitsToPlay();
 
+        void buryUnit(IUnit unit);
+
     }
 }

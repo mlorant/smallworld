@@ -86,6 +86,7 @@ namespace UnitTestsSmallWorld
             Game.Instance.createMap(3);
             Game.Instance.Map.initUnits(Game.Instance.Players[0].Units, new Point(0, 0));
             Game.Instance.Map.initUnits(Game.Instance.Players[1].Units, new Point(2, 2));
+            // Init unit position attr
             int j = 0;
             while (j < Game.Instance.Players[0].Units.Count)
             {
@@ -93,13 +94,14 @@ namespace UnitTestsSmallWorld
                 Game.Instance.Players[1].Units[j].CurrentPosition = new Point(2, 2);
                 j++;
             }
+
             while(Game.Instance.Players[0].Units.Count != 0)
             {
                 IUnit toBury = Game.Instance.Players[0].Units[0];
                 toBury.Health = 0;
                 Assert.IsFalse(toBury.isAlive());
 
-                toBury.buryUnit(Game.Instance.Players[0], toBury.CurrentPosition);
+                Game.Instance.Players[0].buryUnit(toBury);
             };
             Assert.AreEqual(0, Game.Instance.Players[0].Units.Count);
             Assert.AreEqual(0, Game.Instance.Map.getUnits(new Point(0, 0)).Count);
@@ -108,18 +110,18 @@ namespace UnitTestsSmallWorld
             IPlayer p2 = Game.Instance.Players[1];
             Assert.AreEqual(3, p2.Units.Count);
             Assert.AreEqual(3, Game.Instance.Map.getUnits(new Point(2, 2)).Count);
-            
-            p2.Units[0].buryUnit(p2, p2.Units[0].CurrentPosition);
+
+            p2.buryUnit(p2.Units[0]);
             
             Assert.AreEqual(2, p2.Units.Count);
             Assert.AreEqual(2, Game.Instance.Map.getUnits(new Point(2, 2)).Count);
 
             // 1 because n°0 is delete
-            p2.Units[1].buryUnit(p2, new Point(2, 2));
+            p2.buryUnit(p2.Units[1]);
             Assert.AreEqual(1, Game.Instance.Map.getUnits(new Point(2, 2)).Count);
             Assert.AreEqual(1, p2.Units.Count);
 
-            Game.Instance.Map.getUnits(new Point(2,2))[0].buryUnit(p2, new Point(2, 2));
+            p2.buryUnit(Game.Instance.Map.getUnits(new Point(2,2))[0]);
             Assert.AreEqual(0, Game.Instance.Map.getUnits(new Point(2, 2)).Count);
             Assert.AreEqual(0, p2.Units.Count);
         }

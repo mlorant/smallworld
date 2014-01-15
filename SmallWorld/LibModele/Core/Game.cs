@@ -59,7 +59,6 @@ namespace SmallWorld
         public IPlayer FirstPlayer
         {
             get { return this._firstPlayer; }
-            set { throw new NotSupportedException(); }
         }
 
         /// <summary>Player which's currently playing</summary>

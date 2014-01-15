@@ -89,6 +89,18 @@ namespace SmallWorld
 
             return total;
         }
+
+
+        /// <summary>
+        /// Delete the unit of the player list and the map
+        /// </summary>
+        /// <param name="general">Player of the unit dead</param>
+        public void buryUnit(IUnit unit)
+        {
+            Game.Instance.Map.getUnits(unit.CurrentPosition).Remove(unit);
+            this.Units.Remove(unit);
+        }
+
         
         /// <summary>Serialization function</summary>
         public void GetObjectData(SerializationInfo info, StreamingContext context)

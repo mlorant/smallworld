@@ -19,9 +19,8 @@ namespace SmallWorld
         double MaxMovePoint { get; }
 
         Point CurrentPosition { get; set; }
-        bool attack(IUnit defender, Point target);
 
-        void buryUnit(IPlayer general, Point assaultLocation);
+        bool attack(IUnit defender, Point target);
 
         double computePercentageToWin(IUnit defender);
 
