@@ -81,7 +81,12 @@ namespace SmallWorld
             _casesReferences.Add(4, new Sea());
         }
 
-
+        /// <summary>
+        /// Call the C++ library to generate a new random map
+        /// with the width given. The new map will be a square,
+        /// so the number of tiles will be mapWidth*mapWidth
+        /// </summary>
+        /// <param name="mapWidth">Width of the map generated</param>
         public void generateMap(int mapWidth)
         {
             this._width = mapWidth;
@@ -181,6 +186,12 @@ namespace SmallWorld
             return index;
         }
 
+
+        /// <summary>
+        /// Return the tile type of the position given
+        /// </summary>
+        /// <param name="pos">Position to retrieve</param>
+        /// <returns>Tule instance requested</returns>
         public ICase getCase(Point pos)
         {
             int index = this.getIndexFromPoint(pos);
@@ -188,10 +199,10 @@ namespace SmallWorld
         }
 
         /// <summary>
-        /// Get list of units of a given tile
+        /// Get list of units on a given tile
         /// </summary>
-        /// <param name="pos"></param>
-        /// <returns></returns>
+        /// <param name="pos">Position to fetch</param>
+        /// <returns>List of units on the position requested</returns>
         public List<IUnit> getUnits(Point pos)
         {
             int index = this.getIndexFromPoint(pos);
@@ -203,12 +214,13 @@ namespace SmallWorld
         }
 
 
-        ///////////////////////////////////
         /// <summary>
-        /// Place units at the beginning
+        /// Place units at the beginning. Every units of the list
+        /// will be place to the same position, given in the second
+        /// argument.
         /// </summary>
-        /// <param name="playerUnits"></param>
-        /// <param name="pos"></param>
+        /// <param name="playerUnits">Units of the player to place</param>
+        /// <param name="pos">Initial position of units</param>
         public void initUnits(List<IUnit> playerUnits, Point pos)
         {
             int index = getIndexFromPoint(pos);
@@ -263,7 +275,11 @@ namespace SmallWorld
             
         }
 
-
+        /// <summary>
+        /// Get a List of units position with int indexing instead
+        /// of classes. Used for passing the map information to the
+        /// C++ Wrapper.
+        /// </summary>
         public List<int> NativeUnits
         {
             get
@@ -314,6 +330,10 @@ namespace SmallWorld
         }
     }
 
+    /// <summary>
+    /// Exception raised when a unknown tile index is 
+    /// requested.
+    /// </summary>
     class UnknownTileException : Exception
     {
     }

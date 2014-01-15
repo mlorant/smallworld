@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SmallWorld
 {
+    /// <summary>
+    /// Desert tile
+    /// </summary>
     public class Desert : Case, IDesert
     {
     }

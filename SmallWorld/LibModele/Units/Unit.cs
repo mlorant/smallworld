@@ -275,7 +275,7 @@ namespace SmallWorld
         public List<Point> getSuggestedPoints()
         {
             // Get tiles suggestion
-            Map map = Game.Instance.Map;
+            IMap map = Game.Instance.Map;
             UnitType unitEnum = (UnitType) Enum.Parse(typeof(UnitType), this.GetType().Name, true);
 
             var raw_points = map.SuggestEngine.get_tiles_suggested(map.NativeUnits, CurrentPosition.X, CurrentPosition.Y, 

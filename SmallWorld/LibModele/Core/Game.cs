@@ -29,7 +29,7 @@ namespace SmallWorld
         // Current round, 1-indexed
         private int _currentRound;
         // Map instance reference
-        private Map _map;
+        private IMap _map;
         // Max rounds number
         private int _nbRounds;
         // Number of units per players at the beginning
@@ -83,7 +83,7 @@ namespace SmallWorld
         }
 
         /// <summary>Map of the game</summary>
-        public Map Map
+        public IMap Map
         {
             get { return this._map; }
             set { this._map = value; }
