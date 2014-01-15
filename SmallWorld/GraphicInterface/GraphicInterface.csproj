@@ -91,8 +91,8 @@
     <Compile Include="Views\UnitsPortraits\Gallic.xaml.cs">
       <DependentUpon>Gallic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UnitsPortraits\Viking..xaml.cs">
-      <DependentUpon>Viking..xaml</DependentUpon>
+    <Compile Include="Views\UnitsPortraits\Viking.xaml.cs">
+      <DependentUpon>Viking.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\EscapeMenu.xaml">
       <SubType>Designer</SubType>
@@ -134,7 +134,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UnitsPortraits\Viking..xaml">
+    <Page Include="Views\UnitsPortraits\Viking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

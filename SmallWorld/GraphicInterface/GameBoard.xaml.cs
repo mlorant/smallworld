@@ -281,7 +281,8 @@ namespace GraphicInterface
                     else if (!selectedUnit.isAlive())
                     {
                         Game.Instance.CurrentPlayer.buryUnit(selectedUnit);
-                        mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(tile).Count);
+                        mapViewer.drawUnits(previous, selectedUnit.GetType(), game.Map.getUnits(selectedUnit.CurrentPosition).Count);
+                        mapViewer.drawHalo();
                         InfoBox.Text = "Your unit takes a fatal hit in the heart. You lost the battle.";
                     }
                     // Otherwise the battle is a tie, we customise the message to give a feedback of the battle 
@@ -303,7 +304,7 @@ namespace GraphicInterface
                         }
                         else if (percentageLost > 25)
                         {
-                            InfoBox.Text += "your attack wasn't very powerfull, the oponent lost " + lifeLostOponent +
+                            InfoBox.Text += "your attack wasn't very powerful, the oponent lost " + lifeLostOponent +
                                 " points of life.";
                         }
                         else
@@ -502,4 +503,3 @@ namespace GraphicInterface
         }
     }
 }
-
