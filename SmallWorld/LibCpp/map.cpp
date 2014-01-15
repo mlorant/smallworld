@@ -1,6 +1,7 @@
 #include "map.h"
 #include <iostream>
 #include <cmath> /* round */
+#include <algorithm> /* random_shuffle */
 
 
 #define NB_PATTERNS 5

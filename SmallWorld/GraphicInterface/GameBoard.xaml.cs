@@ -78,11 +78,12 @@ namespace GraphicInterface
                     this.endRound(sender, e);
                     break;
 
+
+                // Unit move
                 case Key.Up:
                 case Key.Left:
                 case Key.Right:
                 case Key.Down:
-                    // Unit move
                     moveUnitKeyboard(e.Key);
                     break;
             }
@@ -118,13 +119,12 @@ namespace GraphicInterface
         /// <summary>
         /// Action when a player ends its turn
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.endRound();
             if (game.isFinished())
             {
+                // Game finished, show ending game panel with the winner
                 var ending = new GameEnding(game.Winner);
 
                 Canvas.SetZIndex(ending, 999);
@@ -139,6 +139,7 @@ namespace GraphicInterface
                 refreshGameInfos();
                 TileInfo.Visibility = Visibility.Hidden;
 
+                // Clear notification box and add warning if last rounds
                 InfoBox.Text = "";
                 int roundsLeft = game.NbRounds - game.CurrentRound;
                 if(roundsLeft == 0)
@@ -147,6 +148,8 @@ namespace GraphicInterface
                     InfoBox.Text = "Watch out, " + (roundsLeft+1) + " turns left. ";
 
                 InfoBox.Text += "It's the turn of " + game.CurrentPlayer.Nickname + ".";
+
+                // Unselected potential units
                 selectedUnit = null;
                 inMove = false;
                 UnitsInfo.Children.Clear();
@@ -157,8 +160,6 @@ namespace GraphicInterface
         /// Control behavior of the nextUnit Button.
         /// Give the control to a new unit automatically instead of click on it
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void nextUnit(object sender, RoutedEventArgs e)
         {
             List<IUnit> unitsOfThePlayer = Game.Instance.CurrentPlayer.Units;
@@ -200,7 +201,9 @@ namespace GraphicInterface
             }
             if (selected != null)
             {
-                InfoBox.Text = "Unit " + selected.Unit.Name + " on " + selected.Unit.CurrentPosition + " selected.";
+                int x = selected.Unit.CurrentPosition.X;
+                int y = selected.Unit.CurrentPosition.Y;
+                InfoBox.Text = "Unit " + selected.Unit.Name + " on (" + x + ", " + y + ") selected.";
                 this.makeUnitSelected(selected);
             }
             else
