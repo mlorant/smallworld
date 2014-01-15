@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="GraphicInterface.Views.UnitsPortraits.Gallic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="305">
+    <StackPanel Width="310" Orientation="Horizontal">
+        <Image Width="60" Source="../../Resources/img/portraits/gallic.png" Margin="0,0,5,0" />
+        <TextBlock Width="240" TextWrapping="Wrap" TextAlignment="Justify" FontSize="11.5">
+            Gallic are tall and light-blue eyed, very pride and insolent.<LineBreak/> 
+            They live in huge plain in Gaul, so <Bold>plain tiles supplies one more point</Bold>, and <Bold>move cost is divided</Bold> by two. <LineBreak/> 
+            Otherwise a gallic on a <Bold>mountain doesn't provide any point</Bold>.
+        </TextBlock>
+    </StackPanel>
+</UserControl>

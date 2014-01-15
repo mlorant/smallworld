@@ -24,6 +24,6 @@ void init_map_suggestion(CaseType** map, int mapSize) {
 	gen = new Suggestion(map, mapSize);
 }
 
-std::vector<std::pair<int, int>> api_get_tiles_suggestion(UnitType** units, int currentX,int currentY, double ptDepl, UnitType currentNation) {
+std::vector<std::tuple<int, int, int>> api_get_tiles_suggestion(UnitType** units, int currentX,int currentY, double ptDepl, UnitType currentNation) {
 	return gen->suggestion(units, currentX, currentY, ptDepl, currentNation);
 }

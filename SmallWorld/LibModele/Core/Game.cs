@@ -49,7 +49,7 @@ namespace SmallWorld
             set 
             { 
                 if(value != this._currentRound + 1)
-                    throw new Exception("Round number shouldn't be increment by more than 1.");
+                    throw new ArgumentException("Round number shouldn't be increment by more than 1.");
 
                 this._currentRound = value;
             }
@@ -88,6 +88,40 @@ namespace SmallWorld
             set { this._map = value; }
         }
 
+
+        /// <summary>
+        /// Check if the game is finished or not, according to
+        /// the round number and units remaining
+        /// </summary>
+        /// <returns>A boolean (true if the game is finished)</returns>
+        public bool Finished
+        {
+            get
+            {
+                return (_currentRound > this._nbRounds) // Check round limit 
+                    || _players[0].Units.Count == 0 
+                    || _players[1].Units.Count == 0; // Units
+            }
+        }
+
+        /// <summary>
+        /// Return the player who wins the current game, by computing
+        /// points for each players
+        /// </summary>
+        public IPlayer Winner
+        {
+            get
+            {
+                int p1 = _players[0].computePoints();
+                int p2 = _players[1].computePoints();
+                if (p1 > p2 || _players[1].Units.Count == 0)
+                    return _players[0];
+                else
+                    return _players[1];
+            }
+        }
+
+
         /// <summary>Singleton design pattern: Private constructor</summary>
         private Game() {}
 
@@ -118,13 +152,25 @@ namespace SmallWorld
         /// <summary>
         /// Init a player according to its configuration
         /// </summary>
-        /// <param name="i">Player number</param>
+        /// <param name="index">Player number</param>
         /// <param name="nickname">Personal nickname</param>
         /// <param name="nation">Nation choosed</param>
-        public void initPlayer(int i, string nickname, NationType nation)
+        public void initPlayer(int index, string nickname, NationType nation)
         {
-            _players[i] = new Player(nickname, nation, this._nbUnits);
-            // TODO: check unicity of nickname and nation?
+            IPlayer p = new Player(nickname, nation, this._nbUnits);
+
+            // Check unicity of nation and nickname
+            for (int i = 0; i < _players.Length; i++)
+            {
+                if (_players[i] != null) {
+                    if(_players[i].Nickname == nickname)
+                        throw new IllegalPlayerException("Two players can't have the same name");
+                    if(_players[i].Nation.GetType() == p.Nation.GetType())
+                        throw new IllegalPlayerException("Two players can't have the same nation");
+                }
+            }
+
+            _players[index] = p;
         }
 
         /// <summary>
@@ -193,37 +239,6 @@ namespace SmallWorld
             }
         }
 
-        /// <summary>
-        /// Check if the game is finished or not, according to
-        /// the round number and units remaining
-        /// </summary>
-        /// <returns>A boolean (true if the game is finished)</returns>
-        public bool isFinished()
-        {
-            // Check round limit 
-            if (_currentRound > this._nbRounds)
-                return true;
-
-            // Check units number
-            return (_players[0].Units.Count == 0 ||
-                     _players[1].Units.Count == 0);
-        }
-
-        /// <summary>
-        /// Return the player who wins the current game, by computing
-        /// points for each players
-        /// </summary>
-        public IPlayer Winner
-        {
-            get {
-                int p1 = _players[0].computePoints();
-                int p2 = _players[1].computePoints();
-                if (p1 > p2 || _players[1].Units.Count == 0)
-                    return _players[0];
-                else
-                    return _players[1];
-            }
-        }
 
 
         /// <summary>
@@ -301,4 +316,14 @@ namespace SmallWorld
     /// Exception raised when an invalid save file is detected
     /// </summary>
     public class InvalidSaveFileException : Exception { }
+
+
+    /// <summary>
+    /// Exception raised when an invalid player is set
+    /// </summary>
+    public class IllegalPlayerException : Exception {
+        public IllegalPlayerException(string msg) : base(msg)
+        {
+        }
+    }
 }

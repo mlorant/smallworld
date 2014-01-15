@@ -14,7 +14,7 @@ namespace SmallWorld
     public interface IPlayer
     {
         /// <summary>Player nickname</summary>
-        String Nickname { get; }
+        string Nickname { get; }
 
         /// <summary>Units list of the player</summary>
         List<IUnit> Units { get; }
@@ -35,6 +35,10 @@ namespace SmallWorld
         /// </summary>
         int getNbUnitsToPlay();
 
+        /// <summary>
+        /// Delete the unit of the player list and the map
+        /// </summary>
+        /// <param name="general">Player of the unit dead</param>
         void buryUnit(IUnit unit);
 
     }

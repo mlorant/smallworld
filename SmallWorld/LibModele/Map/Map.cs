@@ -189,9 +189,7 @@ namespace SmallWorld
         {
             int index = pos.X * _width + pos.Y;
             if (index > _grid.Length)
-            {
-                throw new IndexOutOfRangeException("Out of bounds: there's only " + _grid.Length + " tiles in the grid");
-            }
+                throw new ArgumentException("Out of bounds: there's only " + _grid.Length + " tiles in the grid");
 
             return index;
         }

@@ -12,6 +12,5 @@ namespace SmallWorld
     /// </summary>
     public abstract class Case : ICase
     {
-        public static int SIZE = 50;
     }
 }

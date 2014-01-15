@@ -33,17 +33,7 @@ class Suggestion
 	int _movePoints;    /*!< Move points available for the unit */
 	UnitType _nation;   /*!< Unit type of the current unit */
 
-public:
-
-	Suggestion(CaseType** map, int mapSize);
-
-	~Suggestion();
-
-	/*!
-     * \brief Returns suggestions tiles
-     */
-	vector<pair<int, int>> suggestion(UnitType** units, int currentX,int currentY, double ptDepl, UnitType currentNation);
-
+	
 	/*!
      * \brief Mark every tiles around the unit as "Possible", if
 	 * it isn't water
@@ -54,6 +44,29 @@ public:
      * \brief Mark every mountains as "Possible"
      */
 	void moveMountains();
+
+	/*!
+     * \brief Check if there's a unit around this case
+     */
+	bool unitNearBy(int x, int y, UnitType nation);
+
+	/*!
+     * \brief Check if there's water near the tile
+     */
+	bool waterNearBy(int x, int y);
+
+
+public:
+
+	Suggestion(CaseType** map, int mapSize);
+
+	~Suggestion();
+
+	/*!
+     * \brief Returns suggestions tiles
+     */
+	vector<tuple<int, int, int>> suggestion(UnitType** units, int currentX,int currentY, double ptDepl, UnitType currentNation);
+
 };
 
 #endif

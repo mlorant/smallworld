@@ -6,6 +6,12 @@ using System.Text;
 
 namespace SmallWorld
 {
+
+    /// <summary>
+    /// Representation of a player in the SmallWorld game.
+    /// A player has a nickname and a list of units associated
+    /// to one nation.
+    /// </summary>
     [Serializable()]
     public class Player : IPlayer, ISerializable
     {
@@ -53,6 +59,8 @@ namespace SmallWorld
                 case NationType.VIKING:
                     nation = new NationViking();
                     break;
+                default:
+                    throw new ArgumentException("Unknown nation");
             }
 
             units = new List<IUnit>();
@@ -113,7 +121,7 @@ namespace SmallWorld
         /// <summary> Deserialization constructor.</summary>
         public Player(SerializationInfo info, StreamingContext ctxt)
         {
-            this.nickname = (String) info.GetString("PlayerNickname");
+            this.nickname = (string) info.GetString("PlayerNickname");
             this.units = (List<IUnit>) info.GetValue("PlayerUnits", typeof(List<IUnit>));
             this.nation = (INation)info.GetValue("PlayerNation", typeof(INation));
         }

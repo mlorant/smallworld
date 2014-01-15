@@ -43,9 +43,11 @@ namespace mapWrapper {
 
 
 		/*!
-		 * Suggest positions, according to the current game
+		 * Suggest positions, according to the current game.
+		 * Returns a list of 3-values tuples, where each tuple has
+		 * x, y, typeOfSuggestion (Possible or Suggested)
 		 */
-		List<Tuple<int, int>^>^ get_tiles_suggested(List<int>^ units, int currentX, int currentY, double ptDepl, int currentNation) {
+		List<Tuple<int, int, int>^>^ get_tiles_suggested(List<int>^ units, int currentX, int currentY, double ptDepl, int currentNation) {
 
 			// Transform int to UnitType array
 			UnitType** unitsEnum = new UnitType*[mapSize];
@@ -58,12 +60,14 @@ namespace mapWrapper {
 			
 			// Get tiles suggestions
 			UnitType nation = static_cast<UnitType>(currentNation);
-			std::vector<std::pair<int, int>> tilesSuggested = api_get_tiles_suggestion(unitsEnum, currentX, currentY, ptDepl, nation);
+			std::vector<std::tuple<int, int, int>> tilesSuggested = api_get_tiles_suggestion(unitsEnum, currentX, currentY, ptDepl, nation);
 	
 			// Format suggestion into list of tuples
-			List<Tuple<int, int>^>^ suggestions = gcnew List<Tuple<int, int>^>();
+			List<Tuple<int, int, int>^>^ suggestions = gcnew List<Tuple<int, int, int>^>();
 			for(int i = 0; i < tilesSuggested.size(); i++) {
-				Tuple<int, int>^ t = gcnew Tuple<int, int>(tilesSuggested[i].first, tilesSuggested[i].second);
+				Tuple<int, int, int>^ t = gcnew Tuple<int, int, int>(std::get<0>(tilesSuggested[i]), 
+																	std::get<1>(tilesSuggested[i]),
+																	std::get<2>(tilesSuggested[i]));
 				suggestions->Add(t);
 			}
 

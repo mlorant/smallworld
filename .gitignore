@@ -3,6 +3,9 @@
 Thumbs.db
 *.DS_Store
 
+#Sonar project
+.sonar/
+
 #Visual Studio files
 *.[Oo]bj
 *.user

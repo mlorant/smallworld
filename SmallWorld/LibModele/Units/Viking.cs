@@ -7,9 +7,18 @@ using System.Text;
 
 namespace SmallWorld
 {
+
+    /// <summary>
+    /// Viking unit representation.
+    /// Can move on sea
+    /// </summary>
     [Serializable()]
     public class Viking : Unit, IViking
     {
+        /// <summary>
+        /// Viking constructor
+        /// </summary>
+        /// <param name="id">Unique identifier</param>
         public Viking(int id)
         {
             this.Id = id;

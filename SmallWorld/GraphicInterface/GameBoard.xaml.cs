@@ -86,6 +86,8 @@ namespace GraphicInterface
                 case Key.Down:
                     moveUnitKeyboard(e.Key);
                     break;
+                default:
+                    break;
             }
 
         }
@@ -124,7 +126,7 @@ namespace GraphicInterface
         private void endRound(object sender, RoutedEventArgs e)
         {
             game.endRound();
-            if (game.isFinished())
+            if (game.Finished)
             {
                 // Game finished, show ending game panel with the winner
                 var ending = new GameEnding(game.Winner);
@@ -165,16 +167,14 @@ namespace GraphicInterface
         private void nextUnit(object sender, RoutedEventArgs e)
         {
             List<IUnit> unitsOfThePlayer = Game.Instance.CurrentPlayer.Units;
-            UnitSelector selected = null;            
+            UnitSelector selected = null;     
             System.Drawing.Point tileMovePointRemaining = new System.Drawing.Point(-1,-1);
            
             int numPrevious = 0;
             
             // if we don't find yet a unit to select, we run through all the units
             if (selectedUnit != null)
-            {
                 numPrevious = unitsOfThePlayer.IndexOf(selectedUnit);
-            }
                 
             // Find the first unit still moveable beginning from the last unit already selected
             for (int i = 0; i < unitsOfThePlayer.Count; i++)
@@ -201,6 +201,7 @@ namespace GraphicInterface
                     }
                 }
             }
+
             if (selected != null)
             {
                 this.makeUnitSelected(selected);
@@ -209,9 +210,7 @@ namespace GraphicInterface
             {
                 UnitsInfo.Children.Clear();
                 if (!tileMovePointRemaining.Equals(new System.Drawing.Point(-1,-1)))
-                {
                     this.displayUnitsOnCase(tileMovePointRemaining, true);
-                }
                 else
                     InfoBox.Text = "No units moveable remaining, you must end your turn.";
             }
@@ -362,6 +361,8 @@ namespace GraphicInterface
                     case Key.Down:
                         moveTo.Y++;
                         break;
+                    default:
+                        break;
                 }
 
                 int width = Game.Instance.Map.Width;
@@ -454,9 +455,9 @@ namespace GraphicInterface
                 unitPanel.Highlight(true);
                 selectedUnit = unitPanel.Unit;
 
-                List<System.Drawing.Point> suggestions = selectedUnit.getSuggestedPoints();
-                foreach (System.Drawing.Point pt in suggestions)
-                    mapViewer.drawSuggestion(pt);
+                var suggestions = selectedUnit.getSuggestedPoints();
+                foreach (Tuple<System.Drawing.Point, MoveType> pt in suggestions)
+                    mapViewer.drawSuggestion(pt.Item1, pt.Item2);
 
                 inMove = true;
                 previous = selectedUnit.CurrentPosition;

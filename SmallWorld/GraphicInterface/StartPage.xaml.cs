@@ -59,6 +59,8 @@ namespace GraphicInterface
                 case "Viking":
                     nation = NationType.VIKING;
                     break;
+                default:
+                    throw new ArgumentException("This nation is unknown");
             }
             return nation;
         }
@@ -106,7 +108,7 @@ namespace GraphicInterface
 
             Player1Nickname.ClearValue(TextBox.BorderBrushProperty);
             
-            if (player1 == null || player1 == "")
+            if (player1 == null || player1 == "" || player1 == Player2Nickname.Text)
             {
                 Player1Nickname.BorderBrush = Brushes.Red;
                 InfoP1.IsChecked = false;
@@ -132,7 +134,7 @@ namespace GraphicInterface
 
             Player2Nickname.ClearValue(TextBox.BorderBrushProperty);
 
-            if (player2 == null || player2 == "")
+            if (player2 == null || player2 == "" || player2 == Player1Nickname.Text)
             {
                 Player2Nickname.BorderBrush = Brushes.Red;
                 InfoP2.IsChecked = false;
@@ -163,7 +165,7 @@ namespace GraphicInterface
                     builder = new SmallGameBuilder();
                     break;
                 default:
-                    throw new Exception("Unexpected game mode");
+                    throw new ArgumentException("Unexpected game mode");
             }
 
             game = builder.createGame(player1, nation1, player2, nation2);

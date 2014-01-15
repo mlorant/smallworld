@@ -7,6 +7,11 @@ using System.Text;
 
 namespace SmallWorld
 {
+
+    /// <summary>
+    /// Gallic unit representation.
+    /// Move faster on plains
+    /// </summary>
     [Serializable()]
     public class Gallic : Unit, IGallic
     {

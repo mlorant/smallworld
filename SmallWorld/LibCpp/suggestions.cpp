@@ -1,5 +1,6 @@
 #include "suggestions.h"
 #include <iostream>
+#include <tuple>
 
 /*!
  * \brief Initialize Suggestion map engine
@@ -41,18 +42,27 @@ Suggestion::~Suggestion() {
  * \param movePoints Move points available for the current unit
  * \param currentNation Nation of the unit
  */
-vector<pair<int, int>> Suggestion::suggestion(UnitType** units, int x, int y, double movePoints, UnitType currentNation)
+vector<tuple<int, int, int>> Suggestion::suggestion(UnitType** units, int x, int y, double movePoints, UnitType currentNation)
 {
 	// Vector of results, composed of 2-int arrays
-	vector<pair<int, int>> tilesSuggested;
+	vector<tuple<int, int, int>> tilesSuggested;
 	
+	// Get other nation type
+	UnitType otherNation;
+	for (int i=0; i < _mapSize; i++) {
+        for (int j=0; j < _mapSize; j++) {
+			if(units[i][j] != None && units[i][j] != currentNation) {
+				otherNation = units[i][j];
+				break;
+			}
+		}
+	}
+
 	// Init a suggestion grid empty
     for (int i=0; i < _mapSize; i++)
-    {
-        for (int j=0; j < _mapSize; j++) {
+        for (int j=0; j < _mapSize; j++)
 			_sugg[i][j] = Impossible;
-        }
-    }
+
 	
 	// Init local member
 	this->_units = units;
@@ -73,18 +83,84 @@ vector<pair<int, int>> Suggestion::suggestion(UnitType** units, int x, int y, do
 	if(currentNation == Dwarf && _map[x][y] == Mountain) 
 		this->moveMountains();
 
+	// Choose 3 best choices
+	for (int i=0; i < _mapSize; i++) {
+        for (int j=0; j < _mapSize; j++) {
+			if(_sugg[i][j] == Possible) {
+
+				// Suggest tiles which earn points
+				if(currentNation == Dwarf && _map[i][j] == Forest)
+					_sugg[i][j] = Suggested;
+				if(currentNation == Gallic && _map[i][j] == Plain)
+					_sugg[i][j] = Suggested;
+				if(currentNation == Viking && _map[i][j] != Sea && waterNearBy(i, j))
+					_sugg[i][j] = Suggested;
+				
+				// Suggest tiles to block the ennemy
+				if(_map[i][j] == Plain && otherNation == Gallic && this->unitNearBy(i, j, otherNation)) 
+					_sugg[i][j] = Suggested;
+
+				if(_map[i][j] == Forest && otherNation == Dwarf && this->unitNearBy(i, j, otherNation)) {
+					_sugg[i][j] = Suggested;
+				}
+
+				if(otherNation == Viking && waterNearBy(i, j) && this->unitNearBy(i, j, otherNation)) {
+					_sugg[i][j] = Suggested;
+				}
+			}
+		}
+	}
 
 	// Returns coordinates possibles
 	int* coords;
 	for (int i=0; i < _mapSize; i++) {
         for (int j=0; j < _mapSize; j++) {
-			if(_sugg[i][j] == Possible) {
-				tilesSuggested.push_back(make_pair(i, j));
-			}
+			if(_sugg[i][j] != Impossible)
+				tilesSuggested.push_back(make_tuple(i, j, _sugg[i][j]));
         }
     }
 	
     return tilesSuggested;
+}
+
+/*!
+ * \brief Check if there's a unit near the tile given
+ */
+bool Suggestion::unitNearBy(int x, int y, UnitType nation) {
+	
+	int offsets[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
+
+	for(int i = 0; i < 4; i++) {
+		int newX = x - offsets[i][0];
+		int newY = y - offsets[i][1];
+
+		if(newX >= 0 && newY >= 0 && newX < _mapSize && newY < _mapSize
+			&& _units[newX][newY] == nation) {
+				return true;
+		}
+	}
+
+	return false;
+}
+
+/*!
+ * \brief Check if there's water near the tile
+ */
+bool Suggestion::waterNearBy(int x, int y) {
+	
+	int offsets[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
+
+	for(int i = 0; i < 4; i++) {
+		int newX = x - offsets[i][0];
+		int newY = y - offsets[i][1];
+
+		if(newX >= 0 && newY >= 0 && newX < _mapSize && newY < _mapSize
+			&& _map[newX][newY] == Sea) {
+				return true;
+		}
+	}
+
+	return false;
 }
 
 /*!

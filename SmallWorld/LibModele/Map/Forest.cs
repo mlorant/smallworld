@@ -6,7 +6,7 @@ using System.Text;
 namespace SmallWorld
 {
     /// <summary>
-    /// Forest tile
+    /// Forest tile, with big trees and dwarfs
     /// </summary>
     public class Forest : Case, IForest
     {
